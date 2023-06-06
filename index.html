@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cargar webs</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    .accordion {
+      background-color: #f1f1f1;
+      color: #333;
+      cursor: pointer;
+      padding: 8px;
+      width: 100%;
+      text-align: left;
+      border: none;
+      outline: none;
+      transition: 0.4s;
+    }
+
+    .active, .accordion:hover {
+      background-color: #ddd;
+    }
+
+    .panel {
+      padding: 0;
+      background-color: white;
+      display: none;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100vh - 150px);
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <button class="accordion">Load Html files</button>
+  <div class="panel">
+    <button onclick="cargarWeb('epikweb.html')">Cargar Web 1</button>
+    <button onclick="cargarWeb('web_rosa.html')">Cargar Web 2</button>
+    <button onclick="cargarWeb('codificadorAI.html')">Codificador</button>
+  </div>
+  <div id="contenedor-web"></div>
+
+  <script>
+    function cargarWeb(url) {
+      var contenedorWeb = document.getElementById('contenedor-web');
+      contenedorWeb.innerHTML = '<iframe src="' + url + '"></iframe>';
+    }
+
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+  </script>
+</body>
+</html>
