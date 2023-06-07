@@ -53,9 +53,9 @@
 <body>
   <button class="accordion">Load Html files</button>
   <div class="panel">
-    <button onclick="cargarWeb('epikweb.html')">Cargar Web 1</button>
-    <button onclick="cargarWeb('web_rosa.html')">Cargar Web 2</button>
-    <button onclick="cargarWeb('codificadorAI.html')">Codificador</button>
+    <button onclick="cargarWeb('epikweb.html'); cerrarPanel()">Cargar Web 1</button>
+    <button onclick="cargarWeb('web_rosa.html'); cerrarPanel()">Cargar Web 2</button>
+    <button onclick="cargarWeb('codificadorAI.html'); cerrarPanel()">Codificador</button>
   </div>
   <div id="contenedor-web"></div>
 
@@ -63,6 +63,15 @@
     function cargarWeb(url) {
       var contenedorWeb = document.getElementById('contenedor-web');
       contenedorWeb.innerHTML = '<iframe src="' + url + '"></iframe>';
+    }
+
+    function cerrarPanel() {
+      var acc = document.getElementsByClassName("accordion");
+      for (var i = 0; i < acc.length; i++) {
+        acc[i].classList.remove("active");
+        var panel = acc[i].nextElementSibling;
+        panel.style.display = "none";
+      }
     }
 
     var acc = document.getElementsByClassName("accordion");
