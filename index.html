@@ -32,7 +32,7 @@
     }
 
     .panel {
-	  text-align: left;
+      text-align: left;
       padding: 0;
       display: none;
       overflow: hidden;
@@ -57,7 +57,9 @@
     <button onclick="cargarWeb('web_rosa.html'); cerrarPanel()">Cargar Web 2</button>
     <button onclick="cargarWeb('codificadorAI.html'); cerrarPanel()">Codificador</button>
   </div>
-  <div id="contenedor-web"></div>
+  <div id="contenedor-web">
+    <iframe src="epikweb.html"></iframe> <!-- Cambia "epikweb.html" por la URL de la web que deseas cargar por defecto -->
+  </div>
 
   <script>
     function cargarWeb(url) {
