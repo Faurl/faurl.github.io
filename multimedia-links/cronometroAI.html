@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cronómetro en HTML</title>
+	<style>
+		#timer {
+			font-size: 4em;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>Cronómetro</h1>
+	<div id="timer">00:00:00.000</div>
+	<button onclick="startTimer()">Iniciar</button>
+	<button onclick="stopTimer()">Detener</button>
+	<button onclick="resetTimer()">Reiniciar</button>
+	<p>Pulsa la tecla "T" o espacio para iniciar, pausar o reanudar.</p>
+	<p>Pulsa la tecla "R" para reiniciar el cronómetro.</p>
+	<script>
+		var hours = 0;
+		var minutes = 0;
+		var seconds = 0;
+		var milliseconds = 0;
+		var timer;
+		var isRunning = false;
+
+		function startTimer() {
+			if (!isRunning) {
+				timer = setInterval(incrementTimer, 10);
+				isRunning = true;
+			}
+		}
+
+		function stopTimer() {
+			if (isRunning) {
+				clearInterval(timer);
+				isRunning = false;
+			}
+		}
+
+		function resetTimer() {
+			clearInterval(timer);
+			timer = null;
+			isRunning = false;
+			hours = 0;
+			minutes = 0;
+			seconds = 0;
+			milliseconds = 0;
+			document.getElementById("timer").innerHTML = "00:00:00.000";
+		}
+
+		function incrementTimer() {
+			milliseconds += 10;
+			if (milliseconds == 1000) {
+				milliseconds = 0;
+				seconds++;
+				if (seconds == 60) {
+					seconds = 0;
+					minutes++;
+					if (minutes == 60) {
+						minutes = 0;
+						hours++;
+					}
+				}
+			}
+			var displayHours = hours < 10 ? "0" + hours : hours;
+			var displayMinutes = minutes < 10 ? "0" + minutes : minutes;
+			var displaySeconds = seconds < 10 ? "0" + seconds : seconds;
+			var displayMilliseconds = milliseconds < 10 ? "00" + milliseconds : (milliseconds < 100 ? "0" + milliseconds : milliseconds);
+			document.getElementById("timer").innerHTML = displayHours + ":" + displayMinutes + ":" + displaySeconds + "." + displayMilliseconds;
+		}
+
+		// Evento de escucha de la barra espaciadora, tecla "T" y tecla "R"
+		document.body.onkeyup = function(e) {
+			if (e.keyCode === 32) {
+				// Si la tecla es la barra espaciadora (código 32)
+				if (isRunning) {
+					// Si el cronómetro está en marcha, lo detiene
+					stopTimer();
+				} else {
+					// Si el cronómetro está detenido, lo inicia
+					startTimer();
+				}
+			} else if (e.keyCode === 84) {
+				// Si la tecla es la "T" (código 84)
+				if (isRunning) {
+					// Si el cronómetro está en marcha, lo detiene
+					stopTimer();
+				} else {
+					// Si el cronómetro está detenido, lo inicia
+					startTimer();
+				}
+			} else if (e.keyCode === 82) {
+				// Si la tecla es la "R" (código 82)
+				resetTimer();
+			}
+		};
+	</script>
+</body>
+</html>
