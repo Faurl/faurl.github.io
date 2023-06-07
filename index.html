@@ -95,11 +95,11 @@
 
 
 	window.addEventListener('message', function(event) {
-		if (event.origin !== 'https://tu-sitio-web.com') {
+		if (event.origin !== 'https://faurl.github.io') {
 			return; // Verifica que el mensaje provenga del origen correcto
 		}
 		var iframe = document.getElementById('mi-iframe');
-	iframe.contentWindow.postMessage(event.data, 'https://tu-sitio-web.com');
+	iframe.contentWindow.postMessage(event.data, 'https://faurl.github.io');
 	
 	});
 
