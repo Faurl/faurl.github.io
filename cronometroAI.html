@@ -11,6 +11,8 @@
 </head>
 <body>
 	<h1>Cronómetro</h1>
+	<button onclick="increaseFontSize()">+</button>
+	<button onclick="decreaseFontSize()">-</button>
 	<div id="timer">00:00:00.000</div>
 	<button onclick="startTimer()">Iniciar</button>
 	<button onclick="stopTimer()">Detener</button>
@@ -24,6 +26,7 @@
 		var milliseconds = 0;
 		var timer;
 		var isRunning = false;
+		var fontSize = 4; // Tamaño de fuente inicial en em
 
 		function startTimer() {
 			if (!isRunning) {
@@ -71,7 +74,18 @@
 			document.getElementById("timer").innerHTML = displayHours + ":" + displayMinutes + ":" + displaySeconds + "." + displayMilliseconds;
 		}
 
-		// Evento de escucha de la barra espaciadora, tecla "T" y tecla "R"
+		function increaseFontSize() {
+			fontSize += 1.5;
+			document.getElementById("timer").style.fontSize = fontSize + "em";
+		}
+
+		function decreaseFontSize() {
+			if (fontSize > 0.1) {
+				fontSize -= 0.8;
+				document.getElementById("timer").style.fontSize = fontSize + "em";
+			}
+		}
+
 		document.body.onkeyup = function(e) {
 			if (e.keyCode === 32) {
 				// Si la tecla es la barra espaciadora (código 32)
@@ -95,6 +109,15 @@
 				// Si la tecla es la "R" (código 82)
 				resetTimer();
 			}
+		};
+		document.body.onkeyup = function(e) {
+				if (e.keyCode === 187) {       <!--191-->
+					increaseFontSize();
+				}
+				if (e.keyCode === 191) {
+					decreaseFontSize();
+				}
+					
 		};
 	</script>
 </body>
