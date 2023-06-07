@@ -111,14 +111,19 @@
 			}
 		};
 
+		document.body.onkeyup = function(e) {
+				if (keyCode === 187) {
+					increaseFontSize();
+				}
+				if (keyCode === 191) {
+					decreaseFontSize();
+				};
+			
 		window.addEventListener('message', function(event) {
 			var keyCode = event.data.keyCode;
-			if (keyCode === 187) {
-				increaseFontSize();
-			} else if (keyCode === 191) {
-				decreaseFontSize();
-			}
+			
 		});
+		
 	</script>
 </body>
 </html>
