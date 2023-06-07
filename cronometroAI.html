@@ -80,7 +80,7 @@
 		}
 
 		function decreaseFontSize() {
-			if (fontSize > 1.5) {
+			if (fontSize > 0.1) {
 				fontSize -= 0.8;
 				document.getElementById("timer").style.fontSize = fontSize + "em";
 			}
@@ -110,15 +110,15 @@
 				resetTimer();
 			}
 		};
-		document.body.onkeyup = function(e) {
-				if (e.keyCode === 187) {       <!--191-->
-					increaseFontSize();
-				}
-				if (e.keyCode === 191) {
-					decreaseFontSize();
-				}
-					
-		};
+
+		window.addEventListener('message', function(event) {
+			var keyCode = event.data.keyCode;
+			if (keyCode === 187) {
+				increaseFontSize();
+			} else if (keyCode === 191) {
+				decreaseFontSize();
+			}
+		});
 	</script>
 </body>
 </html>
