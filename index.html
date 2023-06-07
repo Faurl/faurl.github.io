@@ -93,13 +93,15 @@
       });
     }
 
-window.addEventListener('message', function(event) {
+
+	window.addEventListener('message', function(event) {
 		if (event.origin !== 'https://tu-sitio-web.com') {
 			return; // Verifica que el mensaje provenga del origen correcto
 		}
 		var iframe = document.getElementById('mi-iframe');
 	iframe.contentWindow.postMessage(event.data, 'https://tu-sitio-web.com');
-});
+	
+	});
 
 </script>
 </body>
