@@ -92,17 +92,28 @@
         }
       });
     }
-
-
-	window.addEventListener('message', function(event) {
-		if (event.origin !== 'https://faurl.github.io') {
-			return; // Verifica que el mensaje provenga del origen correcto
-		}
-		var iframe = document.getElementById('mi-iframe');
-	iframe.contentWindow.postMessage(event.data, 'https://faurl.github.io');
 	
-	});
+	
+	
+	window.addEventListener('keydown', function(event) {
+			var iframe = document.getElementById('cronometroFrame');
+			var iframeWindow = iframe.contentWindow || iframe;
 
-</script>
+			var keyCode = event.keyCode;
+			if (keyCode === 32 || keyCode === 84) {
+				iframeWindow.postMessage({ event: 'toggle' }, '*');
+			} else if (keyCode === 82) {
+				iframeWindow.postMessage({ event: 'reset' }, '*');
+			} else if (keyCode === 187) {
+				iframeWindow.postMessage({ event: 'increaseFontSize' }, '*');
+			} else if (keyCode === 191) {
+				iframeWindow.postMessage({ event: 'decreaseFontSize' }, '*');
+			}
+		});
+	
+	
+	
+	
+  </script>
 </body>
 </html>
