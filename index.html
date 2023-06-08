@@ -3,7 +3,7 @@
 <head>
   <title>Faurl Webbe</title>
   <link rel="icon" href="faurl4web.ico" type="image/x-icon">
-  <meta http-equiv="Content-Security-Policy" content="frame-src 'self'; interest-cohort=()">
+  <meta http-equiv="Content-Security-Policy" content="frame-src 'self' *"> <!--'self'-->
   <style>
     body {
       display: flex;
@@ -59,9 +59,10 @@
     <button onclick="cargarWeb('epikweb.html'); cerrarPanel()">Main Web</button>
     <button onclick="cargarWeb('codificadorAI.html'); cerrarPanel()">Codificador</button>
 	<button onclick="cargarWeb('cronometroAI.html'); cerrarPanel()">Cronómetro</button>
+	<button onclick="cargarWeb('https://faurl.github.io/'); cerrarPanel()">Test</button>
   </div>
   <div id="contenedor-web">
-    <iframe src="epikweb.html"></iframe>
+    <iframe id="cronometroFrame" src="epikweb.html"></iframe>
   </div>
 
   <script>
