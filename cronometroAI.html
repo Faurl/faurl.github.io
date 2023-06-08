@@ -86,6 +86,7 @@
 			}
 		}
 
+		// Evento de escucha de la barra espaciadora, tecla "T" y tecla "R"
 		document.body.onkeyup = function(e) {
 			if (e.keyCode === 32) {
 				// Si la tecla es la barra espaciadora (código 32)
@@ -109,8 +110,7 @@
 				// Si la tecla es la "R" (código 82)
 				resetTimer();
 			}
-		};
-		document.body.onkeyup = function(e) {
+		
 				if (e.keyCode === 187) {       <!--191-->
 					increaseFontSize();
 				}
