@@ -110,17 +110,15 @@
 				resetTimer();
 			}
 		};
-
 		document.body.onkeyup = function(e) {
-				if (keyCode === 187) {
+				if (e.keyCode === 187) {       <!--191-->
 					increaseFontSize();
 				}
-				if (keyCode === 191) {
+				if (e.keyCode === 191) {
 					decreaseFontSize();
-				};
-			
-		window.addEventListener('message', function(event));
-		
+				}
+					
+		};
 	</script>
 </body>
 </html>
