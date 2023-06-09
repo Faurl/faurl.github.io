@@ -13,13 +13,23 @@
 	<h1>Cronómetro</h1>
 	<button onclick="increaseFontSize()">+</button>
 	<button onclick="decreaseFontSize()">-</button>
-	<div id="timer">00:00:00.000</div>
-	<button onclick="startTimer()">Iniciar</button>
-	<button onclick="stopTimer()">Detener</button>
-	<button onclick="resetTimer()">Reiniciar</button>
-	<p>Pulsa la tecla "T" o espacio para iniciar, pausar o reanudar.</p>
-	<p>Pulsa la tecla "R" para reiniciar el cronómetro.</p>
+	<div id="timer">00:00:00.000</div><br><br>
+	<button onclick="startTimer()">► Iniciar</button>
+	<button onclick="stopTimer()">ӀӀ Detener</button>
+	<button onclick="resetTimer()">↺ Reiniciar</button><br><br>
+	<div id="KeyboardInfo"></div><br>
+	<button id="KeyInfButton" onclick="ShowKeyboardInfo(), HideButton()">⌨ Keyboard Shortcuts</button>
 	<script>
+	
+		function ShowKeyboardInfo() {
+			var textElement = document.getElementById("KeyboardInfo");
+			textElement.innerHTML = "Pulsa la tecla \"T\" o espacio para iniciar, pausar o reanudar.<br><br>Pulsa la tecla \"R\" para reiniciar el cronómetro.<br><br>Pulsa \"+\" o \"ç\" para reescalar el cronómetro."
+		}
+		function HideButton() {
+			var button = document.getElementById("KeyInfButton");
+			button.style.display = "none"
+		}
+	
 		var hours = 0;
 		var minutes = 0;
 		var seconds = 0;
