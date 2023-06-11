@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reproductor de Música</title>
+	<style>
+		#playlist {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		#playlist li {
+			cursor: pointer;
+			padding: 5px;
+			background-color: #f2f2f2;
+			margin-bottom: 5px;
+		}
+
+		#playlist li:hover {
+			background-color: #e6e6e6;
+		}
+
+		#controls {
+			margin-top: 10px;
+		}
+
+		#progress-bar {
+			width: 100%;
+			height: 5px;
+			background-color: gray;
+		}
+
+		#progress {
+			height: 100%;
+			background-color: green;
+			width: 0%;
+		}
+	</style>
+</head>
+<body>
+	<h1>Reproductor de Música</h1>
+	<label for="playlistURL">Ingresa el enlace de la playlist de YouTube:</label><br>
+	<input type="text" id="playlistURL" placeholder="https://www.youtube.com/playlist?list=XXXXXXXXXXXX"><br>
+	<button onclick="loadPlaylist()">Cargar Playlist</button><br>
+	<ul id="playlist"></ul>
+	<div id="controls">
+		<button onclick="previousSong()">Anterior</button>
+		<button onclick="togglePlayPause()">Reproducir/Pausar</button>
+		<button onclick="nextSong()">Siguiente</button>
+	</div>
+	<div id="progress-bar">
+		<div id="progress"></div>
+	</div>
+	<script src="https://www.youtube.com/iframe_api"></script>
+	<script>
+		var player;
+		var playlist = [];
+		var currentSongIndex = 0;
+		var progressInterval;
+
+		function loadPlaylist() {
+			var playlistURL = document.getElementById("playlistURL").value;
+			var playlistId = extractPlaylistId(playlistURL);
+			if (playlistId) {
+				var apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
+				fetch(apiUrl)
+					.then(response => response.json())
+					.then(data => {
+						playlist = data.items.map(item => {
+							return {
+								title: item.snippet.title,
+								videoId: item.snippet.resourceId.videoId
+							};
+						});
+						displayPlaylist();
+						loadPlayer(playlist[0].videoId);
+					})
+					.catch(error => console.error("Error loading playlist:", error));
+			} else {
+				console.error("Invalid playlist URL");
+			}
+		}
+
+		function extractPlaylistId(url) {
+			var match = url.match(/[?&]list=([^&]+)/);
+			return match ? match[1] : null;
+		}
+
+		function displayPlaylist() {
+			var playlistElement = document.getElementById("playlist");
+			playlistElement.innerHTML = "";
+			playlist.forEach((song, index) => {
+				var listItem = document.createElement("li");
+				listItem.textContent = song.title;
+				listItem.onclick = function() {
+					loadPlayer(song.videoId);
+					currentSongIndex = index;
+				};
+				playlistElement.appendChild(listItem);
+			});
+		}
+
+		function loadPlayer(videoId) {
+			if (player) {
+				player.destroy();
+			}
+			player = new YT.Player('player', {
+				height: '0',
+				width: '0',
+				videoId: videoId,
+				events: {
+					'onReady': onPlayerReady,
+					'onStateChange': onPlayerStateChange
+				}
+			});
+			currentSongIndex = 0;
+		}
+
+		function onPlayerReady(event) {
+			event.target.playVideo();
+			updateProgressBar();
+		}
+
+		function onPlayerStateChange(event) {
+			if (event.data === YT.PlayerState.ENDED) {
+				nextSong();
+			}
+		}
+
+		function previousSong() {
+			currentSongIndex--;
+			if (currentSongIndex < 0) {
+				currentSongIndex = playlist.length - 1;
+			}
+			loadPlayer(playlist[currentSongIndex].videoId);
+		}
+
+		function nextSong() {
+			currentSongIndex++;
+			if (currentSongIndex >= playlist.length) {
+				currentSongIndex = 0;
+			}
+			loadPlayer(playlist[currentSongIndex].videoId);
+		}
+
+		function togglePlayPause() {
+			if (player) {
+				if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+					player.pauseVideo();
+				} else {
+					player.playVideo();
+				}
+			}
+		}
+
+		function updateProgressBar() {
+			progressInterval = setInterval(function() {
+				var currentTime = player.getCurrentTime();
+				var duration = player.getDuration();
+				var progressPercentage = (currentTime / duration) * 100;
+				document.getElementById("progress").style.width = progressPercentage + "%";
+			}, 500);
+		}
+	</script>
+	<div id="player"></div>
+</body>
+</html>
