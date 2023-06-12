@@ -9,6 +9,10 @@
 		position: relative;
 		display: inline-block;
 		cursor: pointer;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 		}
 		
 		/* The actual popup */
@@ -42,6 +46,8 @@
 		/* Toggle this class - hide and show the popup */
 		.popup .show {
 		visibility: visible;
+		-webkit-animation: fadeIn 1s;
+		animation: fadeIn 1s;
 		}
 		
 </style>
