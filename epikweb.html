@@ -2,24 +2,63 @@
 <html>
 <head>
    <title>Epico</title>
+   <link rel="stylesheet" href="https://coliff.github.io/dark-mode-switch/dark-mode.css">
+   <style>
+		/* Popup container - can be anything you want */
+		.popup {
+		position: relative;
+		display: inline-block;
+		cursor: pointer;
+		}
+		
+		/* The actual popup */
+		.popup .popuptext {
+		visibility: hidden;
+		width: 160px;
+		background-color: #555;
+		color: #fff;
+		text-align: center;
+		border-radius: 6px;
+		padding: 8px 0;
+		position: absolute;
+		z-index: 1;
+		bottom: 125%;
+		left: 50%;
+		margin-left: -80px;
+		}
+		
+		/* Popup arrow */
+		.popup .popuptext::after {
+		content: "";
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		margin-left: -5px;
+		border-width: 5px;
+		border-style: solid;
+		border-color: #555 transparent transparent transparent;
+		}
+		
+		/* Toggle this class - hide and show the popup */
+		.popup .show {
+		visibility: visible;
+		}
+		
+</style>
 </head>
+
 <body>
 <h1><font color="#adacac">Venvenuty dü the BEsto Page Webbé >:D</font></h1>
 <div><font color="orange">a jajjajj</font></div>
 <div class="nav-link">
 
-         <div class="form-check form-switch">
+		<div class="form-check form-switch">
             <input type="checkbox" class="form-check-input" id="darkSwitch">
             <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
-            <a id="icon">
-
-               <img src="https://cdn.eldeforma.com/wp-content/uploads/2020/03/hacker-meme-e1604368158422.png" width = "80" height = "45" alt = "Haquer">
-
-            </a>
-          </div>
+            <a id="icon"><img src="https://cdn.eldeforma.com/wp-content/uploads/2020/03/hacker-meme-e1604368158422.png" width = "80" height = "45" alt = "Haquer"></a>
+		</div>
           <script src="https://coliff.github.io/dark-mode-switch/dark-mode-switch.min.js"></script>
-
-         </div>
+        </div>
 <div class="popup" onclick="myFunction()">Click Here
   <span class="popuptext" id="myPopup">fciriwuwuiruwhruweywkkbeucdwuinñ</span>
 </div>
@@ -55,66 +94,19 @@
    </a>
    </section>
 </header>
-
-</body>
 <script type ="text/javascript">
     alert('¿Acepta compartir todos sus datos personales junto con su número de cuenta bancaria y contraseñas?');
 </script>
+
 <script nomodule="">window.MSInputMethodContext && document.documentMode && document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-ie11@5/css/bootstrap-ie11.min.css"><script src="https://cdn.jsdelivr.net/npm/ie11-custom-properties@4/ie11CustomProperties.min.js"><\/script>');
-</script><link rel="stylesheet" href="https://coliff.github.io/dark-mode-switch/dark-mode.css">
-<style>
-/* Popup container - can be anything you want */
-.popup {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* The actual popup */
-.popup .popuptext {
-  visibility: hidden;
-  width: 160px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-/* Toggle this class - hide and show the popup */
-.popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;
-}
-</style>
-<script>
-// When the user clicks on div, open the popup
-function myFunction() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
 </script>
-<body>	
+
+<script>
+	// When the user clicks on div, open the popup
+	function myFunction() {
+		var popup = document.getElementById("myPopup");
+		popup.classList.toggle("show");
+	}
+</script>
+</body>	
 <html>
