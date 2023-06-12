@@ -111,7 +111,6 @@
 		.volume-control {
 		margin-top: 10px;
 		}
-		
 		.volume-slider {
 			width: 150px;
 			height: 8px;
@@ -119,13 +118,11 @@
 			position: relative;
 			cursor: pointer;
 		}
-		
 		.volume-slider-progress {
 			height: 100%;
 			background-color: #ffa3c1;
 			width: 100%;
 		}
-		
 		.volume-slider-thumb {
 			width: 10px;
 			height: 16px;
@@ -136,9 +133,9 @@
 			cursor: pointer;
 		}
 		.volume-control #volume-percentage {
-  position: absolute;
-    transform: translateX(167px) translateY(-22px);
-}
+			position: absolute;
+			transform: translateX(167px) translateY(-22px);
+		}
 		
 	</style>
 </head>
@@ -394,11 +391,26 @@
 			player.setVolume(progress * 100);
 		}
 		var volumePercentage = document.getElementById("volume-percentage");
-volumePercentage.textContent = Math.round(progress * 100) + "%";
+		volumePercentage.textContent = Math.round(progress * 100) + "%";
 
 		}
-
-
+	
+		document.addEventListener("keydown", function(event) {
+		switch (event.key) {
+			case " ":
+			// Espacio: pausar/reanudar reproducción
+			togglePlayPause();
+			break;
+			case "ArrowRight":
+			// Flecha derecha: siguiente canción
+			nextSong();
+			break;
+			case "ArrowLeft":
+			// Flecha izquierda: anterior canción
+			previousSong();
+			break;
+		}
+	});
 		
 	</script>
 </body>
