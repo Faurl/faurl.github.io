@@ -16,7 +16,7 @@
 			list-style-type: none;
 			margin: 0;
 			padding: 0;
-			height: 200px;
+			height: 300px;
 			overflow-y: scroll;
 			border: 1px solid #ccc;
 			padding: 10px;
@@ -48,9 +48,14 @@
 		}
 
 		#progress {
-			height: 100%;
+			height: 90%;
 			background-color: #ff7aa5;
 			width: 0%;
+		}
+		
+		#time-display {	
+			transform: translateY(-60%) translateX(102%);
+			margin-right: 10px;
 		}
 
 		.current-song {
@@ -111,6 +116,7 @@
 	
 	<div id="progress-bar">
 		<div id="progress"></div>
+		<div id="time-display">00:00 / 00:00</div>
 	</div><br>
 	<div id="player"></div>
 	<div id="controls">
@@ -240,9 +246,27 @@
 				var currentTime = player.getCurrentTime();
 				var duration = player.getDuration();
 				var progressPercentage = (currentTime / duration) * 100;
+			
+				// Formatear el tiempo actual y la duración total en formato mm:ss
+				var currentTimeFormatted = formatTime(currentTime);
+				var durationFormatted = formatTime(duration);
+			
 				document.getElementById("progress").style.width = progressPercentage + "%";
+				document.getElementById("time-display").textContent = currentTimeFormatted + " / " + durationFormatted;
 			}, 500);
-		}
+			
+				}
+				
+				function formatTime(time) {
+					var minutes = Math.floor(time / 60);
+					var seconds = Math.floor(time % 60);
+					return padNumber(minutes) + ":" + padNumber(seconds);
+				}
+				
+				function padNumber(number) {
+					return (number < 10 ? "0" : "") + number;
+				}
+
 
 		function setCurrentSong(index) {
 			var buttons = document.querySelectorAll("#playlist button");
