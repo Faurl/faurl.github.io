@@ -3,7 +3,7 @@
 <head>
   <title>Faurl Webbe</title>
   <link rel="icon" href="faurl4web.ico" type="image/x-icon">
-  <meta http-equiv="Content-Security-Policy" content="frame-src 'self' *"> <!--'self'-->
+  <meta http-equiv="Content-Security-Policy" content="frame-src 'self' *">
   <style>
     body {
       display: flex;
@@ -55,13 +55,13 @@
 <body>
   <button class="accordion">Load Html files</button>
   <div class="panel">
-   <!--<button onclick="cargarWeb('path'); cerrarPanel()">Texto Boton</button>-->
+    <!--<button onclick="cargarWeb('path'); cerrarPanel()">Texto Boton</button>-->
     <button onclick="cargarWeb('web_rosa.html'); cerrarPanel()">Cargar Web 1</button>
     <button onclick="cargarWeb('epikweb.html'); cerrarPanel()">Main Web</button>
     <button onclick="cargarWeb('codificadorZA.html'); cerrarPanel()">Codificador</button>
-	<button onclick="cargarWeb('cronómetro.html'); cerrarPanel()">Cronómetro</button>
-	<a href="https://faurl.github.io/yt-music-player"><button>Music Player</button></a>
-	<button onclick="cargarWeb('https://www.friv.com/z/games/bloxorz/game.html'); cerrarPanel()">Bloxorz [Friv.com]</button>
+    <button onclick="cargarWeb('cronómetro.html'); cerrarPanel()">Cronómetro</button>
+    <a href="https://faurl.github.io/yt-music-player"><button>Music Player</button></a>
+    <button onclick="cargarWeb('https://www.friv.com/z/games/bloxorz/game.html'); cerrarPanel()">Bloxorz [Friv.com]</button>
   </div>
   <div id="contenedor-web">
     <iframe id="cronometroFrame" src="epikweb.html"></iframe>
@@ -96,28 +96,22 @@
         }
       });
     }
-	
-	
-	
-	window.addEventListener('keydown', function(event) {
-			var iframe = document.getElementById('cronometroFrame');
-			var iframeWindow = iframe.contentWindow || iframe;
 
-			var keyCode = event.keyCode;
-			if (keyCode === 32 || keyCode === 84) {
-				iframeWindow.postMessage({ event: 'toggle' }, '*');
-			} else if (keyCode === 82) {
-				iframeWindow.postMessage({ event: 'reset' }, '*');
-			} else if (keyCode === 187) {
-				iframeWindow.postMessage({ event: 'increaseFontSize' }, '*');
-			} else if (keyCode === 191) {
-				iframeWindow.postMessage({ event: 'decreaseFontSize' }, '*');
-			}
-		});
-	
-	
-	
-	
+    window.addEventListener('keydown', function(event) {
+      var iframe = document.getElementById('cronometroFrame');
+      var iframeWindow = iframe.contentWindow || iframe;
+
+      var keyCode = event.keyCode;
+      if (keyCode === 32 || keyCode === 84) {
+        iframeWindow.postMessage({ event: 'toggle' }, '*');
+      } else if (keyCode === 82) {
+        iframeWindow.postMessage({ event: 'reset' }, '*');
+      } else if (keyCode === 187) {
+        iframeWindow.postMessage({ event: 'increaseFontSize' }, '*');
+      } else if (keyCode === 191) {
+        iframeWindow.postMessage({ event: 'decreaseFontSize' }, '*');
+      }
+    });
   </script>
 </body>
 </html>
