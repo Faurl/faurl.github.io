@@ -9,6 +9,7 @@
 			margin: 0;
 			padding: 20px;
 			font-family: Arial, sans-serif;
+			background-color: #fff2f2;
 		}
 
 		#playlist {
@@ -103,8 +104,8 @@
 </head>
 <body>
 	<h1>Reproductor de Música</h1>
-	<label for="playlistURL">Ingresa el enlace de la playlist de YouTube:</label><br>
-	<input type="text" id="playlistURL" placeholder="https://www.youtube.com/playlist?list=XXXXXXXXXXXX" oninput="loadPlaylist()"><br><br>
+	<a>Ingresa el enlace de la playlist de YouTube:</a><br>
+	<input type="text" id="playlistURL" placeholder="https://www.youtube.com/playlist?list=XXXXXXXXXXXX" oninput="validateAndLoadPlaylist()"><br><br>
 	<div id="playlist"></div><br>
 	
 	<div id="progress-bar">
@@ -252,6 +253,21 @@
 				}
 			});
 		}
+		
+		function validateAndLoadPlaylist() {
+			var playlistURL = document.getElementById("playlistURL").value.trim();
+			if (playlistURL !== "") {
+				loadPlaylist();
+			} else {
+				clearPlaylist();
+			}
+		}
+
+		function clearPlaylist() {
+			var playlistElement = document.getElementById("playlist");
+			playlistElement.innerHTML = "";
+		}
+		
 	</script>
 </body>
 </html>
