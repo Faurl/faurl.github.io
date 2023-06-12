@@ -136,11 +136,30 @@
 		var currentSongIndex = 0;
 		var progressInterval;
 
+		var hideLoadingTimeout;
+
 		function onYouTubeIframeAPIReady() {
-			document.getElementById("loading-message").style.display = "none";
 			document.getElementById("player").style.display = "block";
+			hideLoadingTimeout = setTimeout(function() {
+				hideLoadingMessage();
+			}, 0);
 			loadPlaylist();
 		}
+		
+		function hideLoadingMessage() {
+			if (document.getElementById("loading-message").style.display !== "none") {
+				document.getElementById("loading-message").style.display = "none";
+			}
+		}
+		
+		// Verificar si el mensaje de carga se ha ocultado automáticamente después de 3 segundos
+		setTimeout(function() {
+			if (document.getElementById("loading-message").style.display !== "none") {
+				// Si no se ha ocultado, ocultarlo manualmente
+				hideLoadingMessage();
+			}
+		}, 3000);
+		
 
 		function loadPlaylist() {
 			var playlistURL = document.getElementById("playlistURL").value;
