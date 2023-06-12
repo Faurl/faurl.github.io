@@ -173,6 +173,7 @@
 		var playlist = [];
 		var currentSongIndex = 0;
 		var progressInterval;
+		var currentVolume = 100;
 
 		var hideLoadingTimeout;
 
@@ -241,6 +242,7 @@
 
 		function loadPlayer(videoId, index) {
 			if (player) {
+				currentVolume = player.getVolume(); // Guardar el volumen actual
 				player.destroy();
 			}
 			player = new YT.Player('player', {
@@ -264,6 +266,7 @@
 			updateProgressBar();
 			player.playVideo();
 			setCurrentSong(currentSongIndex);
+			player.setVolume(currentVolume);
 		}
 
 		function onPlayerStateChange(event) {
