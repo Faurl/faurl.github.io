@@ -108,6 +108,39 @@
 			font-weight: 900;
 		}
 		
+		.volume-control {
+		margin-top: 10px;
+		}
+		
+		.volume-slider {
+			width: 150px;
+			height: 8px;
+			background-color: #fccada;
+			position: relative;
+			cursor: pointer;
+		}
+		
+		.volume-slider-progress {
+			height: 100%;
+			background-color: #ff7aa5;
+			width: 100%;
+		}
+		
+		.volume-slider-thumb {
+			width: 10px;
+			height: 16px;
+			background-color: #ff7aa5;
+			position: absolute;
+			top: -4px;
+			right: 0;
+			cursor: pointer;
+		}
+		.volume-control #volume-percentage {
+  position: absolute;
+    transform: translateX(167px) translateY(-22px);
+}
+
+		
 	</style>
 </head>
 <body>
@@ -126,6 +159,15 @@
 		<button class="control-button play-pause-button" onclick="togglePlayPause()"></button>
 		<button class="control-button" onclick="nextSong()"><i class="fas fa-step-forward"></i></button>
 	</div><br>
+	
+	<div class="volume-control">
+		<div class="volume-slider">
+			<div class="volume-slider-progress"></div>
+				<div class="volume-slider-thumb"></div>
+		</div>
+	</div>
+	
+	<div class="volume-control"><span id="volume-percentage">100%</span></div>
 	
 	<div id="loading-message">Cargando...</div>
 
@@ -313,6 +355,51 @@
 			var playlistElement = document.getElementById("playlist");
 			playlistElement.innerHTML = "";
 		}
+		
+		var volumeSlider = document.querySelector(".volume-slider");
+		var volumeSliderProgress = document.querySelector(".volume-slider-progress");
+		var volumeSliderThumb = document.querySelector(".volume-slider-thumb");
+		
+		volumeSlider.addEventListener("mousedown", startVolumeDrag);
+		volumeSlider.addEventListener("touchstart", startVolumeDrag);
+		
+		function startVolumeDrag(event) {
+		event.preventDefault();
+		
+		document.addEventListener("mousemove", moveVolumeSlider);
+		document.addEventListener("mouseup", stopVolumeDrag);
+		document.addEventListener("touchmove", moveVolumeSlider);
+		document.addEventListener("touchend", stopVolumeDrag);
+		
+		moveVolumeSlider(event);
+		}
+		
+		function stopVolumeDrag() {
+		document.removeEventListener("mousemove", moveVolumeSlider);
+		document.removeEventListener("mouseup", stopVolumeDrag);
+		document.removeEventListener("touchmove", moveVolumeSlider);
+		document.removeEventListener("touchend", stopVolumeDrag);
+		}
+		
+		function moveVolumeSlider(event) {
+		var sliderRect = volumeSlider.getBoundingClientRect();
+		var sliderWidth = sliderRect.width;
+		var mouseX = event.pageX || event.touches[0].pageX;
+		var offsetX = mouseX - sliderRect.left;
+		var progress = Math.max(0, Math.min(offsetX / sliderWidth, 1));
+		
+		volumeSliderProgress.style.width = (progress * 100) + "%";
+		volumeSliderThumb.style.right = "calc(" + (100 - progress * 100) + "% - 5px)";
+		
+		if (player) {
+			player.setVolume(progress * 100);
+		}
+		var volumePercentage = document.getElementById("volume-percentage");
+volumePercentage.textContent = Math.round(progress * 100) + "%";
+
+		}
+
+
 		
 	</script>
 </body>
