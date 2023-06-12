@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Reproductor de Música</title>
+	<title>Reproductor de Música by Faurl852</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	<style>
+		body {
+			margin: 0;
+			padding: 20px;
+			font-family: Arial, sans-serif;
+		}
+
 		#playlist {
 			list-style-type: none;
 			margin: 0;
 			padding: 0;
+			height: 200px;
+			overflow-y: scroll;
+			border: 1px solid #ccc;
+			padding: 10px;
 		}
 
-		#playlist li {
+		#playlist button {
+			display: block;
 			cursor: pointer;
 			padding: 5px;
 			background-color: #f2f2f2;
 			margin-bottom: 5px;
+			border: none;
+			width: 100%;
+			text-align: left;
 		}
 
-		#playlist li:hover {
-			background-color: #e6e6e6;
+		#playlist button:hover {
+			background-color: #fccada;
 		}
 
 		#controls {
@@ -25,38 +41,96 @@
 		}
 
 		#progress-bar {
-			width: 100%;
-			height: 5px;
+			width: 90%;
+			height: 8px;
 			background-color: gray;
 		}
 
 		#progress {
 			height: 100%;
-			background-color: green;
+			background-color: #ff7aa5;
 			width: 0%;
 		}
+
+		.current-song {
+			background-color: #ff8cb1 !important;
+		}
+
+		#player {
+			display: none;
+		}
+
+		#loading-message {
+			display: block;
+			text-align: center;
+			font-weight: bold;
+		}
+		
+		/* Estilos para los botones de reproducción */
+		.control-button {
+			display: inline-block;
+			vertical-align: middle;
+			padding: 10px;
+			width: 70px;
+			height: 50px;
+			background-color: #fccada;
+			border: none;
+			cursor: pointer;
+			font-size: 20px;
+			color: #333;
+			transition: background-color 0.3s ease;
+			
+		}
+
+		.control-button {
+			height: 50px;
+		}
+		
+		.control-button:hover {
+			background-color: #ff8cb1;
+		}
+
+		.play-pause-button::before {
+			content: "▶"; <!--►-->
+		}
+
+		.play-pause-button.paused::before {
+			content: "ІІ";
+			font-weight: 900;
+		}
+		
 	</style>
 </head>
 <body>
 	<h1>Reproductor de Música</h1>
 	<label for="playlistURL">Ingresa el enlace de la playlist de YouTube:</label><br>
-	<input type="text" id="playlistURL" placeholder="https://www.youtube.com/playlist?list=XXXXXXXXXXXX"><br>
-	<button onclick="loadPlaylist()">Cargar Playlist</button><br>
-	<ul id="playlist"></ul>
-	<div id="controls">
-		<button onclick="previousSong()">Anterior</button>
-		<button onclick="togglePlayPause()">Reproducir/Pausar</button>
-		<button onclick="nextSong()">Siguiente</button>
-	</div>
+	<input type="text" id="playlistURL" placeholder="https://www.youtube.com/playlist?list=XXXXXXXXXXXX" oninput="loadPlaylist()"><br><br>
+	<div id="playlist"></div><br>
+	
 	<div id="progress-bar">
 		<div id="progress"></div>
-	</div>
+	</div><br>
+	<div id="player"></div>
+	<div id="controls">
+		<button class="control-button" onclick="previousSong()"><i class="fas fa-step-backward"></i></button>
+		<button class="control-button play-pause-button" onclick="togglePlayPause()"></button>
+		<button class="control-button" onclick="nextSong()"><i class="fas fa-step-forward"></i></button>
+	</div><br>
+	
+	<div id="loading-message">Cargando...</div>
+
 	<script src="https://www.youtube.com/iframe_api"></script>
 	<script>
 		var player;
 		var playlist = [];
 		var currentSongIndex = 0;
 		var progressInterval;
+
+		function onYouTubeIframeAPIReady() {
+			document.getElementById("loading-message").style.display = "none";
+			document.getElementById("player").style.display = "block";
+			loadPlaylist();
+		}
 
 		function loadPlaylist() {
 			var playlistURL = document.getElementById("playlistURL").value;
@@ -73,7 +147,6 @@
 							};
 						});
 						displayPlaylist();
-						loadPlayer(playlist[0].videoId);
 					})
 					.catch(error => console.error("Error loading playlist:", error));
 			} else {
@@ -90,17 +163,16 @@
 			var playlistElement = document.getElementById("playlist");
 			playlistElement.innerHTML = "";
 			playlist.forEach((song, index) => {
-				var listItem = document.createElement("li");
-				listItem.textContent = song.title;
-				listItem.onclick = function() {
-					loadPlayer(song.videoId);
-					currentSongIndex = index;
+				var button = document.createElement("button");
+				button.textContent = song.title;
+				button.onclick = function() {
+					loadPlayer(song.videoId, index);
 				};
-				playlistElement.appendChild(listItem);
+				playlistElement.appendChild(button);
 			});
 		}
 
-		function loadPlayer(videoId) {
+		function loadPlayer(videoId, index) {
 			if (player) {
 				player.destroy();
 			}
@@ -109,16 +181,22 @@
 				width: '0',
 				videoId: videoId,
 				events: {
-					'onReady': onPlayerReady,
+					'onReady': function(event) {
+						onPlayerReady(event, index);
+					},
 					'onStateChange': onPlayerStateChange
 				}
 			});
-			currentSongIndex = 0;
+
+			var playPauseButton = document.querySelector(".play-pause-button");
+			playPauseButton.classList.remove("paused");
 		}
 
-		function onPlayerReady(event) {
-			event.target.playVideo();
+		function onPlayerReady(event, index) {
+			currentSongIndex = index;
 			updateProgressBar();
+			player.playVideo();
+			setCurrentSong(currentSongIndex);
 		}
 
 		function onPlayerStateChange(event) {
@@ -132,7 +210,7 @@
 			if (currentSongIndex < 0) {
 				currentSongIndex = playlist.length - 1;
 			}
-			loadPlayer(playlist[currentSongIndex].videoId);
+			loadPlayer(playlist[currentSongIndex].videoId, currentSongIndex);
 		}
 
 		function nextSong() {
@@ -140,7 +218,7 @@
 			if (currentSongIndex >= playlist.length) {
 				currentSongIndex = 0;
 			}
-			loadPlayer(playlist[currentSongIndex].videoId);
+			loadPlayer(playlist[currentSongIndex].videoId, currentSongIndex);
 		}
 
 		function togglePlayPause() {
@@ -150,6 +228,8 @@
 				} else {
 					player.playVideo();
 				}
+				var playPauseButton = document.querySelector(".play-pause-button");
+				playPauseButton.classList.toggle("paused");
 			}
 		}
 
@@ -161,7 +241,17 @@
 				document.getElementById("progress").style.width = progressPercentage + "%";
 			}, 500);
 		}
+
+		function setCurrentSong(index) {
+			var buttons = document.querySelectorAll("#playlist button");
+			buttons.forEach((button, i) => {
+				if (i === index) {
+					button.classList.add("current-song");
+				} else {
+					button.classList.remove("current-song");
+				}
+			});
+		}
 	</script>
-	<div id="player"></div>
 </body>
 </html>
