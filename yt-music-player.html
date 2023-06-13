@@ -198,13 +198,12 @@
 				hideLoadingMessage();
 			}
 		}, 3000);
-		
 
 		function loadPlaylist() {
 			var playlistURL = document.getElementById("playlistURL").value;
 			var playlistId = extractPlaylistId(playlistURL);
 			if (playlistId) {
-				var apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
+				var apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_SisY";
 				fetch(apiUrl)
 					.then(response => response.json())
 					.then(data => {
@@ -218,8 +217,24 @@
 					})
 					.catch(error => console.error("Error loading playlist:", error));
 			} else {
-				console.error("Invalid playlist URL");
+				// Si no es una URL de playlist, intentar cargar un video individual
+				var videoId = extractVideoId(playlistURL);
+				if (videoId) {
+					playlist = [{
+						title: "Video",
+						videoId: videoId
+					}];
+					displayPlaylist();
+					loadPlayer(videoId, 0);
+				} else {
+					console.error("Invalid URL");
+				}
 			}
+		}
+
+		function extractVideoId(url) {
+			var match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?/);
+			return match ? match[1] : null;
 		}
 
 		function extractPlaylistId(url) {
