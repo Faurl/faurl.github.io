@@ -176,6 +176,17 @@
 		var currentVolume = 100;
 
 		var hideLoadingTimeout;
+		
+		// Obtener el parámetro 'playlist' de la URL
+var urlParams = new URLSearchParams(window.location.search);
+var playlistParam = urlParams.get('playlist');
+
+// Verificar si se proporcionó el parámetro 'playlist' en la URL
+if (playlistParam) {
+  // Cargar el contenido del parámetro 'playlist' en el input playlistURL
+  document.getElementById("playlistURL").value = playlistParam;
+}
+
 
 		function onYouTubeIframeAPIReady() {
 			document.getElementById("player").style.display = "block";
@@ -414,15 +425,7 @@
 			break;
 		}
 		
-		// Obtener el parámetro 'playlist' de la URL
-var urlParams = new URLSearchParams(window.location.search);
-var playlistParam = urlParams.get('playlist');
 
-// Verificar si se proporcionó el parámetro 'playlist' en la URL
-if (playlistParam) {
-  // Cargar el contenido del parámetro 'playlist' en el input playlistURL
-  document.getElementById("playlistURL").value = playlistParam;
-}
 
 		
 	});
