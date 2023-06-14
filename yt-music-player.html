@@ -191,13 +191,13 @@
 			}
 		}
 		
-		// Verificar si el mensaje de carga se ha ocultado automáticamente después de 3 segundos
+		// Verificar si el mensaje de carga se ha ocultado automáticamente después de 2 segundos
 		setTimeout(function() {
 			if (document.getElementById("loading-message").style.display !== "none") {
 				// Si no se ha ocultado, ocultarlo manualmente
 				hideLoadingMessage();
 			}
-		}, 3000);
+		}, 2000);
 		
 
 		function loadPlaylist() {
@@ -232,12 +232,10 @@
 		// Cargar el contenido del primer parámetro 'playlist' en el input playlistURL
 		document.getElementById("playlistURL").value = firstPlaylistParam;
 		}
-
 		function extractPlaylistId(url) {
 			var match = url.match(/[?&]list=([^&]+)/);
 			return match ? match[1] : null;
 		}
-
 		function displayPlaylist() {
 			var playlistElement = document.getElementById("playlist");
 			playlistElement.innerHTML = "";
@@ -424,10 +422,7 @@
 			previousSong();
 			break;
 		}
-		
 
-
-		
 	});
 		
 	</script>
