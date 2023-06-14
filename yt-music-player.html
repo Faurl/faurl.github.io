@@ -174,18 +174,19 @@
 		var currentSongIndex = 0;
 		var progressInterval;
 		var currentVolume = 100;
-
 		var hideLoadingTimeout;
 		
 		// Obtener el parámetro 'playlist' de la URL
-var urlParams = new URLSearchParams(window.location.search);
-var playlistParam = urlParams.get('playlist');
-
-// Verificar si se proporcionó el parámetro 'playlist' en la URL
-if (playlistParam) {
-  // Cargar el contenido del parámetro 'playlist' en el input playlistURL
-  document.getElementById("playlistURL").value = playlistParam;
-}
+		var urlParams = new URLSearchParams(window.location.search);
+		var playlistParams = urlParams.getAll('playlist');
+		var firstPlaylistParam = playlistParams.length > 0 ? playlistParams[0] : null;
+		
+		// Verificar si se proporcionó el parámetro 'playlist' en la URL
+		if (firstPlaylistParam) {
+		// Cargar el contenido del primer parámetro 'playlist' en el input playlistURL
+		document.getElementById("playlistURL").value = firstPlaylistParam;
+		}
+		
 
 
 		function onYouTubeIframeAPIReady() {
