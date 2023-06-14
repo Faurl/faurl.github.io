@@ -175,17 +175,6 @@
 		var progressInterval;
 		var currentVolume = 100;
 		
-		// Obtener el parámetro 'playlist' de la URL
-		var urlParams = new URLSearchParams(window.location.search);
-		var playlistParams = urlParams.getAll('playlist');
-		var firstPlaylistParam = playlistParams.length > 0 ? playlistParams[0] : null;
-		
-		// Verificar si se proporcionó el parámetro 'playlist' en la URL
-		if (firstPlaylistParam) {
-		// Cargar el contenido del primer parámetro 'playlist' en el input playlistURL
-		document.getElementById("playlistURL").value = firstPlaylistParam;
-		}
-		
 		var hideLoadingTimeout;
 
 		function onYouTubeIframeAPIReady() {
@@ -209,6 +198,18 @@
 				hideLoadingMessage();
 			}
 		}, 3000);
+		
+		
+		// Obtener el parámetro 'playlist' de la URL
+		var urlParams = new URLSearchParams(window.location.search);
+		var playlistParams = urlParams.getAll('playlist');
+		var firstPlaylistParam = playlistParams.length > 0 ? playlistParams[0] : null;
+		
+		// Verificar si se proporcionó el parámetro 'playlist' en la URL
+		if (firstPlaylistParam) {
+		// Cargar el contenido del primer parámetro 'playlist' en el input playlistURL
+		document.getElementById("playlistURL").value = firstPlaylistParam;
+		}
 		
 
 		function loadPlaylist() {
