@@ -174,7 +174,6 @@
 		var currentSongIndex = 0;
 		var progressInterval;
 		var currentVolume = 100;
-		var hideLoadingTimeout;
 		
 		// Obtener el parámetro 'playlist' de la URL
 		var urlParams = new URLSearchParams(window.location.search);
@@ -187,7 +186,7 @@
 		document.getElementById("playlistURL").value = firstPlaylistParam;
 		}
 		
-
+		var hideLoadingTimeout;
 
 		function onYouTubeIframeAPIReady() {
 			document.getElementById("player").style.display = "block";
