@@ -199,6 +199,35 @@
 			}
 		}, 2000);
 		
+		// Obtener el parámetro 'playlist' de la URL
+		var urlParams = new URLSearchParams(window.location.search);
+		var playlistParams = urlParams.getAll('playlist');
+		var firstPlaylistParam = playlistParams.length > 0 ? playlistParams[0] : null;
+		
+		// Verificar si se proporcionó el parámetro 'playlist' en la URL
+		if (firstPlaylistParam) {
+		// Cargar el contenido del primer parámetro 'playlist' en el input playlistURL después de 3 segundos
+		setTimeout(function() {
+			document.getElementById("playlistURL").value = firstPlaylistParam;
+			loadPlaylist(firstPlaylistParam); // Cargar la lista de reproducción
+		}, 800);
+		}
+		function extractPlaylistId(url) {
+		var match = url.match(/[?&]list=([^&]+)/);
+		return match ? match[1] : null;
+		}
+		function displayPlaylist() {
+		var playlistElement = document.getElementById("playlist");
+		playlistElement.innerHTML = "";
+		playlist.forEach((song, index) => {
+			var button = document.createElement("button");
+			button.textContent = song.title;
+			button.onclick = function() {
+			loadPlayer(song.videoId, index);
+			};
+			playlistElement.appendChild(button);
+			});
+		}
 
 		function loadPlaylist() {
 			var playlistURL = document.getElementById("playlistURL").value;
@@ -222,32 +251,7 @@
 			}
 		}
 		
-		// Obtener el parámetro 'playlist' de la URL
-		var urlParams = new URLSearchParams(window.location.search);
-		var playlistParams = urlParams.getAll('playlist');
-		var firstPlaylistParam = playlistParams.length > 0 ? playlistParams[0] : null;
-		
-		// Verificar si se proporcionó el parámetro 'playlist' en la URL
-		if (firstPlaylistParam) {
-		// Cargar el contenido del primer parámetro 'playlist' en el input playlistURL
-		document.getElementById("playlistURL").value = firstPlaylistParam;
-		}
-		function extractPlaylistId(url) {
-			var match = url.match(/[?&]list=([^&]+)/);
-			return match ? match[1] : null;
-		}
-		function displayPlaylist() {
-			var playlistElement = document.getElementById("playlist");
-			playlistElement.innerHTML = "";
-			playlist.forEach((song, index) => {
-				var button = document.createElement("button");
-				button.textContent = song.title;
-				button.onclick = function() {
-					loadPlayer(song.videoId, index);
-				};
-				playlistElement.appendChild(button);
-			}, 3000);
-		}
+
 
 		function loadPlayer(videoId, index) {
 			if (player) {
