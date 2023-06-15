@@ -246,7 +246,7 @@
 					loadPlayer(song.videoId, index);
 				};
 				playlistElement.appendChild(button);
-			});
+			}, 3000);
 		}
 
 		function loadPlayer(videoId, index) {
@@ -351,13 +351,18 @@
 		}
 		
 		function validateAndLoadPlaylist() {
-			var playlistURL = document.getElementById("playlistURL").value.trim();
-			if (playlistURL !== "") {
-				loadPlaylist();
+			var playlistValue = document.getElementById("playlistURL").value.trim();
+			var playlistId = extractPlaylistId(playlistValue);
+			
+			if (playlistId) {
+				loadPlaylistById(playlistId);
+			} else if (playlistValue !== "") {
+				loadPlaylistByUrl(playlistValue);
 			} else {
 				clearPlaylist();
 			}
 		}
+
 
 		function clearPlaylist() {
 			var playlistElement = document.getElementById("playlist");
