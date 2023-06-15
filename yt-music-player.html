@@ -174,7 +174,7 @@
 		var currentSongIndex = 0;
 		var progressInterval;
 		var currentVolume = 100;
-		
+
 		var hideLoadingTimeout;
 
 		function onYouTubeIframeAPIReady() {
@@ -191,13 +191,38 @@
 			}
 		}
 		
-		// Verificar si el mensaje de carga se ha ocultado automáticamente después de 2 segundos
+		// Verificar si el mensaje de carga se ha ocultado automáticamente después de 3 segundos
 		setTimeout(function() {
 			if (document.getElementById("loading-message").style.display !== "none") {
 				// Si no se ha ocultado, ocultarlo manualmente
 				hideLoadingMessage();
 			}
-		}, 2000);
+		}, 3000);
+		
+
+		function loadPlaylist() {
+			var playlistURL = document.getElementById("playlistURL").value;
+			var playlistId = extractPlaylistId(playlistURL);
+			if (playlistId) {
+				var apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
+				fetch(apiUrl)
+					.then(response => response.json())
+					.then(data => {
+						playlist = data.items.map(item => {
+							return {
+								title: item.snippet.title,
+								videoId: item.snippet.resourceId.videoId
+							};
+						});
+						displayPlaylist();
+					})
+					.catch(error => console.error("Error loading playlist:", error));
+			} else {
+				console.error("Invalid playlist URL");
+			}
+		}
+
+		<!--fin código get playlist from url-->
 		
 		// Obtener el parámetro 'playlist' de la URL
 		var urlParams = new URLSearchParams(window.location.search);
@@ -228,30 +253,25 @@
 			playlistElement.appendChild(button);
 			});
 		}
+		<!--fin código get playlist from url-->
 
-		function loadPlaylist() {
-			var playlistURL = document.getElementById("playlistURL").value;
-			var playlistId = extractPlaylistId(playlistURL);
-			if (playlistId) {
-				var apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
-				fetch(apiUrl)
-					.then(response => response.json())
-					.then(data => {
-						playlist = data.items.map(item => {
-							return {
-								title: item.snippet.title,
-								videoId: item.snippet.resourceId.videoId
-							};
-						});
-						displayPlaylist();
-					})
-					.catch(error => console.error("Error loading playlist:", error));
-			} else {
-				console.error("Invalid playlist URL");
-			}
+		function extractPlaylistId(url) {
+			var match = url.match(/[?&]list=([^&]+)/);
+			return match ? match[1] : null;
 		}
-		
 
+		function displayPlaylist() {
+			var playlistElement = document.getElementById("playlist");
+			playlistElement.innerHTML = "";
+			playlist.forEach((song, index) => {
+				var button = document.createElement("button");
+				button.textContent = song.title;
+				button.onclick = function() {
+					loadPlayer(song.videoId, index);
+				};
+				playlistElement.appendChild(button);
+			});
+		}
 
 		function loadPlayer(videoId, index) {
 			if (player) {
@@ -355,18 +375,13 @@
 		}
 		
 		function validateAndLoadPlaylist() {
-			var playlistValue = document.getElementById("playlistURL").value.trim();
-			var playlistId = extractPlaylistId(playlistValue);
-			
-			if (playlistId) {
-				loadPlaylistById(playlistId);
-			} else if (playlistValue !== "") {
-				loadPlaylistByUrl(playlistValue);
+			var playlistURL = document.getElementById("playlistURL").value.trim();
+			if (playlistURL !== "") {
+				loadPlaylist();
 			} else {
 				clearPlaylist();
 			}
 		}
-
 
 		function clearPlaylist() {
 			var playlistElement = document.getElementById("playlist");
@@ -431,7 +446,6 @@
 			previousSong();
 			break;
 		}
-
 	});
 		
 	</script>
