@@ -204,7 +204,7 @@
 			var playlistURL = document.getElementById("playlistURL").value;
 			var playlistId = extractPlaylistId(playlistURL);
 			if (playlistId) {
-				var apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
+				var apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=250&playlistId=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
 				fetch(apiUrl)
 					.then(response => response.json())
 					.then(data => {
@@ -267,7 +267,7 @@
 				var button = document.createElement("button");
 				button.textContent = song.title;
 				button.onclick = function() {
-					loadPlayer(song.videoId, index);
+				loadPlayer(song.videoId, index);
 				};
 				playlistElement.appendChild(button);
 			});
