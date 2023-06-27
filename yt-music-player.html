@@ -201,26 +201,51 @@
 		
 
 		function loadPlaylist() {
-			var playlistURL = document.getElementById("playlistURL").value;
-			var playlistId = extractPlaylistId(playlistURL);
-			if (playlistId) {
-				var apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=250&playlistId=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
-				fetch(apiUrl)
-					.then(response => response.json())
-					.then(data => {
-						playlist = data.items.map(item => {
-							return {
-								title: item.snippet.title,
-								videoId: item.snippet.resourceId.videoId
-							};
-						});
-						displayPlaylist();
-					})
-					.catch(error => console.error("Error loading playlist:", error));
-			} else {
-				console.error("Invalid playlist URL");
-			}
+		var playlistURL = document.getElementById("playlistURL").value;
+		var playlistId = extractPlaylistId(playlistURL);
+		if (playlistId) {
+			var apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
+			fetch(apiUrl)
+			.then(response => response.json())
+			.then(data => {
+				var nextPageToken = data.nextPageToken;
+				var items = data.items;
+		
+				// Realizar solicitudes adicionales si hay más de 50 canciones en la lista
+				var requests = [];
+				while (nextPageToken) {
+				apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis" + "&pageToken=" + nextPageToken;
+				requests.push(fetch(apiUrl).then(response => response.json()));
+				nextPageToken = null;
+				}
+		
+				// Combinar los resultados de todas las solicitudes en una sola lista de reproducción
+				Promise.all(requests)
+				.then(results => {
+					results.forEach(result => {
+					items = items.concat(result.items);
+					if (result.nextPageToken) {
+						nextPageToken = result.nextPageToken;
+					}
+					});
+		
+					playlist = items.map(item => {
+					return {
+						title: item.snippet.title,
+						videoId: item.snippet.resourceId.videoId
+					};
+					});
+		
+					displayPlaylist();
+				})
+				.catch(error => console.error("Error loading playlist:", error));
+			})
+			.catch(error => console.error("Error loading playlist:", error));
+		} else {
+			console.error("Invalid playlist URL");
 		}
+		}
+		
 
 		<!--fin código get playlist from url-->
 		
