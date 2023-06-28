@@ -199,8 +199,10 @@
 			}
 		}, 3000);
 		
-
+		var playlist = []; // Variable para almacenar la playlist actual
+		
 		function loadPlaylist() {
+		playlist = []; // Reiniciar la playlist actual
 		var playlistURL = document.getElementById("playlistURL").value;
 		var playlistId = extractPlaylistId(playlistURL);
 		
