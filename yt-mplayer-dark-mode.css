@@ -59,8 +59,6 @@ body.dark-mode .current-song {
 body.dark-mode #playlist button:hover {
 	background-color: #516b56;
 }
-
-/* Estilos de la barra de desplazamiento en modo oscuro */
 .dark-mode #playlist::-webkit-scrollbar {
   width: 8px;
 }
