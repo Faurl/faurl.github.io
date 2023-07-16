@@ -29,7 +29,6 @@
 		#playlist {
 			list-style-type: none;
 			margin: 0;
-			padding: 0;
 			height: 300px;
 			overflow-y: scroll;
 			border: 1px solid #ccc;
@@ -201,9 +200,10 @@
 		#playlist::-webkit-scrollbar {
 			height: 8px;
 		}
-
-
-
+		
+		#playlist::-webkit-scrollbar-corner {
+			background-color: #F1F1F1;
+		}
 	</style>
 </head>
 <body>
@@ -532,8 +532,7 @@
 			previousSong();
 			break;
 		}
-	});
-	
+		});
 			function toggleDarkMode() {
 			var body = document.body;
 			body.classList.toggle("dark-mode");
