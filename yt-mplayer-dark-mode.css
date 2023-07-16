@@ -44,7 +44,6 @@ body.dark-mode #playlistURL {
 }
 body.dark-mode #playlistURL {
 	background-color: #394e3a;
-	color: #3b5243;
 }
 body.dark-mode input:-webkit-autofill,
 body.dark-mode input:-webkit-autofill:hover,
@@ -77,4 +76,8 @@ body.dark-mode #playlist button:hover {
 
 body.dark-mode input#playlistURL {
 	color: #1a1a1a;
+}
+
+body.dark-mode #playlist::-webkit-scrollbar-corner {
+	background-color: #333;
 }
