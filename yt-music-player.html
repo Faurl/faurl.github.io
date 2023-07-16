@@ -7,6 +7,10 @@
 	<link rel="icon" href="faurl4web.ico" type="image/x-icon"> <!--Icono mi web (faurl.github.io)-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	<style>
+		.margen-vertical{
+			margin-top: 3px;
+		}
+		
 		body {
 			margin: 0;
 			padding: 20px;
@@ -141,16 +145,19 @@
 		
 		/* Estilos para móviles */
 		@media (max-width: 768px) {
+		
 			#time-display {
 				display: inline-block;
 				float: right;
 				transform: translateX(10px);
-				margin-top: 7px;
+				margin-top: 45px;
 			} #progress-bar {
 				width: 100%;
 				height: 8px;
 				background-color: gray;
 				position: relative;
+			}.control-button {
+				margin-top: 0px;
 		    }
 		}
 	</style>
@@ -158,7 +165,7 @@
 <body>
 	<h1>Pablix Music Player®</h1>
 	<a>Ingresa el enlace de la playlist de YouTube:</a><br>
-	<input type="text" id="playlistURL" placeholder="https://www.youtube.com/playlist?list=XXXXXXXXXXXX" oninput="validateAndLoadPlaylist()"><br><br>
+	<input class="margen-vertical" type="text" id="playlistURL" placeholder="https://www.youtube.com/playlist?list=XXXXXXXXXXXX" oninput="validateAndLoadPlaylist()"><br><br>
 	<div id="playlist"></div><br>
 	
 	<div id="progress-bar">
