@@ -5,7 +5,7 @@ body, #playlist, .control-button, .play-pause-button::before, .volume-slider, .v
 
 body.dark-mode {
 	background-color: #222;
-	color: #506e51;
+	color: #5d805e;
 }
 body.dark-mode #playlist button {
 	background-color: #394e3a;
@@ -25,7 +25,7 @@ body.dark-mode .volume-slider-thumb {
 	background-color: #33473a;
 }
 body.dark-mode #volume-percentage {
-	color: #394e3a;
+	color: #3e543f;
 }
 body.dark-mode .volume-slider-progress {
 	background-color: #506e51;
@@ -76,6 +76,3 @@ body.dark-mode #playlist button:hover {
 .dark-mode #playlist::-webkit-scrollbar-track {
   background-color: #333;
 }
-
-
-
