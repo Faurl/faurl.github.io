@@ -1,0 +1,81 @@
+body, #playlist, .control-button, .play-pause-button::before, .volume-slider, .volume-slider-thumb, #volume-percentage, .volume-slider-progress, #progress-bar, #progress, .current-song, #playlistURL {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+
+body.dark-mode {
+	background-color: #222;
+	color: #506e51;
+}
+body.dark-mode #playlist button {
+	background-color: #394e3a;
+	color: black;
+}
+body.dark-mode .control-button {
+	background-color: #394e3a;
+	color: black;
+}
+body.dark-mode .play-pause-button::before {
+	color: black;
+}
+body.dark-mode .volume-slider {
+	background-color: #394e3a;
+}
+body.dark-mode .volume-slider-thumb {
+	background-color: #33473a;
+}
+body.dark-mode #volume-percentage {
+	color: #394e3a;
+}
+body.dark-mode .volume-slider-progress {
+	background-color: #506e51;
+}
+body.dark-mode #progress-bar {
+	background-color: #171717;
+}
+body.dark-mode #progress,
+body.dark-mode .control-button:hover,
+body.dark-mode .current-song {
+	background-color: #5c7a61;
+}
+body.dark-mode #playlist,
+body.dark-mode #playlistURL {
+	border-color: #5c7a61;
+}
+body.dark-mode #playlistURL {
+	background-color: #394e3a;
+	color: #3b5243;
+}
+body.dark-mode input:-webkit-autofill,
+body.dark-mode input:-webkit-autofill:hover,
+body.dark-mode input:-webkit-autofill:focus,
+body.dark-mode input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #394e3a inset !important;
+	-webkit-text-fill-color: #757575
+}
+body.dark-mode .current-song {
+	background-color: #65856a !important;
+}
+body.dark-mode #playlist button:hover {
+	background-color: #516b56;
+}
+
+/* Estilos de la barra de desplazamiento en modo oscuro */
+.dark-mode #playlist::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark-mode #playlist::-webkit-scrollbar-thumb {
+  background-color: #555;
+}
+
+.dark-mode #playlist::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
+.dark-mode #playlist::-webkit-scrollbar-track {
+  background-color: #333;
+}
+
+
+
