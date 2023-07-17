@@ -33,6 +33,12 @@
 	<link rel="stylesheet" href="musicplayer/yt-mplayer-dark-mode.css">
 	<style>
 	
+		/* Cambiar el color de la línea gris en la vista previa de la URL */
+        meta[property="og:description"]::after,
+        meta[property="og:description"]::before {
+            background-color: #ff8cb1; /* Reemplaza "red" con el color deseado */
+        }
+	
 		.prevent-select {
 			-webkit-user-select: none; /* Safari */
 			-ms-user-select: none; /* IE 10 and IE 11 */
