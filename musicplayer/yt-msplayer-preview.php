@@ -26,12 +26,12 @@ if ($param == 'playlist') {
       }
   } else {
       // Metadatos predeterminados si no se proporciona un valor válido para el parámetro 'playlist'
-      echo '<meta property="og:image" content="URL_de_la_imagen_personalizada">';
+      echo '<meta property="og:image" content="https://faurl.github.io/musicplayer/preview1.png">';
   }
 } else {
   // Metadatos predeterminados si no se cumple la condición
   echo '<meta property="og:title" content="Reproductor de Música by Faurl852">';
   echo '<meta property="og:description" content="Reproductor de PlayLists de YouTube mediante Url">';
-  echo '<meta property="og:image" content="https://faurl.github.io/multimedia-links/preview1.png">';
+  echo '<meta property="og:image" content="https://faurl.github.io/musicplayer/preview1.png">';
 }
 ?>
