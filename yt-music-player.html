@@ -5,37 +5,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- Agregar 'user-scalable=no' para deshabilitar el zoom -->
 	
-
-
-    <script>
-        // Obtener la URL actual
-        var currentUrl = window.location.href;
-
-        // Verificar si la URL contiene la etiqueta "playlist"
-        if (currentUrl.includes("playlist")) {
-            // Obtener el valor de la etiqueta "playlist" de la URL
-            var playlistUrl = new URL(currentUrl).searchParams.get("playlist");
-
-            // Construir el texto de la descripción con el formato deseado
-            var descriptionText = 'Playlist: ' + playlistUrl;
-
-            // Modificar la descripción en la etiqueta <meta property="og:description">
-            var ogDescription = document.querySelector('meta[property="og:description"]');
-            ogDescription.setAttribute("content", descriptionText);
-        } else {
-            // Si no se encuentra la etiqueta "playlist", usar descripción predeterminada
-            var defaultDescription = 'Reproductor de PlayLists de YouTube mediante Url';
-
-            // Modificar la descripción en la etiqueta <meta property="og:description">
-            var ogDescription = document.querySelector('meta[property="og:description"]');
-            ogDescription.setAttribute("content", defaultDescription);
-        }
-    </script>
-	
+	<meta name="description" content="Pablix Music Player">
 	<meta property="og:title" content="Reproductor de Música by Faurl852">
     <meta property="og:description" content="Reproductor de PlayLists de YouTube mediante Url">
-    <meta property="og:image" content="https://faurl.github.io/musicplayer/preview1.png">
-	
+	<meta property="og:image" content="https://faurl.github.io/musicplayer/preview1.png">
 	
 	<link rel="icon" href="musicplayer/faurl4web.ico" type="image/x-icon"> <!--Icono mi web (faurl.github.io)-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
