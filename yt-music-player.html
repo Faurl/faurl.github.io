@@ -9,12 +9,6 @@
     <meta property="og:description" content="Reproductor de PlayLists de YouTube mediante Url">
     <meta property="og:image" content="https://faurl.github.io/musicplayer/preview1.png">
 
-    <!-- Metadatos específicos para Discord -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Reproductor de Música by Faurl852">
-    <meta property="twitter:description" content="Reproductor de PlayLists de YouTube mediante Url">
-    <meta property="twitter:image" content="https://faurl.github.io/musicplayer/preview1.png">
-
     <script>
         // Obtener la URL actual
         var currentUrl = window.location.href;
@@ -30,14 +24,15 @@
             // Modificar la descripción en la etiqueta <meta property="og:description">
             var ogDescription = document.querySelector('meta[property="og:description"]');
             ogDescription.setAttribute("content", descriptionText);
+        } else {
+            // Si no se encuentra la etiqueta "playlist", usar descripción predeterminada
+            var defaultDescription = 'Reproductor de PlayLists de YouTube mediante Url';
 
-            // Modificar la descripción en la etiqueta <meta property="twitter:description">
-            var twitterDescription = document.querySelector('meta[property="twitter:description"]');
-            twitterDescription.setAttribute("content", descriptionText);
+            // Modificar la descripción en la etiqueta <meta property="og:description">
+            var ogDescription = document.querySelector('meta[property="og:description"]');
+            ogDescription.setAttribute("content", defaultDescription);
         }
     </script>
-
-	
 	
 	
 	<link rel="icon" href="musicplayer/faurl4web.ico" type="image/x-icon"> <!--Icono mi web (faurl.github.io)-->
