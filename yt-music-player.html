@@ -20,6 +20,9 @@
 			-ms-user-select: none; /* IE 10 and IE 11 */
 			user-select: none; /* Standard syntax */
 		}
+		.pointer {
+			cursor: pointer;
+		}
 		.margen-vertical{
 			margin-top: 3px;
 		}
@@ -213,7 +216,7 @@
 	</style>
 </head>
 <body>
-	<h1 class="prevent-select">Pablix Music Player®</h1>
+	<h1 class="prevent-select pointer">Pablix Music Player®</h1>
 	<a>Ingresa el enlace de la playlist de YouTube:</a><br>
 	<input class="margen-vertical prevent-select" type="text" id="playlistURL" placeholder="https://www.youtube.com/playlist?list=XXXXXXXXXXXX" oninput="validateAndLoadPlaylist()"><br><br>
 	<div id="playlist"></div><br>
