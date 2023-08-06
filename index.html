@@ -48,7 +48,25 @@
       overflow: hidden;
       position: absolute;
       z-index: 3;
-      width: 7.3%;
+      width: 10.3%;
+    }
+    #accordion-buttons button {
+      display: inline-block;
+      cursor: pointer;
+      padding: 5px;
+      width: 140px;
+      background-color: #e0e4e6;
+      border: 1px solid gray;
+      text-align: left;
+      font-size: 15px;
+      transition-duration: 0.2s;
+
+    }
+
+    #accordion-buttons button:hover {
+      background-color: #c8ccce;
+      color: 303841;
+
     }
 
     iframe {
@@ -58,11 +76,12 @@
       position: relative;
       z-index: 1;
     }
+
   </style>
 </head>
 <body>
   <button class="accordion">Load Html files</button>
-  <div class="panel">
+  <div class="panel" id="accordion-buttons">
     <!--<button onclick="cargarWeb('path'); cerrarPanel()">Texto Boton</button>-->
     <button onclick="cargarWeb('web_rosa.html'); cerrarPanel()">Cargar Web 1</button>
     <button onclick="cargarWeb('epikweb.html'); cerrarPanel()">Main Web</button>
