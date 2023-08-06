@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" href="https://faurl.github.io/multimedia-links/faurl4web.ico" type="image/x-icon">
     <meta charset="utf-8">
     <title>epic cube</title>
     <style>
@@ -34,7 +33,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-const texture = new THREE.TextureLoader().load('../assets/doby.jpg');
+const texture = new THREE.TextureLoader().load('./assets/doby.jpg');
 texture.colorSpace = THREE.SRGBColorSpace;
 
 const geometry = new THREE.BoxGeometry(1, 1, 1);
