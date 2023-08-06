@@ -37,7 +37,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-const texture = new THREE.TextureLoader().load('./assets/cubepixelart.png');
+const texture = new THREE.TextureLoader().load('../assets/cubepixelart.png');
 texture.colorSpace = THREE.SRGBColorSpace;
 
 const geometry = new THREE.BoxGeometry(1, 1, 1);
