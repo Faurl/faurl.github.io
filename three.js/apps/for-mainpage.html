@@ -4,7 +4,11 @@
     <meta charset="utf-8">
     <title>epic cube</title>
     <style>
-      body { margin: 0; }
+      body { 
+        overflow: hidden;
+      }
+      canvas { 
+        display: block; }
     </style>
   </head>
   <body>
@@ -23,47 +27,41 @@
     </script>
 
     <script type="module">
+      import * as THREE from 'three';
+      import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js';
+
+      const scene = new THREE.Scene();
       
-import * as THREE from 'three';
+      // alpha true for renderer support transparency
+      const renderer = new THREE.WebGLRenderer({ alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
 
-import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js';
+      const texture = new THREE.TextureLoader().load('../assets/chuerk.jpg');
+      texture.colorSpace = THREE.SRGBColorSpace;
 
+      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true }); // transparent material true
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
 
-const scene = new THREE.Scene();
-scene.background = new THREE.Color( 0xFFFFFFF );
-
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
-
-const texture = new THREE.TextureLoader().load('../assets/chuerk.jpg');
-texture.colorSpace = THREE.SRGBColorSpace;
-
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial( {map: texture } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
-
-const controls = new OrbitControls( camera, renderer.domElement );
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const controls = new OrbitControls(camera, renderer.domElement);
       controls.maxZoom = 0;
       controls.enableRotate = true;
-      controls.enablePan = false; 
-      controls.enableZoom = false; 
+      controls.enablePan = false;
+      controls.enableZoom = false;
 
-camera.position.z = 1.5;
+      camera.position.z = 1.5;
 
+      function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.005;
+        cube.rotation.y += 0.005;
+        renderer.render(scene, camera);
+      }
 
-function animate() {
-  requestAnimationFrame( animate );
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
-  renderer.render( scene, camera );
-}
-
-animate();
-
+      animate();
     </script>
   </body>
 </html>
