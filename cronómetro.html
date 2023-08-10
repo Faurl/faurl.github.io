@@ -1,104 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="icon" href="https://faurl.github.io/multimedia-links/faurl4web.ico" type="image/x-icon">
-	<title>Cronómetro en HTML</title>
-	<style>
-		#timer {
-			font-size: 4em;
-			text-align: center;
-		}
-	</style>
+    <link rel="icon" href="https://faurl.github.io/multimedia-links/faurl4web.ico" type="image/x-icon">
+    <title>Cronómetro en HTML</title>
+    <style>
+        #timer {
+            font-size: 4em;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-	<h1>Cronómetro</h1>
-	<button onclick="increaseFontSize()">+</button>
-	<button onclick="decreaseFontSize()">-</button>
-	<div id="timer">00:00:00.000</div><br><br>
-	<button onclick="startTimer()">► Iniciar</button>
-	<button onclick="stopTimer()">ӀӀ Detener</button>
-	<button onclick="resetTimer()">↺ Reiniciar</button><br><br>
-	<div id="KeyboardInfo"></div><br>
-	<button id="KeyInfButton" onclick="ShowKeyboardInfo(), HideButton()">⌨ Keyboard Shortcuts</button>
-	<script>
-	
-		function ShowKeyboardInfo() {
-			var textElement = document.getElementById("KeyboardInfo");
-			textElement.innerHTML = "<br>Pulsa la tecla \"T\" o espacio para iniciar, pausar o reanudar.<br><br>Pulsa la tecla \"R\" para reiniciar el cronómetro.<br><br>Pulsa \"+\" o \"ç\" para reescalar el cronómetro."
-		}
-		function HideButton() {
-			var button = document.getElementById("KeyInfButton");
-			button.style.display = "none"
-		}
-	
-		var hours = 0;
-		var minutes = 0;
-		var seconds = 0;
-		var milliseconds = 0;
-		var timer;
-		var isRunning = false;
-		var fontSize = 4; // Tamaño de fuente inicial en em
+    <h1>Cronómetro</h1>
+    <button onclick="increaseFontSize()">+</button>
+    <button onclick="decreaseFontSize()">-</button>
+    <div id="timer">00:00:00.000</div><br><br>
+    <button onclick="startTimer()">► Iniciar</button>
+    <button onclick="stopTimer()">ӀӀ Detener</button>
+    <button onclick="resetTimer()">↺ Reiniciar</button><br><br>
+    <div id="KeyboardInfo"></div><br>
+    <button id="KeyInfButton" onclick="showKeyboardInfo(), hideButton()">⌨ Keyboard Shortcuts</button>
+    <script>
+        var startTime = null;
+        var hours = 0;
+        var minutes = 0;
+        var seconds = 0;
+        var milliseconds = 0;
+        var isRunning = false;
+        var fontSize = 4; // Tamaño de fuente inicial en em
+
+        function showKeyboardInfo() {
+            var textElement = document.getElementById("KeyboardInfo");
+            textElement.innerHTML =
+                "<br>Pulsa la tecla \"T\" o espacio para iniciar, pausar o reanudar.<br><br>Pulsa la tecla \"R\" para reiniciar el cronómetro.<br><br>Pulsa \"+\" , \"ç\" o \"-\" para reescalar el cronómetro.";
+        }
+
+        function hideButton() {
+            var button = document.getElementById("KeyInfButton");
+            button.style.display = "none";
+        }
+
+        function updateTimer(currentTime) {
+            if (!startTime) startTime = currentTime;
+            var elapsedTime = currentTime - startTime;
+            milliseconds = Math.floor(elapsedTime) % 1000;
+            seconds = Math.floor(elapsedTime / 1000) % 60;
+            minutes = Math.floor(elapsedTime / (1000 * 60)) % 60;
+            hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+            displayTime();
+            if (isRunning) {
+                requestAnimationFrame(function() {
+                    updateTimer(performance.now());
+                });
+            }
+        }
+
 
 		function startTimer() {
-			if (!isRunning) {
-				timer = setInterval(incrementTimer, 10);
-				isRunning = true;
-			}
+		    if (!isRunning) {
+		        var currentTime = performance.now();
+		        if (startTime === null) {
+		            startTime = currentTime - (milliseconds + (seconds * 1000) + (minutes * 60 * 1000) + (hours * 60 * 60 * 1000));
+		        }
+		        isRunning = true;
+		        requestAnimationFrame(updateTimer);
+		    }
 		}
 
-		function stopTimer() {
-			if (isRunning) {
-				clearInterval(timer);
-				isRunning = false;
-			}
-		}
+        function stopTimer() {
+            if (isRunning) {
+                isRunning = false;
+            }
+        }
 
-		function resetTimer() {
-			clearInterval(timer);
-			timer = null;
-			isRunning = false;
-			hours = 0;
-			minutes = 0;
-			seconds = 0;
-			milliseconds = 0;
-			document.getElementById("timer").innerHTML = "00:00:00.000";
-		}
+        function resetTimer() {
+            stopTimer();
+            startTime = null;
+            hours = 0;
+            minutes = 0;
+            seconds = 0;
+            milliseconds = 0;
+            displayTime();
+        }
 
-		function incrementTimer() {
-			milliseconds += 10;
-			if (milliseconds == 1000) {
-				milliseconds = 0;
-				seconds++;
-				if (seconds == 60) {
-					seconds = 0;
-					minutes++;
-					if (minutes == 60) {
-						minutes = 0;
-						hours++;
-					}
-				}
-			}
-			var displayHours = hours < 10 ? "0" + hours : hours;
-			var displayMinutes = minutes < 10 ? "0" + minutes : minutes;
-			var displaySeconds = seconds < 10 ? "0" + seconds : seconds;
-			var displayMilliseconds = milliseconds < 10 ? "00" + milliseconds : (milliseconds < 100 ? "0" + milliseconds : milliseconds);
-			document.getElementById("timer").innerHTML = displayHours + ":" + displayMinutes + ":" + displaySeconds + "." + displayMilliseconds;
-		}
+        function displayTime() {
+            var displayHours = hours.toString().padStart(2, "0");
+            var displayMinutes = minutes.toString().padStart(2, "0");
+            var displaySeconds = seconds.toString().padStart(2, "0");
+            var displayMilliseconds = milliseconds.toString().padStart(3, "0");
+            document.getElementById("timer").textContent = `${displayHours}:${displayMinutes}:${displaySeconds}.${displayMilliseconds}`;
+        }
 
-		function increaseFontSize() {
-			fontSize += 1.5;
-			document.getElementById("timer").style.fontSize = fontSize + "em";
-		}
+        function increaseFontSize() {
+            fontSize += 1.5;
+            document.getElementById("timer").style.fontSize = fontSize + "em";
+        }
 
-		function decreaseFontSize() {
-			if (fontSize > 0.1) {
-				fontSize -= 0.8;
-				document.getElementById("timer").style.fontSize = fontSize + "em";
-			}
-		}
+        function decreaseFontSize() {
+            if (fontSize > 0.1) {
+                fontSize -= 0.8;
+                document.getElementById("timer").style.fontSize = fontSize + "em";
+            }
+        }
 
-		// Evento de escucha de la barra espaciadora, tecla "T" y tecla "R"
-		document.body.onkeyup = function(e) {
+        // Evento de escucha de teclas
+        document.body.onkeyup = function(e) {
 			if (e.keyCode === 32) {
 				// Si la tecla es la barra espaciadora (código 32)
 				if (isRunning) {
@@ -130,6 +136,6 @@
 				}
 					
 		};
-	</script>
+    </script>
 </body>
 </html>
