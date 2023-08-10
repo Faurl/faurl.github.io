@@ -63,21 +63,11 @@ background-color: #A8A8A8;
 background-color: #F1F1F1;		
 }
 
+/* Aplicar estilos en pantallas móviles */
 @media (max-width: 490px) {
-
-.title {
-	font-size: 80px;
-	margin-top: 90px;
-	margin-bottom: 80px;
-	}
-
-#button-gui {
-	height: 800px;
-	}
-
-#button-gui button{
-	padding: 40px;
-	width: 100%;
-	font-size: 40px;
-	}
+    #button-gui {
+        height: auto;
+        width: 80%; /* Ajusta el ancho como desees */
+        max-height: 70vh; /* Limita la altura máxima en dispositivos móviles */
+    }
 }
