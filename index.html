@@ -20,8 +20,10 @@
       height: 100vh;
       margin: 0;
       padding: 0;
-	  overflow-y: hidden;
+	    overflow-y: hidden;
     }
+
+    a { text-decoration: none; }
 
     .accordion {
       background-color: #f1f1f1;
@@ -42,16 +44,13 @@
     }
 
     .panel {
-      text-align: left;
-      padding: 0;
       display: none;
       overflow: hidden;
       position: absolute;
       z-index: 3;
-      width: 10.3%;
     }
-    #accordion-buttons button {
-      display: inline-block;
+    #panel-button button {
+      display: block;
       cursor: pointer;
       padding: 5px;
       width: 140px;
@@ -63,7 +62,7 @@
 
     }
 
-    #accordion-buttons button:hover {
+    #panel-button button:hover {
       background-color: #c8ccce;
       color: 303841;
 
@@ -81,7 +80,7 @@
 </head>
 <body>
   <button class="accordion">Load Html files</button>
-  <div class="panel" id="accordion-buttons">
+  <div class="panel" id="panel-button">
     <!--<button onclick="cargarWeb('path'); cerrarPanel()">Texto Boton</button>-->
     <button onclick="cargarWeb('web_rosa.html'); cerrarPanel()">Cargar Web 1</button>
     <button onclick="cargarWeb('epikweb.html'); cerrarPanel()">Main Web</button>
