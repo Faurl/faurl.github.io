@@ -58,6 +58,7 @@ body.dark-mode .current-song {
 body.dark-mode #playlist button:hover {
 	background-color: #516b56;
 }
+
 .dark-mode #playlist::-webkit-scrollbar {
   width: 8px;
 }
@@ -80,4 +81,8 @@ body.dark-mode input#playlistURL {
 
 body.dark-mode #playlist::-webkit-scrollbar-corner {
 	background-color: #333;
+}
+
+body.dark-mode #playlist-title {
+	color: #5d805e;
 }
