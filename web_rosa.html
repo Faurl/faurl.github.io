@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html>
+  <!DOCTYPE html>
+  <html>
   <head>
     <link rel="icon" href="https://faurl.github.io/multimedia-links/faurl4web.ico" type="image/x-icon">
     <title>Página web rouseada</title>
     <style>
       body {
+        margin: 0;
+        padding: 0;
         background-image: linear-gradient(to bottom, #ffe6e6, #ff4d94);
         text-align: center;
+        position: relative;
+        min-height: 100vh;
+        overflow-y: hidden;
       }
       h1 {
         color: #ff1a8c;
@@ -24,11 +29,17 @@
         color: #cc0052;
         font-size: 36px;
         margin-top: 100px;
+       }
+    #content {
+      position: relative;
+      z-index: 1; /* Ensure content appears on top of the image */
       }
       #roses {
-        position: fixed;
+        position: absolute;
         bottom: 0;
-        right: 0;
+        left: 0;
+        width: 100%; /* Stretch horizontally */
+        height: 35%;
       }
       #color-list {
         display: flex;
@@ -62,19 +73,21 @@
     </style>
   </head>
   <body>
-    <h1>Bienvenidos a la web rosa</h1>
-    <p>Esta página está diseñada en tonos de rosa para crear un ambiente cálido y acogedor.</p>
-    <h2>Diferentes tonos de rosa:</h2>
-    <ul id="color-list">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-    <div id="date"></div>
-    <p style="color: #ff1a8c">Para más información, visita nuestra <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbbznUl1hyboFJGZ6D1beXgJxGQ0i7hrRugw&usqp=CAU">página de contacto</a>.</p>
-    <img id="roses" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjPp85F7SA4d9EiNr72npZVNkn57jVxHo5eQ&usqp=CAU" width="1500" height="240" alt="Imagen de rosas">
+    <div id="content">
+      <h1>Bienvenidos a la web rosa</h1>
+      <p>Esta página está diseñada en tonos de rosa para crear un ambiente cálido y acogedor.</p>
+      <h2>Diferentes tonos de rosa:</h2>
+      <ul id="color-list">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <div id="date"></div>
+      <p style="color: #ff1a8c">Para más información, visita nuestra <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbbznUl1hyboFJGZ6D1beXgJxGQ0i7hrRugw&usqp=CAU">página de contacto</a>.</p>
+    </div>
+    <img id="roses" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjPp85F7SA4d9EiNr72npZVNkn57jVxHo5eQ&usqp=CAU" alt="Imagen de rosas">
     <script>
       var date = new Date();
       function displayDate() {
@@ -90,4 +103,4 @@
       setInterval(displayDate, 1000);
     </script>
   </body>
-</html>
+  </html>
