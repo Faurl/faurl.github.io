@@ -177,6 +177,14 @@
 			position: absolute;
 			transform: translateX(167px) translateY(-22px);
 		}
+
+		#playlist-title {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			font-weight: bold;
+			color: #ffa3c1;
+		}
 		
 		/* Estilos para móviles */
 		@media (max-width: 806px) {
@@ -238,6 +246,8 @@
 	<h1 class="prevent-select pointer">Pablix Music Player®</h1>
 	<a>Ingresa el enlace de la playlist de YouTube:</a><br>
 	<input class="margen-vertical prevent-select" type="text" id="playlistURL" placeholder="https://www.youtube.com/playlist?list=XXXXXXXXXXXX" oninput="validateAndLoadPlaylist()"><br><br>
+	<div id="playlist-title"></div>
+
 	<div id="playlist"></div><br>
 	
 	<div id="progress-bar">
@@ -296,47 +306,59 @@
 		
 		var playlist = []; // Variable para almacenar la playlist actual
 		
+
+
 		function loadPlaylist() {
-		playlist = []; // Reiniciar la playlist actual
-		var playlistURL = document.getElementById("playlistURL").value;
-		var playlistId = extractPlaylistId(playlistURL);
-		
-		if (playlistId) {
-			var apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
-			
-			// Función para cargar las canciones
-			var loadSongs = function(pageToken) {
-			var url = apiUrl;
-			if (pageToken) {
-				url += "&pageToken=" + pageToken;
-			}
-			
-			fetch(url)
-				.then(response => response.json())
-				.then(data => {
-				var newPlaylist = data.items.map(item => {
-					return {
-					title: item.snippet.title,
-					videoId: item.snippet.resourceId.videoId
-					};
-				});
-				
-				playlist = playlist.concat(newPlaylist); // Añadir las nuevas canciones a la lista existente
-				displayPlaylist();
-				
-				if (data.nextPageToken) {
-					// Si hay una página siguiente, cargar más canciones
-					loadSongs(data.nextPageToken);
-				}
-				})
-				.catch(error => console.error("Error loading playlist:", error));
-			};
-			
-			loadSongs(null);
-		} else {
-			console.error("Invalid playlist URL");
+		    playlist = []; // Reiniciar la playlist actual
+		    var playlistURL = document.getElementById("playlistURL").value;
+		    var playlistId = extractPlaylistId(playlistURL);
+
+		    if (playlistId) {
+		        var apiUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
+
+		        // Obtener el título de la playlist usando la API de YouTube
+		        fetch("https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=" + playlistId + "&key=AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis")
+		            .then(response => response.json())
+		            .then(data => {
+		                var playlistTitle = data.items[0].snippet.title;
+		                document.getElementById("playlist-title").textContent = playlistTitle; // Mostrar el título en la esquina superior derecha
+		            })
+		            .catch(error => console.error("Error loading playlist title:", error));
+
+		        // Función para cargar las canciones
+		        var loadSongs = function(pageToken) {
+		            var url = apiUrl;
+		            if (pageToken) {
+		                url += "&pageToken=" + pageToken;
+		            }
+		            
+		            fetch(url)
+		                .then(response => response.json())
+		                .then(data => {
+		                    var newPlaylist = data.items.map(item => {
+		                        return {
+		                            title: item.snippet.title,
+		                            videoId: item.snippet.resourceId.videoId
+		                        };
+		                    });
+		                    
+		                    playlist = playlist.concat(newPlaylist); // Añadir las nuevas canciones a la lista existente
+		                    displayPlaylist();
+		                    
+		                    if (data.nextPageToken) {
+		                        // Si hay una página siguiente, cargar más canciones
+		                        loadSongs(data.nextPageToken);
+		                    }
+		                })
+		                .catch(error => console.error("Error loading playlist:", error));
+		        };
+		        
+		        loadSongs(null);
+		    } else {
+		        console.error("Invalid playlist URL");
+		    }
 		}
-		}
+
 		
 		// Obtener el parámetro 'playlist' de la URL
 		var urlParams = new URLSearchParams(window.location.search);
