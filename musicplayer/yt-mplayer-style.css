@@ -142,12 +142,12 @@ margin-top: 10px;
 	transform: translateX(167px) translateY(-22px);
 }
 
-#playlist-title {
+#playlist-title {			/*Playlist Title*/
 	position: absolute;       	
-	top: 10px;				/*Playlist Title*/
-	right: 10px;
+	top: 12px;
+	right: 16px;
 	font-weight: bold;
-	color: #ffa3c1; /*#ff8cb1*/
+	color: #ffa3c1;/*#ff8cb1*/
 }
 
 /* Estilos para móviles */
