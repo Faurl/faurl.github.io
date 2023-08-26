@@ -5,7 +5,7 @@
 		#	                                                            	#
 		#	                                                            	#
 		#	---------------                                             	#
-			MISCELANEOUS:                                             		
+			MISCELANEOUS:                                             
 		#	---------------                                            	#
 		#	                                                           	#
 		#	!clein.flag                                                	#
@@ -36,7 +36,7 @@
 		#	                                                            	#
 		#	                                                            	#
 		#	---------------                                             	#
-			JOVANI:                                                     		
+			JOVANI:                                                  
 		#	---------------                                             	#
 		#	                                                            	#
 		#	!eldenring                                                  	#
@@ -77,7 +77,7 @@
 		#	                                                            	#
 		#	"holo @BotEsponja" (holo <@1050489655612678244>)		#
 		#	                                                       		#
-		#	"???????????"	                                                            	#
+		#	"???????????"	                                                #
 		#	                                                            	#
 		#	"???"                                                       	#
 		#	                                                            	#
@@ -90,7 +90,7 @@
 		#	Message includes: "h" (probabilidad 0.05%)			#
 		#	                                                            	#
 		#	------------------------------                              	#
-			NEXT LETTER OR NUMBER:                                  	 	
+			NEXT LETTER OR NUMBER:                                  	
 		#	------------------------------                              	#
 		#	                                                            	#
 		#	Ej:                                                         	#
@@ -100,6 +100,18 @@
 		#		"1679"	-> 1680                                         #
 		#	                                                            	#
 		#	                                                            	#
-		#	-------------------------------------------------------		#						
+		#	-------------------------------------------------------		#
+		#	MUSIC BOT COMMANDS:                                             
+		#	-------------------------------------------------------		#
+		#	Prefix: j                                                       #
+		#	                                                            	#
+		#	Play Song/ Add to queqe: jp [song name]                  	#
+		#	Stop Queqe/ bot leaves:  js                        	 	#
+		#	Skip Current Song:	 jsk                                    #
+		#	Pause Current Song:	 jps                                    #
+		#	Current Playing Song:    jnp                                    #
+		#	                                                            	#
+		#	                                                            	#
+		#	-------------------------------------------------------		#
 
 
