@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text-to-Speech Converter</title>
+</head>
+<body>
+    <h1>Text-to-Speech Converter</h1>
+    <textarea id="textToSpeak" rows="10" cols="70" placeholder="Enter text to convert to speech..." onkeydown="handleKeyDown(event)"></textarea><br>
+    <label for="voiceSelect">Select Voice:</label>
+    <select id="voiceSelect"></select>
+    <button id="previewButton" onclick="togglePreviewSpeech()">Preview Speech</button>
+    <a id="downloadLink" style="display: none;">Download MP3</a>
+
+    <style type="text/css">
+        body {
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        let synthesis = window.speechSynthesis;
+        let mediaRecorder;
+        let audioChunks = [];
+        let isPlaying = false; // Track if audio is currently playing
+
+        function populateVoiceList() {
+            const voiceSelect = document.getElementById('voiceSelect');
+            const voices = synthesis.getVoices();
+            
+            voiceSelect.innerHTML = '';
+
+            voices.forEach(voice => {
+                const option = document.createElement('option');
+                option.textContent = `${voice.name} (${voice.lang})`;
+                option.value = voice.name;
+                voiceSelect.appendChild(option);
+            });
+        }
+
+        populateVoiceList();
+
+        synthesis.onvoiceschanged = populateVoiceList;
+
+        function togglePreviewSpeech() {
+            if (isPlaying) {
+                stopPreviewSpeech();
+            } else {
+                startPreviewSpeech();
+            }
+        }
+
+        function startPreviewSpeech() {
+            const textToSpeak = document.getElementById('textToSpeak').value;
+            const selectedVoiceName = document.getElementById('voiceSelect').value;
+            
+            if (synthesis.speaking) {
+                synthesis.cancel();
+            }
+            
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+
+            // Set the selected voice using its name
+            const voices = synthesis.getVoices();
+            const selectedVoiceObj = voices.find(voice => voice.name === selectedVoiceName);
+            if (selectedVoiceObj) {
+                utterance.voice = selectedVoiceObj;
+            }
+            
+            utterance.onend = () => {
+                stopRecording();
+            };
+            
+            synthesis.speak(utterance);
+            isPlaying = true;
+            document.getElementById('previewButton').textContent = 'Stop Preview';
+        }
+
+        function stopPreviewSpeech() {
+            synthesis.cancel();
+            isPlaying = false;
+            document.getElementById('previewButton').textContent = 'Preview Speech';
+        }
+
+        function downloadSpeech() {
+            if (audioChunks.length === 0) {
+                alert('Please preview the speech first.');
+                return;
+            }
+
+            const audioBlob = new Blob(audioChunks, { type: 'audio/mpeg' });
+            const url = window.URL.createObjectURL(audioBlob);
+            const downloadLink = document.getElementById('downloadLink');
+            downloadLink.href = url;
+            downloadLink.style.display = 'block';
+            downloadLink.download = 'speech.mp3';
+        }
+
+        function startRecording() {
+            audioChunks = [];
+            const audioStream = audioPreview.captureStream();
+
+            mediaRecorder = new MediaRecorder(audioStream);
+
+            mediaRecorder.ondataavailable = event => {
+                if (event.data.size > 0) {
+                    audioChunks.push(event.data);
+                }
+            };
+
+            mediaRecorder.onstop = () => {
+                // Recording has stopped
+            };
+
+            mediaRecorder.start();
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                mediaRecorder.stop();
+            }
+        }
+
+        // Stop playback when the page is refreshed
+        window.addEventListener('beforeunload', () => {
+            if (isPlaying) {
+                stopPreviewSpeech();
+            }
+        });
+
+        // Handle Enter key press to trigger audio preview
+        function handleKeyDown(event) {
+            if (event.key === 'Enter') {
+                togglePreviewSpeech();
+                event.preventDefault(); // Prevent textarea line break
+            }
+        }
+    </script>
+</body>
+</html>
