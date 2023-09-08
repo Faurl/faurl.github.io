@@ -9,6 +9,9 @@ body.dark-mode {
 }
 body.dark-mode #playlist button {
 	background-color: #394e3a;
+	color: #688f69;
+}
+body.dark-mode #playlist button:hover {
 	color: black;
 }
 body.dark-mode .control-button {
