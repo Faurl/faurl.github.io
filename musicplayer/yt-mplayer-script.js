@@ -1,3 +1,5 @@
+        
+
         // Obtener la URL actual
         var currentUrl = window.location.href;
 
@@ -13,8 +15,7 @@
             var ogDescription = document.querySelector('meta[property="og:description"]');
             ogDescription.setAttribute("content", descriptionText);
         }
-
-
+        //EL CÓDIGO ANTERIOR ES SOLO PARA MOSTRAR LA PLAYLIST EN LA PREVIEW DE UN ENLACE (no funciona akwhkahws)
 
 var player;
 var playlist = [];
@@ -105,33 +106,35 @@ function loadPlaylist() {
 // Obtener el parámetro 'playlist' de la URL
 var urlParams = new URLSearchParams(window.location.search);
 var playlistParams = urlParams.getAll('playlist');
-var firstPlaylistParam = playlistParams.length > 0 ? playlistParams[0] : null;
+var darkModeParam = urlParams.get('dark-mode');
 
-// Verificar si se proporcionó el parámetro 'playlist' en la URL
-if (firstPlaylistParam) {
-// Cargar el contenido del primer parámetro 'playlist' en el input playlistURL después de 3 segundos
-setTimeout(function() {
-	document.getElementById("playlistURL").value = firstPlaylistParam;
-	loadPlaylist(firstPlaylistParam); // Cargar la lista de reproducción
-}, 300);
+// Verificar si se proporcionó el parámetro 'playlist' en la URL y no hay '?dark-mode'
+if (playlistParams.length > 0 && !darkModeParam) {
+    var firstPlaylistParam = playlistParams[0];
+    
+    // Si el primer parámetro 'playlist' no contiene comillas, se asume que es la URL de la playlist
+    if (!firstPlaylistParam.includes('"')) {
+        // Cargar el contenido del primer parámetro 'playlist' en el input playlistURL después de 3 segundos
+        setTimeout(function () {
+            document.getElementById("playlistURL").value = firstPlaylistParam;
+            loadPlaylist(firstPlaylistParam); // Cargar la lista de reproducción
+        }, 300);
+    } else {
+        // Si contiene comillas, se extrae el contenido entre comillas
+        var match = firstPlaylistParam.match(/"([^"]+)"/); // Encuentra el contenido entre comillas
+        var playlistUrl = match ? match[1] : null; // Obtén el contenido encontrado
+        if (playlistUrl) {
+            // Cargar el contenido del primer parámetro 'playlist' (sin comillas) en el input playlistURL después de 3 segundos
+            setTimeout(function () {
+                document.getElementById("playlistURL").value = playlistUrl;
+                loadPlaylist(playlistUrl); // Cargar la lista de reproducción
+            }, 300);
+        }
+    }
 }
-function extractPlaylistId(url) {
-var match = url.match(/[?&]list=([^&]+)/);
-return match ? match[1] : null;
-}
-function displayPlaylist() {
-var playlistElement = document.getElementById("playlist");
-playlistElement.innerHTML = "";
-playlist.forEach((song, index) => {
-	var button = document.createElement("button");
-	button.textContent = song.title;
-	button.onclick = function() {
-	loadPlayer(song.videoId, index);
-	};
-	playlistElement.appendChild(button);
-	});
-}
-<!--fin código get playlist from url-->
+
+
+//fin código get playlist from url
 
 function extractPlaylistId(url) {
 	var match = url.match(/[?&]list=([^&]+)/);
