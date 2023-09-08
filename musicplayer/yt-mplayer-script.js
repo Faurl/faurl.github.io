@@ -100,6 +100,7 @@ function loadPlaylist() {
     }
 }
 
+// GET PLAYLIST FROM URL :
 
 // Obtener el parámetro 'playlist' de la URL
 var urlParams = new URLSearchParams(window.location.search);
