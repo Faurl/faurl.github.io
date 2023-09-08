@@ -15,6 +15,7 @@
         }
 
 
+
 var player;
 var playlist = [];
 var currentSongIndex = 0;
@@ -324,6 +325,12 @@ switch (event.key) {
 	break;
 }
 });
+
+// Verifica si la URL contiene "?dark-mode"
+if (window.location.href.includes('?dark-mode')) {
+    toggleDarkMode();
+}
+
 	function toggleDarkMode() {
 	var body = document.body;
 	body.classList.toggle("dark-mode");
