@@ -1,6 +1,4 @@
-        
-
-        // Obtener la URL actual
+		// Obtener la URL actual
         var currentUrl = window.location.href;
 
         // Verificar si la URL contiene la etiqueta "playlist"
@@ -106,35 +104,23 @@ function loadPlaylist() {
 // Obtener el parámetro 'playlist' de la URL
 var urlParams = new URLSearchParams(window.location.search);
 var playlistParams = urlParams.getAll('playlist');
-var darkModeParam = urlParams.get('dark-mode');
+var firstPlaylistParam = playlistParams.length > 0 ? playlistParams[0] : null;
 
-// Verificar si se proporcionó el parámetro 'playlist' en la URL y no hay '?dark-mode'
-if (playlistParams.length > 0 && !darkModeParam) {
-    var firstPlaylistParam = playlistParams[0];
-    
-    // Si el primer parámetro 'playlist' no contiene comillas, se asume que es la URL de la playlist
-    if (!firstPlaylistParam.includes('"')) {
+// Verificar si se proporcionó el parámetro 'playlist' en la URL y extraer el contenido entre comillas
+if (firstPlaylistParam) {
+    var match = firstPlaylistParam.match(/"([^"]+)"/); // Encuentra el contenido entre comillas
+    var playlistUrl = match ? match[1] : null; // Obtén el contenido encontrado
+    if (playlistUrl) {
         // Cargar el contenido del primer parámetro 'playlist' en el input playlistURL después de 3 segundos
         setTimeout(function () {
-            document.getElementById("playlistURL").value = firstPlaylistParam;
-            loadPlaylist(firstPlaylistParam); // Cargar la lista de reproducción
+            document.getElementById("playlistURL").value = playlistUrl;
+            loadPlaylist(playlistUrl); // Cargar la lista de reproducción
         }, 300);
-    } else {
-        // Si contiene comillas, se extrae el contenido entre comillas
-        var match = firstPlaylistParam.match(/"([^"]+)"/); // Encuentra el contenido entre comillas
-        var playlistUrl = match ? match[1] : null; // Obtén el contenido encontrado
-        if (playlistUrl) {
-            // Cargar el contenido del primer parámetro 'playlist' (sin comillas) en el input playlistURL después de 3 segundos
-            setTimeout(function () {
-                document.getElementById("playlistURL").value = playlistUrl;
-                loadPlaylist(playlistUrl); // Cargar la lista de reproducción
-            }, 300);
-        }
     }
 }
 
+// FIN CÓDIGO GET PLAYLIST FROM URL
 
-//fin código get playlist from url
 
 function extractPlaylistId(url) {
 	var match = url.match(/[?&]list=([^&]+)/);
