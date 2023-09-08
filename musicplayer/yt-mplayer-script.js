@@ -104,21 +104,32 @@ function loadPlaylist() {
 // Obtener el parámetro 'playlist' de la URL
 var urlParams = new URLSearchParams(window.location.search);
 var playlistParams = urlParams.getAll('playlist');
-var firstPlaylistParam = playlistParams.length > 0 ? playlistParams[0] : null;
+var darkModeParam = urlParams.get('dark-mode');
 
-// Verificar si se proporcionó el parámetro 'playlist' en la URL y extraer el contenido entre comillas
-if (firstPlaylistParam) {
-    var match = firstPlaylistParam.match(/"([^"]+)"/); // Encuentra el contenido entre comillas
-    var playlistUrl = match ? match[1] : null; // Obtén el contenido encontrado
-    if (playlistUrl) {
+// Verificar si se proporcionó el parámetro 'playlist' en la URL y no hay '?dark-mode'
+if (playlistParams.length > 0 && !darkModeParam) {
+    var firstPlaylistParam = playlistParams[0];
+    
+    // Si el primer parámetro 'playlist' no contiene comillas, se asume que es la URL de la playlist
+    if (!firstPlaylistParam.includes('"')) {
         // Cargar el contenido del primer parámetro 'playlist' en el input playlistURL después de 3 segundos
         setTimeout(function () {
-            document.getElementById("playlistURL").value = playlistUrl;
-            loadPlaylist(playlistUrl); // Cargar la lista de reproducción
+            document.getElementById("playlistURL").value = firstPlaylistParam;
+            loadPlaylist(firstPlaylistParam); // Cargar la lista de reproducción
         }, 300);
+    } else {
+        // Si contiene comillas, se extrae el contenido entre comillas
+        var match = firstPlaylistParam.match(/"([^"]+)"/); // Encuentra el contenido entre comillas
+        var playlistUrl = match ? match[1] : null; // Obtén el contenido encontrado
+        if (playlistUrl) {
+            // Cargar el contenido del primer parámetro 'playlist' (sin comillas) en el input playlistURL después de 3 segundos
+            setTimeout(function () {
+                document.getElementById("playlistURL").value = playlistUrl;
+                loadPlaylist(playlistUrl); // Cargar la lista de reproducción
+            }, 300);
+        }
     }
 }
-
 // FIN CÓDIGO GET PLAYLIST FROM URL
 
 
