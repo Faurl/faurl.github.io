@@ -12,7 +12,13 @@ body.dark-mode #playlist button {
 	color: #688f69;
 }
 body.dark-mode #playlist button:hover {
+	background-color: #516b56;
 	color: black;
+}
+body.dark-mode .current-song {
+	background-color: #65856a !important;
+	color: black !important;
+	font-weight: bold;
 }
 body.dark-mode .control-button {
 	background-color: #394e3a;
@@ -37,8 +43,7 @@ body.dark-mode #progress-bar {
 	background-color: #171717;
 }
 body.dark-mode #progress,
-body.dark-mode .control-button:hover,
-body.dark-mode .current-song {
+body.dark-mode .control-button:hover {
 	background-color: #5c7a61;
 }
 body.dark-mode #playlist,
@@ -54,12 +59,6 @@ body.dark-mode input:-webkit-autofill:focus,
 body.dark-mode input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #394e3a inset !important;
 	-webkit-text-fill-color: #1a1a1a
-}
-body.dark-mode .current-song {
-	background-color: #65856a !important;
-}
-body.dark-mode #playlist button:hover {
-	background-color: #516b56;
 }
 
 .dark-mode #playlist::-webkit-scrollbar {
