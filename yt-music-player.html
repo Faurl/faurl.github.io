@@ -51,38 +51,6 @@
 
 	<!-- <script src="musicplayer/screen_wake_lock.js"></script> -->
 
-
-	<script>
-    var audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    var audioElement = new Audio();
-
-    function playAudioInBackground(url) {
-        audioElement.src = url;
-        audioElement.play().then(function() {
-            var source = audioContext.createMediaElementSource(audioElement);
-            source.connect(audioContext.destination);
-        });
-    }
-
-
-    function loadPlayer(videoId, index) {
-    if (player) {
-        currentVolume = player.getVolume(); // Guardar el volumen actual
-        player.destroy();
-    }
-    
-    var videoUrl = "https://www.youtube.com/watch?v=" + videoId;
-    playAudioInBackground(videoUrl); // Reproducir audio en segundo plano
-    
-    var playPauseButton = document.querySelector(".play-pause-button");
-    playPauseButton.classList.remove("paused");
-}
-
-
-	</script>
-
-
-
 	<script src="https://www.youtube.com/iframe_api"></script>
 	<script src="musicplayer/yt-mplayer-script.js"></script>
 </body>
