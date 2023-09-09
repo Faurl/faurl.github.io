@@ -3,7 +3,7 @@ let wakeLock = null;
 async function requestWakeLock() {
     try {
         wakeLock = await navigator.wakeLock.request('screen');
-        console.log('Bloqueo de pantalla solicitado con éxito.');
+        console.log('Bloqueo de pantalla solicitado con éxito!');
     } catch (err) {
         console.error('No se pudo solicitar el bloqueo de pantalla:', err);
     }
@@ -13,7 +13,7 @@ function releaseWakeLock() {
     if (wakeLock) {
         wakeLock.release()
             .then(() => {
-                console.log('Bloqueo de pantalla liberado con éxito!');
+                console.log('Bloqueo de pantalla liberado con éxito.');
             })
             .catch((err) => {
                 console.error('No se pudo liberar el bloqueo de pantalla:', err);
