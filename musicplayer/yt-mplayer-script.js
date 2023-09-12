@@ -327,11 +327,10 @@ switch (event.key) {
 }
 });
 
-// Verifica si la URL contiene "?dark-mode"
-if (window.location.href.includes('?dark-mode')) {
+// Verifica si la URL contiene "dark-mode"
+if (window.location.href.includes('dark-mode')) {
     toggleDarkMode();
 }
-
 	function toggleDarkMode() {
 	var body = document.body;
 	body.classList.toggle("dark-mode");
