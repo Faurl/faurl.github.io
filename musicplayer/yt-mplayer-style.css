@@ -9,6 +9,10 @@
 .margen-vertical{
 	margin-top: 3px;
 }
+h1 {
+	width: 0%;
+	white-space: nowrap;
+}
 
 body {
 	margin: 0;
@@ -151,8 +155,12 @@ margin-top: 10px;
 }
 
 /* Estilos para móviles */
-@media (max-width: 806px) {
+@media (max-width: 484px) {
 
+	h1 {
+		width: auto;
+		white-space: normal;
+	}
 	#time-display {
 		display: inline-block;
 		float: right;
