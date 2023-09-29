@@ -20,6 +20,7 @@ body {
 	font-family: Arial, sans-serif;
 	background-color: #fff2f2;
 	overflow-x: hidden;
+	user-select: none;
 }
 
 #playlist {
@@ -67,6 +68,7 @@ body {
 #time-display {	
 	transform: translateY(-65%) translateX(102%);
 	margin-right: 10px;
+	user-select: text;
 }
 
 .current-song {
@@ -81,6 +83,79 @@ body {
 	display: block;
 	text-align: center;
 	font-weight: bold;
+}
+
+/* Estilos para los botones de reproducción */
+.control-button {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 10px;
+	width: 70px;
+	height: 50px;
+	background-color: #fccada;
+	border: none;
+	cursor: pointer;
+	font-size: 20px;
+	color: #333;
+	transition: background-color 0.3s ease;
+	
+}
+
+.control-button {
+	height: 50px;
+}
+
+.control-button:hover {
+	background-color: #ff8cb1;
+}
+
+.play-pause-button::before {
+	content: "►"; <!--▶-->
+	font-weight: 900;
+}
+
+.play-pause-button.paused::before {
+	content: "ІІ";
+	font-weight: 900;
+}
+
+.volume-control {
+margin-top: 10px;
+}
+.volume-slider {
+	width: 150px;
+	height: 8px;
+	background-color: #fccada;
+	position: relative;
+	cursor: pointer;
+}
+.volume-slider-progress {
+	height: 100%;
+	background-color: #ffa3c1;
+	width: 100%;
+}
+.volume-slider-thumb {
+	width: 10px;
+	height: 16px;
+	background-color: #ff8cb1; 
+	position: absolute;
+	top: -4px;
+	right: 0;
+	cursor: pointer;
+}
+.volume-control #volume-percentage {
+	position: absolute;
+	transform: translateX(167px) translateY(-22px);
+	user-select: text;
+}
+
+#playlist-title {			/*Playlist Title*/
+	position: absolute;       	
+	top: 12px;
+	right: 15px;
+	font-weight: bold;
+	color: #ffa3c1;/*#ff8cb1*/
+	user-select: text;
 }
 
 /* Estilos para los botones de reproducción */
