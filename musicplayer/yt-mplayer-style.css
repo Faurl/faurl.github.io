@@ -230,7 +230,7 @@ margin-top: 10px;
 }
 
 /* Estilos para móviles */
-@media (max-width: 484px) {
+@media (max-width: 869px) {
 
 	h1 {
 		width: auto;
