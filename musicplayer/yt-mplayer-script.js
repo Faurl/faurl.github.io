@@ -178,7 +178,6 @@ function onPlayerReady(event, index) {
 	updateProgressBar();
 	player.playVideo();
 	setCurrentSong(currentSongIndex);
-	player.setVolume(currentVolume);
 }
 
 function onPlayerStateChange(event) {
