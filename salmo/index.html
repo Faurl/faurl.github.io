@@ -36,79 +36,90 @@
 		}
 
 		.lorax {
-			width: 10%;
+			width: 15%;
+			cursor: pointer;
 		}
-		.lorax: hover {
-			width: 20%;
-		}
-		#lorax-link {
-			position: absolute;
+		.lorax-link {
 			animation: color-change 3s steps(1) infinite;
 			-webkit-text-stroke-width: 1px; 
             -webkit-text-stroke-color: black;
-			transform: translate(450%, 30px);
+
+			transform: translateY(100px);
+			pointer-events: none;
+		}
+		#container-lorax {
+			position: absolute;
+			transform: translate(5%, 392%);
 
 		}
+		#container-all {
+			display: flex;
+			justify-content: center;
 
+			transform: translateX(-3%);
+		}
 
 	</style>
 </head>
 <body>
 	<h1>INCREÍBLE PERO CIERTO</h1>
 <h2>No lo creerás :0</h2>
-<pre>
-	
-Salmón mon mon,
-Salmón mon mon
-Salmón mon mon,
-Salmón mon mon
-Ohh
-Salmón mon mon, salmón mon mon
-Salmón mon mon,
-Salmón mon mon
-Salmón mon mon, salmón mon mon
-Salmón mon mon,
-Salmón mon mon
+<div id="container-all">
+	<pre>
+		
+	Salmón mon mon,
+	Salmón mon mon
+	Salmón mon mon,
+	Salmón mon mon
+	Ohh
+	Salmón mon mon, salmón mon mon
+	Salmón mon mon,
+	Salmón mon mon
+	Salmón mon mon, salmón mon mon
+	Salmón mon mon,
+	Salmón mon mon
 
-Salmón mon mon,
-Salmón mon mon
+	Salmón mon mon,
+	Salmón mon mon
 
-Contra la pared,
-Contra la pared
-Contra la pared,
-Contra la pared
-Contra la pared,
-Contra la pared
-Salmón mon mon
-(Que le gusta) Salmón mon mon
-(Que le gusta) Salmón mon mon
-(Que le gusta) Salmón mon mon
-(Que le gusta) Salmón mon mon
-(Que le gusta) Salmón mon mon
-(Que le gusta) Salmón mon mon
-(Que le gusta) Salmón mon mon
-(Que le gusta) Salmón mon mon
+	Contra la pared,
+	Contra la pared
+	Contra la pared,
+	Contra la pared
+	Contra la pared,
+	Contra la pared
+	Salmón mon mon
+	(Que le gusta) Salmón mon mon
+	(Que le gusta) Salmón mon mon
+	(Que le gusta) Salmón mon mon
+	(Que le gusta) Salmón mon mon
+	(Que le gusta) Salmón mon mon
+	(Que le gusta) Salmón mon mon
+	(Que le gusta) Salmón mon mon
+	(Que le gusta) Salmón mon mon
 
-No lo intentes hacer en tu casa
-Estamos a otro puto nivel
-Haciendo buena mierda desde 2009
-
-
-
+	No lo intentes hacer en tu casa
+	Estamos a otro puto nivel
+	Haciendo buena mierda desde 2009
 
 
 
 
-</pre>
-
-<a href="" onclick=" window.open('https://www.youtube.com/embed/rGmiPTmj8eM?si=a9mDMjPbwZqN1uwQ&autoplay=1', '', 'width=560 height=315') ">
-	<p id="lorax-link">click me!! :::)</p>
-	<img class="lorax" src="https://www.redbrokoly.com/12285-large_default/mascota-de-lorax-famosa-criatura-naranja-de-dibujos-animados.jpg">
-</a>
-<br>
-<br>
 
 
+
+
+	</pre>
+	<div id="container-lorax">
+
+			<p class="lorax-link">click me!! :::)</p>
+			<img class="lorax"
+				src="https://faurl.github.io/salmo/lorrax1.png"
+				onclick=" window.open('https://www.youtube.com/embed/rGmiPTmj8eM?si=a9mDMjPbwZqN1uwQ&autoplay=1', '', 'width=560 height=315') ">
+	</div>
+	<br>
+	<br>
+</div>
 
 </body>
 </html>
