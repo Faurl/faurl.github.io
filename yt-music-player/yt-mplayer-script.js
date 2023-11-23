@@ -48,6 +48,13 @@ setTimeout(function() {
 
 var playlist = []; // Variable para almacenar la playlist actual
 
+// LOG LAST song url on CONSOLE
+function logCurrentVideoUrl() {
+    if (player) {
+        var currentVideoUrl = "https://www.youtube.com/watch?v=" + player.getVideoData().video_id;
+        console.log("Last Song URL: ", currentVideoUrl);
+    }
+}
 
 function loadPlaylist() {
     playlist = []; // Reiniciar la playlist actual
@@ -179,6 +186,8 @@ function onPlayerReady(event, index) {
 	player.playVideo();
 	setCurrentSong(currentSongIndex);
 	player.setVolume(currentVolume);
+
+	logCurrentVideoUrl();
 }
 
 function onPlayerStateChange(event) {
@@ -193,6 +202,8 @@ function previousSong() {
 		currentSongIndex = playlist.length - 1;
 	}
 	loadPlayer(playlist[currentSongIndex].videoId, currentSongIndex);
+
+	logCurrentVideoUrl();
 }
 
 function nextSong() {
@@ -201,6 +212,8 @@ function nextSong() {
 		currentSongIndex = 0;
 	}
 	loadPlayer(playlist[currentSongIndex].videoId, currentSongIndex);
+
+	logCurrentVideoUrl();
 }
 
 function togglePlayPause() {
