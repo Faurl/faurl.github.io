@@ -20,7 +20,8 @@ var playlist = [];
 var currentSongIndex = 0;
 var progressInterval;
 var currentVolume = 100;
-var YouttubeAapikeeyy = "AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
+var YouttubeAapikeeyy = "AIzaSyB53d0aVpGq1-jkQ3-Zpntl3hjd9fPmm_o";
+//var YouttubeAapikeeyy = "AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
 
 var hideLoadingTimeout;
 
@@ -29,7 +30,8 @@ function onYouTubeIframeAPIReady() {
 	hideLoadingTimeout = setTimeout(function() {
 		hideLoadingMessage();
 	}, 0);
-	loadPlaylist();
+	
+//	loadPlaylist();
 }
 
 function hideLoadingMessage() {
@@ -260,6 +262,17 @@ function setCurrentSong(index) {
 	buttons.forEach((button, i) => {
 		if (i === index) {
 			button.classList.add("current-song");
+
+				// Verificar si el botón actual está fuera de la vista y hacer scroll si es necesario.
+
+	            if (typeof button.scrollIntoViewIfNeeded === 'function') {
+	                button.scrollIntoViewIfNeeded();
+	            } else if (typeof button.scrollIntoView === 'function') {
+	                button.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
+	            }
+
+	            // End.Verificar si el botón actual está fuera de la vista y hacer scroll si es necesario.
+
 		} else {
 			button.classList.remove("current-song");
 		}
