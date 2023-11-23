@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reproductor de Música by Faurl852</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	
+	<meta property="theme-color" content="#FF1683">
+	<meta property="og:site_name" content="Pablix Music Player">
+	<meta property="og:title" content="Reproductor de Música by Faurl852">
+    <meta property="og:description" content="Reproductor de PlayLists de YouTube mediante Url">
+	<meta property="og:image" content="https://faurl.github.io/musicplayer/preview1.png">
+	
+	<link rel="icon" href="https://faurl.github.io/multimedia-links/faurl4web.ico" type="image/x-icon">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+	<link rel="stylesheet" href="musicplayer/yt-mplayer-dark-mode.css">
+	<link rel="stylesheet" type="text/css" href="musicplayer/yt-mplayer-style.css">
+</head>
+
+<body>
+	<h1 class="prevent-select pointer">Pablix Music Player®</h1>
+	<a>Ingresa el enlace de la playlist de YouTube:</a><br>
+	<input class="margen-vertical prevent-select" type="text" id="playlistURL" placeholder="https://www.youtube.com/playlist?list=XXXXXXXXXXXX" oninput="validateAndLoadPlaylist()">
+	<br>
+	<br>
+	<div id="playlist-title"></div>
+	<div id="playlist">
+		
+		<!-- FOR TESTING CSS
+
+		<button>Another Day Of Sun</button><button>Oh Klahoma | PMV | DareGare</button><button>I / Me / Myself</button><button>Giga &amp; Kira - GETCHA! (cover) ft. Cycoriot &amp; PARANOiD DJ</button><button>Had Me @ Hello</button><button>Nimona | Santigold, Karen O - GO! // sub. español</button><button>Portal - 'Still Alive'</button><button>Chasper - Wise Guy</button><button>Benny &amp; Joon : I'm Gonna Be (500 Miles)</button><button>hyper potions &amp; skye rocket ★ mania ★ (sonic mania vocal theme)</button><button>~Kanroji Mitsuri (Kings &amp; Queens)~ [Kimetsu No Yaiba AMV]</button><button>My Hero Academia - "Peace Sign" FULL OPENING (OP 2) - [ENGLISH Cover by NateWantsToBattle]</button><button>Payphone - Maroon 5 (cover) Megan Nicole and Dave Days</button><button>Parachute [TOH:Lumity AMV]</button><button>Magic - The Owl House AMV</button><button>I Wouldn't Mind | Lumity AMV</button>
+		-->
+	</div>
+	<br>
+	<div id="progress-bar">
+		<div id="progress"></div>
+		<div id="time-display">00:00 / 00:00</div>
+	</div>
+	<br>
+	<div id="player"></div>
+	<div id="controls">
+		<button class="control-button" onclick="previousSong()"><i class="fas fa-step-backward"></i></button>
+		<button class="control-button play-pause-button" onclick="togglePlayPause()"></button>
+		<button class="control-button" onclick="nextSong()"><i class="fas fa-step-forward"></i></button>
+	</div>
+	<br>
+	<div class="volume-control">
+		<div class="volume-slider">
+			<div class="volume-slider-progress"></div>
+			<div class="volume-slider-thumb"></div>
+		</div>
+	</div>
+	<div class="volume-control"><span id="volume-percentage">100%</span></div>
+	
+	<div id="loading-message">Cargando...</div>
+
+	<!-- <script src="musicplayer/screen_wake_lock.js"></script> -->
+
+	<script src="https://www.youtube.com/iframe_api"></script>
+	<script src="musicplayer/yt-mplayer-script.js"></script>
+</body>
+</html>
