@@ -20,8 +20,7 @@ var playlist = [];
 var currentSongIndex = 0;
 var progressInterval;
 var currentVolume = 100;
-var YouttubeAapikeeyy = "AIzaSyB53d0aVpGq1-jkQ3-Zpntl3hjd9fPmm_o";
-//var YouttubeAapikeeyy = "AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
+var YouttubeAapikeeyy = "AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
 
 var hideLoadingTimeout;
 
