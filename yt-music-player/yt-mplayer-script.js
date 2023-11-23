@@ -20,7 +20,8 @@ var playlist = [];
 var currentSongIndex = 0;
 var progressInterval;
 var currentVolume = 100;
-var YouttubeAapikeeyy = "AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
+var YouttubeAapikeeyy = "AIzaSyB53d0aVpGq1-jkQ3-Zpntl3hjd9fPmm_o";
+//var YouttubeAapikeeyy = "AIzaSyBojdH9dK2F8Dyk4mw7Ia2Y-e0zVWk_Sis";
 
 var hideLoadingTimeout;
 
@@ -29,7 +30,7 @@ function onYouTubeIframeAPIReady() {
 	hideLoadingTimeout = setTimeout(function() {
 		hideLoadingMessage();
 	}, 0);
-	
+
 //	loadPlaylist();
 }
 
@@ -53,7 +54,7 @@ var playlist = []; // Variable para almacenar la playlist actual
 function logCurrentVideoUrl() {
     if (player) {
         var currentVideoUrl = "https://www.youtube.com/watch?v=" + player.getVideoData().video_id;
-        console.log("Last Song URL: ", currentVideoUrl);
+        console.log("Last-Song-URL: ", currentVideoUrl);
     }
 }
 
