@@ -62,13 +62,11 @@
       text-align: left;
       font-size: 15px;
       transition-duration: 0.2s;
-
     }
 
     #panel-button button:hover {
       background-color: #c8ccce;
       color: 303841;
-
     }
 
     iframe {
@@ -88,26 +86,50 @@
       
       font-weight: normal;
       background-color: transparent;
-      
+    }
+
+    #panel-smaller button {
+      display: block;
+      cursor: pointer;
+      padding: 5px;
+      width: 110px;
+      background-color: #e0e4e6;
+      border: 1px solid gray;
+      text-align: left;
+      font-size: 15px;
+      transition-duration: 0.2s;
+    }
+
+    #panel-smaller button:hover {
+      background-color: #c8ccce;
+      color: 303841;
     }
 
   </style>
 </head>
 <body>
   <button class="accordion">Load Html files</button>
-  <div class="panel" id="panel-button">
+  <div class="panel">
+    <div id="panel-button">
     <!--<button onclick="cargarWeb('path'); cerrarPanel()">Texto Boton</button>-->
-    <button onclick="cargarWeb('web_rosa.html'); cerrarPanel()">Cargar Web 1</button>
-    <button onclick="cargarWeb('epikweb.html'); cerrarPanel()">Main Web</button>
-    <button onclick="cargarWeb('tools/codificador.html'); cerrarPanel()">Codificador</button>
-    <button onclick="cargarWeb('tools/cronómetro.html'); cerrarPanel()">Cronómetro</button>
-    
-      <a href="https://faurl.github.io/yt-music-player" ><button>Music Player</button></a>
-      <a href="https://faurl.github.io/yt-music-player" onclick="window.open(this.href, '_blank', 'width=450,height=653'); return false;"><button class="music-ext-window"></button></a>
-    
-    <button onclick="cargarWeb('https://www.friv.com/z/games/bloxorz/game.html'); cerrarPanel()">Bloxorz [Friv.com]</button>
-    <button onclick="cargarWeb('three.js/gui-loader.html'); cerrarPanel()">Three.js</button>
-	<a href="https://faurl.github.io/salmo" ><button>salmo</button></a>
+
+        <button onclick="cargarWeb('web_rosa.html'); cerrarPanel()">Cargar Web 1</button>
+        <button onclick="cargarWeb('epikweb.html'); cerrarPanel()">Main Web</button>
+        <button onclick="cargarWeb('tools/codificador.html'); cerrarPanel()">Codificador</button>
+        <button onclick="cargarWeb('tools/cronómetro.html'); cerrarPanel()">Cronómetro</button>
+        
+        <a href="https://faurl.github.io/yt-music-player" ><button>Music Player</button></a>
+        <a href="https://faurl.github.io/yt-music-player" onclick="window.open(this.href, '_blank', 'width=450,height=653'); return false;"><button class="music-ext-window"></button></a>
+        
+        <button onclick="cargarWeb('https://www.friv.com/z/games/bloxorz/game.html'); cerrarPanel()">Bloxorz [Friv.com]</button>
+    </div>
+    <div id="panel-smaller">
+        <button onclick="cargarWeb('mtos.html'); cerrarPanel()">Min to Secs</button>
+        <button onclick="cargarWeb('tools/geolocation.html'); cerrarPanel()">Geolocation</button>
+        <a href="https://faurl.github.io/salmo" ><button>salmo</button></a>
+        <button onclick="cargarWeb('three.js/gui-loader.html'); cerrarPanel()">Three.js</button>
+    </div>
+
   </div>
   <div id="contenedor-web">
     <iframe id="cronometroFrame" src="epikweb.html"></iframe>
