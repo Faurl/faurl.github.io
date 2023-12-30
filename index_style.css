@@ -1,0 +1,94 @@
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+	    overflow-y: hidden;
+    }
+
+    a { text-decoration: none; }
+
+    .accordion {
+      background-color: #f1f1f1;
+      color: #333;
+      cursor: pointer;
+      padding: 8px;
+      width: 100%;
+      text-align: left;
+      border: none;
+      outline: none;
+      transition: 0.4s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .active, .accordion:hover {
+      background-color: #ddd;
+    }
+
+    .panel {
+      display: none;
+      overflow: hidden;
+      position: absolute;
+      z-index: 3;
+    }
+    #panel-button button {
+      display: block;
+      cursor: pointer;
+      padding: 5px;
+      width: 140px;
+      background-color: #e0e4e6;
+      border: 1px solid gray;
+      text-align: left;
+      font-size: 15px;
+      transition-duration: 0.2s;
+    }
+
+    #panel-button button:hover {
+      background-color: #c8ccce;
+      color: 303841;
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100vh - 35px);
+      border: none;
+      position: relative;
+      z-index: 1;
+    }
+    .music-ext-window {
+      width: 20px !important;
+      height: 20px !important;
+
+      transform: translate(105px, -24px);
+      position: fixed;
+
+      
+      font-weight: normal;
+      background-color: transparent;
+    }
+
+    #panel-smaller button{
+      display: block;
+      cursor: pointer;
+      padding: 4px;
+      width: 110px;
+      background-color: #e0e4e6;
+      border: 1px solid gray;
+      text-align: left;
+      font-size: 15px;
+      transition-duration: 0.2s;
+    }
+
+    #panel-smaller button:hover {
+      background-color: #c8ccce;
+      color: 303841;
+    }
+
+    .panel-smaller-container {
+      margin-top: 3px;
+    } 

@@ -6,106 +6,14 @@
   <meta http-equiv="Content-Security-Policy" content="frame-src 'self' *">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
+  <link rel="stylesheet" type="text/css" href="index_style.css">
+
 	<meta property="theme-color" content="#FF7C66">
   <meta property="og:site_name" content="Epic Web">
 	<meta property="og:title" content="Faur Webbe">
   <meta property="og:description" content="Multitool Web ✓ 👀👀👀👀 😱😱😱😱😱">
 	<meta property="og:image" content="https://faurl.github.io/multimedia-links/thumbs_up.jpg">
-  <script type="text/javascript">
-    
-  </script>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: flex-start;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-	    overflow-y: hidden;
-    }
 
-    a { text-decoration: none; }
-
-    .accordion {
-      background-color: #f1f1f1;
-      color: #333;
-      cursor: pointer;
-      padding: 8px;
-      width: 100%;
-      text-align: left;
-      border: none;
-      outline: none;
-      transition: 0.4s;
-      position: relative;
-      z-index: 2;
-    }
-
-    .active, .accordion:hover {
-      background-color: #ddd;
-    }
-
-    .panel {
-      display: none;
-      overflow: hidden;
-      position: absolute;
-      z-index: 3;
-    }
-    #panel-button button {
-      display: block;
-      cursor: pointer;
-      padding: 5px;
-      width: 140px;
-      background-color: #e0e4e6;
-      border: 1px solid gray;
-      text-align: left;
-      font-size: 15px;
-      transition-duration: 0.2s;
-    }
-
-    #panel-button button:hover {
-      background-color: #c8ccce;
-      color: 303841;
-    }
-
-    iframe {
-      width: 100%;
-      height: calc(100vh - 35px);
-      border: none;
-      position: relative;
-      z-index: 1;
-    }
-    .music-ext-window {
-      width: 20px !important;
-      height: 20px !important;
-
-      transform: translate(105px, -24px);
-      position: fixed;
-
-      
-      font-weight: normal;
-      background-color: transparent;
-    }
-
-    #panel-smaller button {
-      display: block;
-      cursor: pointer;
-      padding: 5px;
-      width: 110px;
-      background-color: #e0e4e6;
-      border: 1px solid gray;
-      text-align: left;
-      font-size: 15px;
-      transition-duration: 0.2s;
-    }
-
-    #panel-smaller button:hover {
-      background-color: #c8ccce;
-      color: 303841;
-    }
-
-  </style>
 </head>
 <body>
   <button class="accordion">Load Html files</button>
@@ -123,13 +31,15 @@
         
         <button onclick="cargarWeb('https://www.friv.com/z/games/bloxorz/game.html'); cerrarPanel()">Bloxorz [Friv.com]</button>
     </div>
-    <div id="panel-smaller">
-        <button onclick="cargarWeb('mtos.html'); cerrarPanel()">Min to Secs</button>
-        <button onclick="cargarWeb('tools/geolocation.html'); cerrarPanel()">Geolocation</button>
-        <a href="https://faurl.github.io/salmo" ><button>salmo</button></a>
-        <button onclick="cargarWeb('three.js/gui-loader.html'); cerrarPanel()">Three.js</button>
+    
+    <div class="panel-smaller-container">
+      <div id="panel-smaller">
+          <button onclick="cargarWeb('mtos.html'); cerrarPanel()">Min to Secs</button>
+          <button onclick="cargarWeb('tools/geolocation.html'); cerrarPanel()">Geolocation</button>
+          <a href="https://faurl.github.io/salmo" ><button>salmo</button></a>
+          <button onclick="cargarWeb('three.js/gui-loader.html'); cerrarPanel()">Three.js</button>
+      </div>
     </div>
-
   </div>
   <div id="contenedor-web">
     <iframe id="cronometroFrame" src="epikweb.html"></iframe>
