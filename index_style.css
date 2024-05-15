@@ -10,6 +10,14 @@
 	    overflow-y: hidden;
     }
 
+    iframe {
+      width: 100%;
+      height: calc(100vh - 35px);
+      border: none;
+      position: relative;
+      z-index: 1;
+    }
+
     a { text-decoration: none; }
 
     .accordion {
@@ -26,8 +34,11 @@
       z-index: 2;
     }
 
-    .active, .accordion:hover {
+    .accordion:hover {
       background-color: #ddd;
+    }
+    .active {
+      background-color: #A4A4A4;
     }
 
     .panel {
@@ -35,31 +46,68 @@
       overflow: hidden;
       position: absolute;
       z-index: 3;
+      /*
+      border: 5px solid pink;
+      background-color: lightblue;
+      opacity: 90%;
+      transition-duration: 0.2s;
+      */
     }
+    .panel:hover {
+      opacity: 100%;
+      transition-duration: 0.2s;
+    }
+
     #panel-button button {
       display: block;
       cursor: pointer;
       padding: 5px;
       width: 140px;
+
       background-color: #e0e4e6;
       border: 1px solid gray;
       text-align: left;
       font-size: 15px;
       transition-duration: 0.2s;
     }
-
     #panel-button button:hover {
       background-color: #c8ccce;
       color: 303841;
+
+      border: 1px solid white;
+      transition-duration: 0.1s;
+    }
+    #panel-button {
+      border-bottom: 4px solid gray;
     }
 
-    iframe {
-      width: 100%;
-      height: calc(100vh - 35px);
-      border: none;
-      position: relative;
-      z-index: 1;
+
+    #panel-smaller button {
+      display: block;
+      cursor: pointer;
+
+      padding: 4px;
+      width: 110px;
+      background-color: #BBD8E5;
+      border: 2px solid gray;
+      border-left: 1px solid gray;
+      border-top: 1px;
+      text-align: left;
+      font-size: 15px;
+
+      transition-duration: 0.2s;
     }
+    #panel-smaller button:hover {
+      background-color: #A5C0CD;
+      /*color: #303841;*/
+      border: 2px solid white;
+      transition-duration: 0.1s;
+    }
+    #panel-smaller { 
+      width: 110px;
+    }    
+
+
     .music-ext-window {
       width: 20px !important;
       height: 20px !important;
@@ -67,28 +115,8 @@
       transform: translate(105px, -24px);
       position: fixed;
 
-      
+      text-align: center;
       font-weight: normal;
       background-color: transparent;
+      font-size: 70% !important;
     }
-
-    #panel-smaller button{
-      display: block;
-      cursor: pointer;
-      padding: 4px;
-      width: 110px;
-      background-color: #e0e4e6;
-      border: 1px solid gray;
-      text-align: left;
-      font-size: 15px;
-      transition-duration: 0.2s;
-    }
-
-    #panel-smaller button:hover {
-      background-color: #c8ccce;
-      color: 303841;
-    }
-
-    .panel-smaller-container {
-      margin-top: 3px;
-    } 

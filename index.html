@@ -22,28 +22,26 @@
     <!--<button onclick="cargarWeb('path'); cerrarPanel()">Texto Boton</button>-->
 
         <button onclick="cargarWeb('web_rosa.html'); cerrarPanel()">Cargar Web 1</button>
-        <button onclick="cargarWeb('epikweb.html'); cerrarPanel()">Main Web</button>
+        <button onclick="cargarWeb('epikweb.html'); cerrarPanel()">Main Web 🏠</button>
         <button onclick="cargarWeb('tools/codificador.html'); cerrarPanel()">Codificador</button>
-        <button onclick="cargarWeb('tools/cronómetro.html'); cerrarPanel()">Cronómetro</button>
+        <button onclick="cargarWeb('tools/cronómetro.html'); ">Cronómetro</button>
         
         <a href="https://faurl.github.io/yt-music-player" ><button>Music Player</button></a>
-        <a href="https://faurl.github.io/yt-music-player" onclick="window.open(this.href, '_blank', 'width=450,height=653'); return false;"><button class="music-ext-window"></button></a>
+        <a href="https://faurl.github.io/yt-music-player" onclick="window.open(this.href, '_blank', 'width=450,height=653'); return false;"><button class="music-ext-window">↗</button></a>
         
         <button onclick="cargarWeb('https://www.friv.com/z/games/bloxorz/game.html'); cerrarPanel()">Bloxorz [Friv.com]</button>
     </div>
     
-    <div class="panel-smaller-container">
       <div id="panel-smaller">
           <button onclick="cargarWeb('mtos.html'); cerrarPanel()">Min to Secs</button>
           <button onclick="cargarWeb('tools/geolocation.html'); cerrarPanel()">Geolocation</button>
-          <a href="https://faurl.github.io/salmo" ><button>salmo</button></a>
+          <button><a href="https://faurl.github.io/salmo">salmo.html</a></button>
           <button onclick="cargarWeb('three.js/gui-loader.html'); cerrarPanel()">Three.js</button>
-          <button onclick="cargarWeb('tools/'); cerrarPanel()">All tuls</button>
+          <button onclick="cargarWeb('tools/'); cerrarPanel()">All tuls 🛠</button>
       </div>
-    </div>
   </div>
   <div id="contenedor-web">
-    <iframe id="cronometroFrame" src="epikweb.html"></iframe>
+    <iframe id="cronometroFrame" src="epikweb.html" onclick="cerrarPanel()"></iframe>
   </div>
 
   <script>
@@ -76,6 +74,7 @@
       });
     }
 
+/*
     window.addEventListener('keydown', function(event) {
       var iframe = document.getElementById('cronometroFrame');
       var iframeWindow = iframe.contentWindow || iframe;
@@ -91,6 +90,24 @@
         iframeWindow.postMessage({ event: 'decreaseFontSize' }, '*');
       }
     });
+*/
   </script>
+  <script>
+  var iframe = document.getElementById('contenedor-web').querySelector('iframe');
+  var panel = document.querySelector('.panel');
+  var timeout;
+
+  iframe.addEventListener('mouseover', function() {
+    timeout = setTimeout(function() {
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none';
+      }
+    }, 100); // 1000 = 1s
+  });
+
+  iframe.addEventListener('mouseout', function() {
+    clearTimeout(timeout);
+  });
+</script>
 </body>
 </html>
