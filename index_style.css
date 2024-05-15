@@ -36,10 +36,10 @@
       transition: 0.4s;
       position: relative;
       z-index: 2;
-      
+
     }
 
-    .active .accordion:hover {
+    .accordion:hover {
       background-color: #ddd;
     }
 
