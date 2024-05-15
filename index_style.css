@@ -34,11 +34,8 @@
       z-index: 2;
     }
 
-    .accordion:hover {
+    .active .accordion:hover {
       background-color: #ddd;
-    }
-    .active {
-      background-color: #A4A4A4;
     }
 
     .panel {
