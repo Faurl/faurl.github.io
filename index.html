@@ -16,7 +16,7 @@
 
 </head>
 <body>
-  <button class="accordion">Load Html files</button>
+  <button class="accordion" id="prevent-select">Load Html files</button>
   <div class="panel">
     <div id="panel-button">
     <!--<button onclick="cargarWeb('path'); cerrarPanel()">Texto Boton</button>-->
@@ -92,24 +92,24 @@
     });
 */
   </script>
+
 <script>
   var iframe = document.getElementById('contenedor-web').querySelector('iframe');
   var panel = document.querySelector('.panel');
   var timeout;
 
-  if (window.innerWidth > 768) { // Verificar si el ancho de la ventana es mayor a 768px (ejemplo)
-    iframe.addEventListener('mouseover', function() {
-      timeout = setTimeout(function() {
-        if (panel.style.display === 'block') {
-          panel.style.display = 'none';
-        }
-      }, 100); // 1000 = 1s
-    });
+  iframe.addEventListener('mouseover', function() {
+    timeout = setTimeout(function() {
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none';
+      }
+    }, 100); // 1000 = 1s
+  });
 
-    iframe.addEventListener('mouseout', function() {
-      clearTimeout(timeout);
-    });
-  }
+  iframe.addEventListener('mouseout', function() {
+    clearTimeout(timeout);
+  });
+  
 </script>
 </body>
 </html>

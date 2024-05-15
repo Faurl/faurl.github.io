@@ -1,4 +1,8 @@
-
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
     body {
       display: flex;
       flex-direction: column;
@@ -32,6 +36,7 @@
       transition: 0.4s;
       position: relative;
       z-index: 2;
+      
     }
 
     .active .accordion:hover {
