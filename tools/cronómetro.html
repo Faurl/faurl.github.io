@@ -32,7 +32,7 @@
         function showKeyboardInfo() {
             var textElement = document.getElementById("KeyboardInfo");
             textElement.innerHTML =
-                "<br>Pulsa la tecla \"T\" o espacio para iniciar, pausar o reanudar.<br><br>Pulsa la tecla \"R\" para reiniciar el cronómetro.<br><br>Pulsa \"+\" , \"ç\" o \"-\" para reescalar el cronómetro.";
+                "<br>Pulsa la tecla \"T\" o espacio para iniciar, pausar o reanudar.<br><br>Pulsa la tecla \"R\" para reiniciar el cronómetro.<br><br>Pulsa \"+\" , \" ` \" o \"-\" para reescalar el cronómetro.";
         }
 
         function hideButton() {
@@ -128,12 +128,15 @@
 				resetTimer();
 			}
 		
-				if (e.keyCode === 187) {       <!--191-->
+				if (e.keyCode === 187) { //+       <!--191-->
 					increaseFontSize();
 				}
-				if (e.keyCode === 191) {
+				if (e.keyCode === 189) { //-
 					decreaseFontSize();
 				}
+                if (e.keyCode === 186) { //`
+                    decreaseFontSize();
+                }
 					
 		};
     </script>

@@ -8,6 +8,7 @@
   
   <link rel="stylesheet" type="text/css" href="index_style.css">
 
+  <meta charset="utf-8">
 	<meta property="theme-color" content="#FF7C66">
   <meta property="og:site_name" content="Epic Web">
 	<meta property="og:title" content="Faur Webbe">
@@ -32,7 +33,7 @@
         <button onclick="cargarWeb('https://www.friv.com/z/games/bloxorz/game.html'); cerrarPanel()">Bloxorz [Friv.com]</button>
     </div>
     
-      <div id="panel-smaller">
+      <div id="panel-chiquito">
           <button onclick="cargarWeb('mtos.html'); cerrarPanel()">Min to Secs</button>
           <button onclick="cargarWeb('tools/geolocation.html'); cerrarPanel()">Geolocation</button>
           <button><a href="https://faurl.github.io/salmo">salmo.html</a></button>
@@ -40,9 +41,10 @@
           <button onclick="cargarWeb('tools/'); cerrarPanel()">All tuls 🛠</button>
       </div>
   </div>
-  <div id="contenedor-web">
-    <iframe src="epikweb.html"></iframe>
-  </div>
+
+<div id="contenedor-web">
+  <iframe src="epikweb.html"></iframe>
+</div>
 
   <script>
     function cargarWeb(url) {
@@ -91,9 +93,9 @@
       }
     });
 */
-  </script>
+ 
 
-<script>
+
   var iframe = document.getElementById('contenedor-web').querySelector('iframe');
   var panel = document.querySelector('.panel');
   var timeout;
