@@ -1,0 +1,153 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: #111111; /* Negro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow-y: hidden;
+}
+
+.container {
+    background-color: #222222; /* Gris oscuro */
+    padding: 20px;
+    max-width: 550px;
+    width: 100%;
+    border: 5px solid #00ff00; /* Verde */
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff; /* Blanco */
+}
+.tcr {
+    font-size: 110%;
+}
+
+h1 {
+    text-align: center;
+    color: #00ff00; /* Verde */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff; /* Blanco */
+}
+
+textarea, input {
+    outline: none;
+    background-color: #111111; /* Negro */
+    color: #b273d1; /* Verde */
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 2px solid #111111; 
+    resize: vertical; /* Permite redimensionar solo verticalmente */
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 90%;
+}
+
+.password-container input {
+    background-color: #222222; /* Gris oscuro */
+    color: #00ff00; /* Verde */
+    flex: 1;
+    padding-right: 40px; /* Espacio para el botón */
+}
+
+.password-container button {
+    position: absolute;
+    transform: translateY(5px) translateX(59px);
+    right: 10px;
+    width: 39px;
+    height: 39px;
+    border: 2px solid #111111;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00ff00; /* Verde */
+    font-size: 1rem;
+    padding: 0;
+}
+.password-container button:hover {
+    background-color: #2B2B2B;
+}
+
+button {
+    width: 100%;
+    padding: 1%;
+    border: 5px solid #00ff00; /* Verde */
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #222222; /* Negro */
+    color: #00ff00; /* Verde */
+    transition-duration: 0.2s;
+    font-size: 0.7rem;
+}
+
+#encrypt-button, #decrypt-button, #copy-button {
+    background-color: #2B2B2B;
+    border-color: #b273d1;
+    color: #b273d1;
+    height: 40%;
+
+    transition-duration: 0.2s;
+
+    font-size: 70%;
+}
+
+#encrypt-button:hover, #decrypt-button:hover, #copy-button:hover {
+    background-color: #222222; /* Negro */
+    color: #915EAA;
+    transition-duration: 0.2s;
+}
+
+#copy-button {
+    transform: translateX(375px);
+    width: 14%;
+}
+
+#result-output {
+    color: #00ff00;
+}
+
+
+#auto-encrypt-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #222222; /* Gris oscuro */
+    border: 2px solid #b273d1; /* Verde */
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 5px;
+    position: relative; /* Necesario para posicionar el símbolo */
+}
+
+#auto-encrypt-checkbox:checked {
+    background-color: #b273d1; /* Verde */
+}
+
+#auto-encrypt-checkbox:checked::after {
+    content: '\2714'; /* Unicode para el símbolo de check */
+    font-size: 19px;
+    color: #222222; /* Gris oscuro */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar el símbolo */
+}
+
+.auto-mode-text {}
