@@ -113,6 +113,15 @@ button {
 }
 
 #copy-button {
+    background-color: #2B2B2B;
+    border-color: #00ff00;
+    color: #00ff00;
+}
+#copy-button:hover {
+    color: #00C300
+}
+
+#copy-button {
     transform: translateX(375px);
     width: 14%;
 }

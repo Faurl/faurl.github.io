@@ -47,13 +47,18 @@ document.getElementById('toggle-password').addEventListener('click', function() 
     }
 });
 
-// Evento para encriptar automáticamente al escribir en el textarea
 document.getElementById('text-input').addEventListener('input', function() {
     var autoEncryptCheckbox = document.getElementById('auto-encrypt-checkbox');
     if (autoEncryptCheckbox.checked) {
         encryptText();
     }
+    
+    // Verificar si el cuadro de texto de entrada está vacío y borrar el contenido del cuadro de resultado si es así
+    if (this.value.trim() === '') {
+        document.getElementById('result-output').value = '';
+    }
 });
+
 
 // Función para encriptar el texto
 function encryptText() {
