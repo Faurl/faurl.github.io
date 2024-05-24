@@ -13,10 +13,10 @@ body {
 .container {
     background-color: #222222;
     padding: 20px;
-    max-width: 550px;
+    max-width: 520px;
     width: 100%;
     border: 5px solid #00ff00;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #ffffff;
 }
@@ -53,20 +53,20 @@ textarea, input {
 .password-container {
     position: relative;
     display: flex;
-    align-items: center;
-    width: 90%;
 }
 
 .password-container input {
     background-color: #222222;
     color: #00ff00;
-    flex: 1;
-    padding-right: 40px;
+
+    width: 86.7% !important;
+    /* flex: 1; */
+    padding-right: 13px;
 }
 
 .password-container button {
     position: absolute;
-    transform: translateY(5px) translateX(59px);
+    transform: translateY(0px) translateX(14px);
     right: 10px;
     width: 39px;
     height: 39px;
@@ -117,7 +117,7 @@ button {
     border-color: #00ff00;
     color: #00ff00;
 
-    transform: translateX(384px);
+    transform: translateX(369px);
     width: 14%;
 }
 
