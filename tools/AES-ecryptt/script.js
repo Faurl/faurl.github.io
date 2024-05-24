@@ -1,41 +1,81 @@
 document.getElementById('encrypt-button').addEventListener('click', function() {
+    encryptText();
+});
+
+document.getElementById('decrypt-button').addEventListener('click', function() {
+    encryptAndTripleDecryptText();
+});
+
+document.getElementById('toggle-password').addEventListener('click', function() {
+    togglePasswordVisibility();
+});
+
+document.getElementById('text-input').addEventListener('input', function() {
+    handleAutoEncrypt();
+});
+
+document.getElementById('result-output').addEventListener('click', function(event) {
+    disableAutoEncryptOnResultClick(event);
+});
+
+document.getElementById('copy-button').addEventListener('click', function() {
+    copyToClipboard();
+});
+
+function encryptText() {
     var text = document.getElementById('text-input').value;
     var password = document.getElementById('password-input').value;
     if (text && password) {
         var encrypted = CryptoJS.AES.encrypt(text, password).toString();
         document.getElementById('result-output').value = encrypted;
     } else {
-        alert('Por favor, introduce el texto y/o la contraseña.');
+        //alert('Por favor, introduce el texto y/o la contraseña.');
     }
-});
+}
 
-// Evento para desactivar el modo automático al hacer clic izquierdo o derecho en el cuadro de resultado
-document.getElementById('result-output').addEventListener('click', function(event) {
-    // Si es un clic izquierdo o derecho
-    if (event.button === 0 || event.button === 2) {
-        document.getElementById('auto-encrypt-checkbox').checked = false;
-    }
-});
-
-document.getElementById('decrypt-button').addEventListener('click', function() {
-    var encryptedText = document.getElementById('result-output').value;
+function encryptAndTripleDecryptText() {
+    var text = document.getElementById('text-input').value;
     var password = document.getElementById('password-input').value;
-    if (encryptedText && password) {
+    if (text && password) {
+        // Encrypt the text
+        var encrypted = CryptoJS.AES.encrypt(text, password).toString();
+        document.getElementById('result-output').value = encrypted;
+
+        // First decryption
         try {
-            var decrypted = CryptoJS.AES.decrypt(encryptedText, password);
+            var decrypted = CryptoJS.AES.decrypt(text, password);
             var decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
-            document.getElementById('result-output').value = decryptedText; // Modificado para mostrar el texto desencriptado en el cuadro de resultado
+
+            // Second decryption
+            if (decryptedText) {
+                var reEncrypted = CryptoJS.AES.encrypt(decryptedText, password).toString();
+                var doubleDecrypted = CryptoJS.AES.decrypt(reEncrypted, password);
+                var doubleDecryptedText = doubleDecrypted.toString(CryptoJS.enc.Utf8);
+
+                // Third decryption
+                if (doubleDecryptedText) {
+                    var reEncryptedAgain = CryptoJS.AES.encrypt(doubleDecryptedText, password).toString();
+                    var tripleDecrypted = CryptoJS.AES.decrypt(reEncryptedAgain, password);
+                    var tripleDecryptedText = tripleDecrypted.toString(CryptoJS.enc.Utf8);
+
+                    // Display the final result
+                    document.getElementById('result-output').value = tripleDecryptedText;
+                } else {
+                    alert('La segunda desencriptación falló. Verifica la contraseña y el texto encriptado.');
+                }
+            } else {
+                alert('⚠ Error. Verifica la contraseña y el texto encriptado.');
+                document.getElementById('result-output').value = '';
+            }
         } catch (e) {
             alert('La desencriptación falló. Verifica la contraseña y el texto encriptado.');
         }
     } else {
-        alert('Por favor, introduce el TEXTO ENCRIPTADO >:(');
+        document.getElementById('result-output').value = '';
     }
-});
+}
 
-
-
-document.getElementById('toggle-password').addEventListener('click', function() {
+function togglePasswordVisibility() {
     var passwordInput = document.getElementById('password-input');
     var toggleButton = document.getElementById('toggle-password');
     if (passwordInput.type === 'password') {
@@ -45,36 +85,28 @@ document.getElementById('toggle-password').addEventListener('click', function() 
         passwordInput.type = 'password';
         toggleButton.innerHTML = '<i class="fas fa-eye-slash"></i>';
     }
-});
+}
 
-document.getElementById('text-input').addEventListener('input', function() {
+function handleAutoEncrypt() {
     var autoEncryptCheckbox = document.getElementById('auto-encrypt-checkbox');
     if (autoEncryptCheckbox.checked) {
         encryptText();
     }
-    
-    // Verificar si el cuadro de texto de entrada está vacío y borrar el contenido del cuadro de resultado si es así
-    if (this.value.trim() === '') {
+    if (document.getElementById('text-input').value.trim() === '') {
         document.getElementById('result-output').value = '';
-    }
-});
-
-
-// Función para encriptar el texto
-function encryptText() {
-    var text = document.getElementById('text-input').value;
-    var password = document.getElementById('password-input').value;
-    if (text && password) {
-        var encrypted = CryptoJS.AES.encrypt(text, password).toString();
-        document.getElementById('result-output').value = encrypted;
-    } else {
-      
     }
 }
 
-// Evento para copiar el contenido del cuadro de resultado al portapapeles
-document.getElementById('copy-button').addEventListener('click', function() {
+function disableAutoEncryptOnResultClick(event) {
+    if (event.button === 0 || event.button === 2) {
+        document.getElementById('auto-encrypt-checkbox').checked = false;
+    }
+}
+
+function copyToClipboard() {
     var resultOutput = document.getElementById('result-output');
     resultOutput.select();
     document.execCommand('copy');
-});
+
+    document.getElementById('auto-encrypt-checkbox').checked = false;
+}
