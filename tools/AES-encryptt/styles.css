@@ -1,32 +1,33 @@
 body {
     font-family: Arial, sans-serif;
     font-size: 16px;
-    background-color: #111111; /* Negro */
+    background-color: #111111;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 .container {
-    background-color: #222222; /* Gris oscuro */
+    background-color: #222222;
     padding: 20px;
-    max-width: 550px;
+    max-width: 520px;
     width: 100%;
-    border: 5px solid #00ff00; /* Verde */
-    font-size: 1.5rem;
+    border: 5px solid #00ff00;
+    font-size: 1.1rem;
     font-weight: bold;
-    color: #ffffff; /* Blanco */
+    color: #ffffff;
 }
-.tcr {
+
+.ContrTextResult {
     font-size: 110%;
 }
 
 h1 {
     text-align: center;
-    color: #00ff00; /* Verde */
+    color: #00ff00;
 }
 
 .form-group {
@@ -36,36 +37,36 @@ h1 {
 label {
     display: block;
     margin-bottom: 5px;
-    color: #ffffff; /* Blanco */
+    color: #ffffff;
 }
 
 textarea, input {
     outline: none;
-    background-color: #111111; /* Negro */
-    color: #b273d1; /* Verde */
+    background-color: #111111;
+    color: #b273d1;
     width: calc(100% - 20px);
     padding: 10px;
-    border: 2px solid #111111; 
-    resize: vertical; /* Permite redimensionar solo verticalmente */
+    border: 2px solid #111111;
+    resize: vertical;
 }
 
 .password-container {
     position: relative;
     display: flex;
-    align-items: center;
-    width: 90%;
 }
 
 .password-container input {
-    background-color: #222222; /* Gris oscuro */
-    color: #00ff00; /* Verde */
-    flex: 1;
-    padding-right: 40px; /* Espacio para el botón */
+    background-color: #222222;
+    color: #00ff00;
+
+    width: 86.7% !important;
+    /* flex: 1; */
+    padding-right: 13px;
 }
 
 .password-container button {
     position: absolute;
-    transform: translateY(5px) translateX(59px);
+    transform: translateY(0px) translateX(14px);
     right: 10px;
     width: 39px;
     height: 39px;
@@ -75,22 +76,23 @@ textarea, input {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #00ff00; /* Verde */
+    color: #00ff00;
     font-size: 1rem;
     padding: 0;
 }
+
 .password-container button:hover {
     background-color: #2B2B2B;
 }
 
 button {
-    width: 100%;
+    width: 100.7%;
     padding: 1%;
-    border: 5px solid #00ff00; /* Verde */
+    border: 5px solid #00ff00;
     margin-bottom: 10px;
     cursor: pointer;
-    background-color: #222222; /* Negro */
-    color: #00ff00; /* Verde */
+    background-color: #222222;
+    color: #00ff00;
     transition-duration: 0.2s;
     font-size: 0.7rem;
 }
@@ -100,14 +102,12 @@ button {
     border-color: #b273d1;
     color: #b273d1;
     height: 40%;
-
     transition-duration: 0.2s;
-
     font-size: 70%;
 }
 
 #encrypt-button:hover, #decrypt-button:hover, #copy-button:hover {
-    background-color: #222222; /* Negro */
+    background-color: #222222;
     color: #915EAA;
     transition-duration: 0.2s;
 }
@@ -116,20 +116,18 @@ button {
     background-color: #2B2B2B;
     border-color: #00ff00;
     color: #00ff00;
-}
-#copy-button:hover {
-    color: #00C300
+
+    transform: translateX(368px);
+    width: 14%;
 }
 
-#copy-button {
-    transform: translateX(375px);
-    width: 14%;
+#copy-button:hover {
+    color: #00C300;
 }
 
 #result-output {
     color: #00ff00;
 }
-
 
 #auto-encrypt-checkbox {
     appearance: none;
@@ -137,26 +135,45 @@ button {
     -moz-appearance: none;
     width: 20px;
     height: 20px;
-    background-color: #222222; /* Gris oscuro */
-    border: 2px solid #b273d1; /* Verde */
+    background-color: #222222;
+    border: 2px solid #b273d1;
     cursor: pointer;
     vertical-align: middle;
     margin-right: 5px;
-    position: relative; /* Necesario para posicionar el símbolo */
+    position: relative;
 }
 
 #auto-encrypt-checkbox:checked {
-    background-color: #b273d1; /* Verde */
+    background-color: #b273d1;
 }
 
 #auto-encrypt-checkbox:checked::after {
-    content: '\2714'; /* Unicode para el símbolo de check */
+    content: '\2714';
     font-size: 19px;
-    color: #222222; /* Gris oscuro */
+    color: #222222;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centrar el símbolo */
+    transform: translate(-50%, -50%);
 }
 
-.auto-mode-text {}
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #333;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #333;
+}
