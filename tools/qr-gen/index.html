@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/png" rel="icon" href="icon_qr.png">
+    <title>QR-generator</title>
+    <style>
+        body {
+            margin-left: 2%;
+        }
+        
+        #text-input {
+            background-color: pink;
+            width: 98%;
+            margin-bottom: 10px;
+        }
+
+        .qr-size-input-container {
+            margin-bottom: 20px;
+        }
+
+        #qr-size-input {
+            width: 65px;
+            box-sizing: border-box;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        button {
+            background-color: pink;
+        }
+        button:hover {
+            background-color: lightcoral;
+        }
+
+        #qrcode img {
+            margin-top: 10px;
+        }
+
+        #error-message {
+            color: red;
+            margin-top: 20px;
+        }
+
+        #auto-mode-checkbox {
+            cursor: pointer;
+            border-radius: 0;
+        }
+        .checkbox-container {
+            font-size: 90%;
+            margin-top: 7px;
+            align-items: center;
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+
+    <input type="text" id="text-input" placeholder="Enter text / url">
+    <div class="qr-size-input-container">
+        <label for="qr-size-input" id="size-text">Size:</label>
+        <input type="text" id="qr-size-input" placeholder="(optional)">
+    </div>
+   
+    <button onclick="generateQRCode()">Generate QR Code</button>
+     <div class="checkbox-container">
+        <label for="auto-mode-checkbox">Auto Mode</label>
+        <input type="checkbox" id="auto-mode-checkbox">
+    </div>
+
+    <div id="qrcode"></div>
+    <p id="error-message"></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script>
+        document.getElementById('text-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                generateQRCode();
+            }
+        });
+        document.getElementById('qr-size-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                generateQRCode();
+            }
+        });
+
+        document.getElementById('text-input').addEventListener('input', function() {
+            if (document.getElementById('auto-mode-checkbox').checked) {
+                generateQRCode();
+            }
+        });
+
+        function generateQRCode() {
+            const text = document.getElementById('text-input').value;
+            const qrSize = document.getElementById('qr-size-input').value.trim();
+            const qrcode = document.getElementById('qrcode');
+            const errorMessage = document.getElementById('error-message');
+            qrcode.innerHTML = '';
+            errorMessage.textContent = '';
+
+            if (!text.trim()) {
+                errorMessage.textContent = 'Error: The text input is empty.';
+                return;
+            }
+
+            const qrOptions = {
+                errorCorrectionLevel: 'L', // Lower error correction level to store more data
+                version: 'auto', // Automatically determine the appropriate version
+                width: qrSize || 'auto' // Width of the QR code, defaulting to 'auto'
+            };
+
+            QRCode.toDataURL(text, qrOptions, function (error, url) {
+                if (error) {
+                    console.error(error);
+                    errorMessage.textContent = 'Error: The data is too large to encode in a QR code.';
+                } else {
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.draggable = true;
+                    img.ondragstart = function (event) {
+                        event.dataTransfer.setData('text/plain', img.src);
+                    };
+                    qrcode.appendChild(img);
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
