@@ -27,15 +27,16 @@
 
         button {
             cursor: pointer;
-            background-color: pink;
-            transition: background-color 0.3s ease;
         }
 
+        button {
+            background-color: pink;
+        }
         button:hover {
             background-color: lightcoral;
         }
 
-        #qrcode {
+        #qrcode img {
             margin-top: 10px;
         }
 
@@ -48,7 +49,6 @@
             cursor: pointer;
             border-radius: 0;
         }
-
         .checkbox-container {
             font-size: 90%;
             margin-top: 7px;
@@ -67,7 +67,7 @@
     </div>
    
     <button onclick="generateQRCode()">Generate QR Code</button>
-    <div class="checkbox-container">
+     <div class="checkbox-container">
         <label for="auto-mode-checkbox">Auto Mode</label>
         <input type="checkbox" id="auto-mode-checkbox">
     </div>
@@ -82,7 +82,6 @@
                 generateQRCode();
             }
         });
-
         document.getElementById('qr-size-input').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 generateQRCode();
@@ -122,9 +121,8 @@
                     const img = document.createElement('img');
                     img.src = url;
                     img.draggable = true;
-                    img.style.cursor = 'pointer';
-                    img.onclick = function() {
-                        window.open(img.src, '_blank'); // Open the QR code image URL in a new tab
+                    img.ondragstart = function (event) {
+                        event.dataTransfer.setData('text/plain', img.src);
                     };
                     qrcode.appendChild(img);
                 }
