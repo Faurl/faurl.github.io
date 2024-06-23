@@ -22,6 +22,10 @@ document.getElementById('copy-button').addEventListener('click', function() {
     copyToClipboard();
 });
 
+document.getElementById('copy-url-button').addEventListener('click', function() {
+    copyUrlToClipboard();
+});
+
 function encryptText() {
     var text = document.getElementById('text-input').value;
     var password = document.getElementById('password-input').value;
@@ -31,7 +35,7 @@ function encryptText() {
 
         // Encriptar la contraseña en Base64 y actualizar la URL
         var encodedPassword = btoa(password);
-        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?pwd=' + encodedPassword;
+        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + encodedPassword;
         history.replaceState(null, '', newUrl);
     } else {
         //alert('Por favor, introduce el texto y/o la contraseña.');
@@ -116,31 +120,11 @@ function copyToClipboard() {
     document.getElementById('auto-encrypt-checkbox').checked = false;
 }
 
-function getParameterByName(name, url = window.location.href) {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-    let results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
-window.onload = function() {
-    let encryptedPassword = getParameterByName('pwd');
-    if (encryptedPassword) {
-        let decryptedPassword = atob(encryptedPassword);
-        document.getElementById('password-input').value = decryptedPassword;
-    }
-};
-
-//copiar url junto con contraseña en base64
-document.getElementById('copy-url-button').addEventListener('click', function() {
-    copyUrlToClipboard();
-});
 function copyUrlToClipboard() {
     var password = document.getElementById('password-input').value;
     if (password) {
         var encodedPassword = btoa(password);
-        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?pwd=' + encodedPassword;
+        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + encodedPassword;
         navigator.clipboard.writeText(newUrl).then(function() {
             alert('URL copiada al portapapeles: ' + newUrl);
         }, function(err) {
@@ -150,3 +134,20 @@ function copyUrlToClipboard() {
         alert('Por favor, introduce una contraseña.');
     }
 }
+
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+    let results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+window.onload = function() {
+    let encryptedPassword = window.location.search.substring(1); // Obtener todo lo que está después de '?'
+    if (encryptedPassword) {
+        let decryptedPassword = atob(encryptedPassword);
+        document.getElementById('password-input').value = decryptedPassword;
+    }
+};
