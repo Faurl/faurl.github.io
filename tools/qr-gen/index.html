@@ -52,6 +52,16 @@
             align-items: center;
             display: flex;
         }
+
+        .copy-button {
+            background-color: lightskyblue;
+            margin-left: 5px;
+            
+            
+        }
+        .copy-button:hover {
+            background-color: #67A6DE;
+        }
     </style>
 </head>
 <body>
@@ -64,7 +74,9 @@
     </div>
    
     <button onclick="generateQRCode()">Generate QR Code</button>
-     <div class="checkbox-container">
+    <button class="copy-button" onclick="copyQRCodeToClipboard()">Copy QR Code</button>
+    
+    <div class="checkbox-container">
         <label for="auto-mode-checkbox">Auto Mode</label>
         <input type="checkbox" id="auto-mode-checkbox">
     </div>
@@ -118,12 +130,42 @@
                     const img = document.createElement('img');
                     img.src = url;
                     img.draggable = true;
-                    img.ondragstart = function (event) {
-                        event.dataTransfer.setData('text/plain', img.src);
+                    img.style.cursor = 'pointer'; // Ensure the cursor is pointer to indicate clickability
+                    img.onclick = function() {
+                        window.open(img.src, '_blank'); // Open the QR code image URL in a new tab
                     };
                     qrcode.appendChild(img);
+
+                    // Show the copy button after QR code is generated
+                    document.querySelector('.copy-button').style.display = 'inline-block';
                 }
             });
+        }
+
+        function copyQRCodeToClipboard() {
+            const img = document.querySelector('#qrcode img');
+            if (!img) {
+                console.error('No QR code image found.');
+                return;
+            }
+
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            context.drawImage(img, 0, 0);
+
+            canvas.toBlob(blob => {
+                navigator.clipboard.write([new ClipboardItem({'image/png': blob})])
+                    .then(() => {
+                        alert('QR Code Image copied to clipboard!');
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        alert('Failed to copy QR Code Image to clipboard.');
+                    });
+            }, 'image/png');
         }
     </script>
 
