@@ -93,7 +93,7 @@
         copyButton.addEventListener('click', () => {
             navigator.clipboard.writeText(resultElement.textContent)
                 .then(() => {
-                    copyButton.textContent = 'Copiaado!';
+                    copyButton.textContent = 'Copiado!';
                 })
                 .catch(() => alert('Error al copiar el texto'));
         });
