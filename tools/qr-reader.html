@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/png" rel="icon" href="/multimedia-links/icons/QR-icons/icon_qr_reader.png">
     <title>QR-reader</title>
     <style>
         body {
@@ -19,15 +20,11 @@
             cursor: pointer;
             transition: 0.2s;
             border: 3px dashed darkgrey;
+            user-select: none;
         }
         #dropZone:hover {
             transition: 0.4s;
             background-color: pink;
-        }
-        #pasteButton {
-            width: 309px;
-            cursor: pointer;
-            margin-bottom: 2%;
         }
         #canvas {
             display: none;
@@ -54,13 +51,13 @@
             margin-right: 10px;
             cursor: pointer;
             width: 100%;
+            position: relative;
         }
     </style>
 </head>
 <body>
     <h1>Lector de Códigos QR</h1>
-    <div id="dropZone">Arrastrar/Subir Imagen</div>
-    <button id="pasteButton" title="Pegar Imagen desde el Portapapeles">Pegar Imagen</button>
+    <div id="dropZone">Arrastrar / Subir / Pegar Imagen</div>
     <input type="file" id="fileInput" accept="image/*" style="display: none;">
     <canvas id="canvas"></canvas>
     <div id="resultContainer">
@@ -77,7 +74,6 @@
         const resultContainer = document.getElementById('resultContainer');
         const resultElement = document.getElementById('result');
         const copyButton = document.getElementById('copyButton');
-        const pasteButton = document.getElementById('pasteButton');
 
         dropZone.addEventListener('click', () => fileInput.click());
         dropZone.addEventListener('dragover', (event) => {
@@ -96,32 +92,18 @@
 
         copyButton.addEventListener('click', () => {
             navigator.clipboard.writeText(resultElement.textContent)
-                .then(() => alert('Texto copiodo :3'))
+                .then(() => {
+                    copyButton.textContent = 'Copiaado!';
+                })
                 .catch(() => alert('Error al copiar el texto'));
         });
 
-        pasteButton.addEventListener('click', () => {
-            pasteButton.focus();
-        });
-
-        pasteButton.addEventListener('paste', (event) => {
+        document.addEventListener('paste', (event) => {
             const items = (event.clipboardData || window.clipboardData).items;
             for (let item of items) {
                 if (item.type.startsWith('image/')) {
                     const blob = item.getAsFile();
                     handleFile(blob);
-                }
-            }
-        });
-
-        document.addEventListener('paste', (event) => {
-            if (event.target !== pasteButton) {
-                const items = (event.clipboardData || window.clipboardData).items;
-                for (let item of items) {
-                    if (item.type.startsWith('image/')) {
-                        const blob = item.getAsFile();
-                        handleFile(blob);
-                    }
                 }
             }
         });
@@ -150,8 +132,13 @@
                         context.strokeStyle = 'red';
                         context.stroke();
 
-                        resultElement.textContent = `${code.data}`;
+                        if (isValidURL(code.data)) {
+                            resultElement.innerHTML = `<a href="${code.data}" target="_blank">${code.data}</a>`;
+                        } else {
+                            resultElement.textContent = `${code.data}`;
+                        }
                         resultContainer.style.display = 'flex';
+                        copyButton.textContent = 'Copiar';
                     } else {
                         resultElement.textContent = 'No se detectó ningún código QR.';
                         resultContainer.style.display = 'none';
@@ -160,6 +147,15 @@
                 img.src = e.target.result;
             };
             reader.readAsDataURL(file);
+        }
+
+        function isValidURL(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
         }
     </script>
 </body>
