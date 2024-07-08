@@ -56,6 +56,7 @@ textarea, input {
 .password-container {
     position: relative;
     display: flex;
+    height: 39px;
 }
 
 .password-container input {
@@ -67,7 +68,7 @@ textarea, input {
 }
 
 #toggle-password {
-    transform: translateY(0px) translateX(-31.5px);
+    transform: translateY(0px) translateX(-31.8px);
     color: #ff8cb1;
 }
 
@@ -108,10 +109,11 @@ button {
     background-color: #444444; /* Cambiado a un gris más oscuro */
     border-color: #ff8cb1;
     color: #ff8cb1;
-    font-weight: bold;
     height: 40%;
     transition-duration: 0.2s;
     font-size: 70%;
+    /**/
+    font-weight: bold;
 }
 
 #encrypt-button:hover, #decrypt-button:hover, #copy-button:hover {
