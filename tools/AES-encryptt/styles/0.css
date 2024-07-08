@@ -1,0 +1,194 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: #111111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow-y: auto;
+}
+
+.container {
+    background-color: #222222; /* Cambiado a un color más oscuro */
+    padding: 20px;
+    max-width: 520px;
+    width: 100%;
+    border: 5px solid #ff8cb1;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffffff; /* Cambiado a blanco para mejor contraste */
+}
+
+.ContrTextResult {
+    font-size: 110%;
+    color: #ff8cb1; /* Mantenido el color rosa */
+}
+
+h1 {
+    text-align: center;
+    color: #ff8cb1;
+    text-shadow: 1px 1px 2px #222222; /* Sombra para mejor contraste */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff; /* Cambiado a blanco para mejor contraste */
+}
+
+textarea, input {
+    outline: none;
+    background-color: #333333; /* Cambiado a un gris oscuro */
+    color: #ff8cb1;
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 2px solid #555555; /* Cambiado a un gris más oscuro */
+    resize: none;
+    font-size: 15px;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+}
+
+.password-container input {
+    background-color: #444444; /* Cambiado a un gris oscuro */
+    color: #ff8cb1;
+    width: 78% !important;
+    padding-right: 13px;
+    border: 2px solid #555555; /* Cambiado a un gris más oscuro */
+}
+
+#toggle-password {
+    transform: translateY(0px) translateX(-31.5px);
+    color: #ff8cb1;
+}
+
+.password-container button {
+    position: absolute;
+    transform: translateY(0px) translateX(14px);
+    right: 10px;
+    width: 39px;
+    height: 39px;
+    border: 2px solid #555555; /* Cambiado a un gris más oscuro */
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff8cb1;
+    font-size: 1rem;
+    padding: 0;
+}
+
+.password-container button:hover {
+    background-color: #666666; /* Cambiado a un gris más oscuro */
+}
+
+button {
+    width: 100.7%;
+    padding: 1%;
+    border: 5px solid #ff8cb1;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #333333; /* Cambiado a un gris oscuro */
+    color: #ff8cb1;
+    transition-duration: 0.2s;
+    font-size: 0.7rem;
+}
+
+#encrypt-button, #decrypt-button {
+    background-color: #444444; /* Cambiado a un gris más oscuro */
+    border-color: #ff8cb1;
+    color: #ff8cb1;
+    font-weight: bold;
+    height: 40%;
+    transition-duration: 0.2s;
+    font-size: 70%;
+}
+
+#encrypt-button:hover, #decrypt-button:hover, #copy-button:hover {
+    background-color: #666666; /* Cambiado a un gris oscuro */
+    color: #ff8cb1;
+    transition-duration: 0.2s;
+}
+
+#copy-button {
+    background-color: #444444; /* Cambiado a un gris más oscuro */
+    border-color: #ff8cb1;
+    color: #ff8cb1;
+    transform: translateX(368px);
+    width: 14%;
+}
+
+#copy-button:hover {
+    color: #ff8cb1;
+}
+
+#result-output {
+    border: none;
+    color: #ff8cb1;
+}
+
+#auto-encrypt-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #444444; /* Cambiado a un gris más oscuro */
+    border: 2px solid #555555; /* Cambiado a un gris más oscuro */
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 5px;
+    position: relative;
+    transition-duration: 0.2s;
+}
+
+#auto-encrypt-checkbox:hover {
+    background-color: #666666;
+    transition-duration: 0.2s;
+}
+
+#auto-encrypt-checkbox:checked {
+    background-color: #ff8cb1;
+    /* border-color: #ff8cb1; */
+}
+
+#auto-encrypt-checkbox:checked::after {
+    content: '\2714';
+    font-size: 19px;
+    color: #555555; /* Cambiado a blanco para mejor contraste */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ff8cb1;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ffa3c1;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #333333; /* Cambiado a un gris oscuro */
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #333333; /* Cambiado a un gris oscuro */
+}

@@ -33,10 +33,9 @@ function encryptText() {
         var encrypted = CryptoJS.AES.encrypt(text, password).toString();
         document.getElementById('result-output').value = encrypted;
 
-        // Encriptar la contraseña en Hexadecimal y actualizar la URL
-        var encodedPassword = CryptoJS.enc.Hex.stringify(CryptoJS.enc.Utf8.parse(password));
-        var css = getParameterByName('css');
-        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?css=' + (css ? css : '') + '?' + encodedPassword;
+        // Encriptar la contraseña en Base64 y actualizar la URL
+        var encodedPassword = btoa(password);
+        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + encodedPassword;
         history.replaceState(null, '', newUrl);
     } else {
         //alert('Por favor, introduce el texto y/o la contraseña.');
@@ -124,9 +123,8 @@ function copyToClipboard() {
 function copyUrlToClipboard() {
     var password = document.getElementById('password-input').value;
     if (password) {
-        var encodedPassword = CryptoJS.enc.Hex.stringify(CryptoJS.enc.Utf8.parse(password));
-        var css = getParameterByName('css');
-        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?css=' + (css ? css : '') + '?' + encodedPassword;
+        var encodedPassword = btoa(password);
+        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + encodedPassword;
         navigator.clipboard.writeText(newUrl).then(function() {
             alert('URL copiada al portapapeles: ' + newUrl);
         }, function(err) {
@@ -147,30 +145,9 @@ function getParameterByName(name, url = window.location.href) {
 }
 
 window.onload = function() {
-    let params = window.location.search.substring(1).split('?');
-    let cssParam = params.find(param => param.startsWith('css='));
-    let css = cssParam ? getCssUrl(cssParam.substring(4)) : null;
-    let encodedPassword = params.find(param => param !== cssParam) || null;
-
-    if (css) {
-        let link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = css;
-        document.head.appendChild(link);
-    }
-
-    if (encodedPassword) {
-        try {
-            let decryptedPassword = CryptoJS.enc.Hex.parse(encodedPassword).toString(CryptoJS.enc.Utf8);
-            document.getElementById('password-input').value = decryptedPassword;
-        } catch (e) {
-            console.error('Error al desencriptar la contraseña desde la URL.');
-        }
+    let encryptedPassword = window.location.search.substring(1); // Obtener todo lo que está después de '?'
+    if (encryptedPassword) {
+        let decryptedPassword = atob(encryptedPassword);
+        document.getElementById('password-input').value = decryptedPassword;
     }
 };
-
-function getCssUrl(cssFileName) {
-    return 'styles/' + cssFileName + '.css';
-}
-
