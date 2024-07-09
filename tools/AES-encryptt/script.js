@@ -3,7 +3,7 @@ document.getElementById('encrypt-button').addEventListener('click', function() {
 });
 
 document.getElementById('decrypt-button').addEventListener('click', function() {
-    encryptAndTripleDecryptText();
+    decryptText();
 });
 
 document.getElementById('toggle-password').addEventListener('click', function() {
@@ -12,6 +12,13 @@ document.getElementById('toggle-password').addEventListener('click', function() 
 
 document.getElementById('text-input').addEventListener('input', function() {
     handleAutoEncrypt();
+});
+
+document.getElementById('text-input').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Evita que se añada una nueva línea en el textarea
+        encryptText();
+    }
 });
 
 document.getElementById('result-output').addEventListener('click', function(event) {
@@ -32,56 +39,28 @@ function encryptText() {
     if (text && password) {
         var encrypted = CryptoJS.AES.encrypt(text, password).toString();
         document.getElementById('result-output').value = encrypted;
-
-        // Encriptar la contraseña en Hexadecimal y actualizar la URL
-        var encodedPassword = CryptoJS.enc.Hex.stringify(CryptoJS.enc.Utf8.parse(password));
-        var css = getParameterByName('css');
-        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?css=' + (css ? css : '') + '?' + encodedPassword;
-        history.replaceState(null, '', newUrl);
     } else {
-        //alert('Por favor, introduce el texto y/o la contraseña.');
+        alert('Por favor, introduce el texto y/o la contraseña.');
     }
 }
 
-function encryptAndTripleDecryptText() {
-    var text = document.getElementById('text-input').value;
+function decryptText() {
+    var encryptedText = document.getElementById('text-input').value;
     var password = document.getElementById('password-input').value;
-    if (text && password) {
-        // Encrypt the text
-        var encrypted = CryptoJS.AES.encrypt(text, password).toString();
-        document.getElementById('result-output').value = encrypted;
-
-        // First decryption
+    if (encryptedText && password) {
         try {
-            var decrypted = CryptoJS.AES.decrypt(text, password);
+            var decrypted = CryptoJS.AES.decrypt(encryptedText, password);
             var decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
-
-            // Second decryption
             if (decryptedText) {
-                var reEncrypted = CryptoJS.AES.encrypt(decryptedText, password).toString();
-                var doubleDecrypted = CryptoJS.AES.decrypt(reEncrypted, password);
-                var doubleDecryptedText = doubleDecrypted.toString(CryptoJS.enc.Utf8);
-
-                // Third decryption
-                if (doubleDecryptedText) {
-                    var reEncryptedAgain = CryptoJS.AES.encrypt(doubleDecryptedText, password).toString();
-                    var tripleDecrypted = CryptoJS.AES.decrypt(reEncryptedAgain, password);
-                    var tripleDecryptedText = tripleDecrypted.toString(CryptoJS.enc.Utf8);
-
-                    // Display the final result
-                    document.getElementById('result-output').value = tripleDecryptedText;
-                } else {
-                    alert('La segunda desencriptación falló. Verifica la contraseña y el texto encriptado.');
-                }
+                document.getElementById('result-output').value = decryptedText;
             } else {
-                alert('⚠ Error. Verifica la contraseña y el texto encriptado.');
-                document.getElementById('result-output').value = '';
+                alert('La desencriptación falló. Verifica la contraseña y el texto encriptado.');
             }
         } catch (e) {
             alert('La desencriptación falló. Verifica la contraseña y el texto encriptado.');
         }
     } else {
-        document.getElementById('result-output').value = '';
+        alert('Por favor, introduce el texto encriptado y la contraseña.');
     }
 }
 
@@ -126,7 +105,15 @@ function copyUrlToClipboard() {
     if (password) {
         var encodedPassword = CryptoJS.enc.Hex.stringify(CryptoJS.enc.Utf8.parse(password));
         var css = getParameterByName('css');
-        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?css=' + (css ? css : '') + '?' + encodedPassword;
+        var baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        var newUrl;
+
+        if (css) {
+            newUrl = baseUrl + '?css=' + css + '&' + encodedPassword;
+        } else {
+            newUrl = baseUrl + '?' + encodedPassword;
+        }
+
         navigator.clipboard.writeText(newUrl).then(function() {
             alert('URL copiada al portapapeles: ' + newUrl);
         }, function(err) {
@@ -137,6 +124,7 @@ function copyUrlToClipboard() {
     }
 }
 
+// Función para obtener el valor de un parámetro en la URL
 function getParameterByName(name, url = window.location.href) {
     name = name.replace(/[\[\]]/g, '\\$&');
     let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
@@ -147,10 +135,10 @@ function getParameterByName(name, url = window.location.href) {
 }
 
 window.onload = function() {
-    let params = window.location.search.substring(1).split('?');
+    let params = window.location.search.substring(1).split('&');
     let cssParam = params.find(param => param.startsWith('css='));
     let css = cssParam ? getCssUrl(cssParam.substring(4)) : null;
-    let encodedPassword = params.find(param => param !== cssParam) || null;
+    let encodedPassword = params.find(param => param !== cssParam && param.length > 0) || null;
 
     if (css) {
         let link = document.createElement('link');
@@ -173,4 +161,3 @@ window.onload = function() {
 function getCssUrl(cssFileName) {
     return 'styles/' + cssFileName + '.css';
 }
-

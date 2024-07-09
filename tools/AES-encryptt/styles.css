@@ -125,7 +125,7 @@ button {
     border-color: #00ff00;
     color: #00ff00;
 
-    transform: translateX(368px);
+    transform: translateX(364.5px); /* transform: translateX(368px); */
     width: 14%;
 }
 
