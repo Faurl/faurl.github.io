@@ -30,8 +30,49 @@ document.getElementById('copy-button').addEventListener('click', function() {
 });
 
 document.getElementById('copy-url-button').addEventListener('click', function() {
-    copyUrlToClipboard();
+    copyUrlWithEncryptedText();
 });
+
+function copyUrlWithEncryptedText() {
+    var encryptedText = document.getElementById('result-output').value;
+    var password = document.getElementById('password-input').value;
+    var passwordInput = document.getElementById('password-input');
+
+    var baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    var newUrl = baseUrl;
+
+    // Create an array to hold parameters
+    var params = [];
+
+    // Include encrypted text only if it exists
+    if (encryptedText) {
+        var encodedText = encodeURIComponent(encryptedText);
+        params.push(`text=${encodedText}`);
+    }
+
+    // Only include the password if it is visible
+    if (passwordInput.type === 'text' && password) {
+        var encodedPassword = CryptoJS.enc.Hex.stringify(CryptoJS.enc.Utf8.parse(password));
+        params.push(`password=${encodedPassword}`);
+    }
+
+    // Include the CSS parameter if it exists in the current URL
+    var currentCssParam = new URLSearchParams(window.location.search).get('css');
+    if (currentCssParam) {
+        params.push(`css=${currentCssParam}`);
+    }
+
+    // If there are any parameters, join them and append to the URL
+    if (params.length > 0) {
+        newUrl += '?' + params.join('&');
+    }
+
+    navigator.clipboard.writeText(newUrl).then(function() {
+        alert('URL copied to clipboard: ' + newUrl);
+    }, function(err) {
+        alert('Error copying URL: ' + err);
+    });
+}
 
 function encryptText() {
     var text = document.getElementById('text-input').value;
@@ -100,54 +141,24 @@ function copyToClipboard() {
     document.getElementById('auto-encrypt-checkbox').checked = false;
 }
 
-function copyUrlToClipboard() {
-    var password = document.getElementById('password-input').value;
-    if (password) {
-        var encodedPassword = CryptoJS.enc.Hex.stringify(CryptoJS.enc.Utf8.parse(password));
-        var css = getParameterByName('css');
-        var baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-        var newUrl;
-
-        if (css) {
-            newUrl = baseUrl + '?css=' + css + '&' + encodedPassword;
-        } else {
-            newUrl = baseUrl + '?' + encodedPassword;
-        }
-
-        navigator.clipboard.writeText(newUrl).then(function() {
-            alert('URL copiada al portapapeles: ' + newUrl);
-        }, function(err) {
-            alert('Error al copiar la URL: ' + err);
-        });
-    } else {
-        alert('Por favor, introduce una contraseña.');
-    }
-}
-
-// Función para obtener el valor de un parámetro en la URL
-function getParameterByName(name, url = window.location.href) {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-    let results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
-
 window.onload = function() {
-    let params = window.location.search.substring(1).split('&');
-    let cssParam = params.find(param => param.startsWith('css='));
-    let css = cssParam ? getCssUrl(cssParam.substring(4)) : null;
-    let encodedPassword = params.find(param => param !== cssParam && param.length > 0) || null;
+    let params = new URLSearchParams(window.location.search);
+    let encryptedText = params.get('text');
+    let encodedPassword = params.get('password');
+    let cssParam = params.get('css');
 
-    if (css) {
+    if (cssParam) {
+        let cssUrl = getCssUrl(cssParam);
         let link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = css;
+        link.href = cssUrl;
         document.head.appendChild(link);
     }
 
+    if (encryptedText) {
+        document.getElementById('text-input').value = decodeURIComponent(encryptedText);
+    }
     if (encodedPassword) {
         try {
             let decryptedPassword = CryptoJS.enc.Hex.parse(encodedPassword).toString(CryptoJS.enc.Utf8);
@@ -161,3 +172,16 @@ window.onload = function() {
 function getCssUrl(cssFileName) {
     return 'styles/' + cssFileName + '.css';
 }
+
+// Function to auto-resize the textarea
+function autoResizeTextarea() {
+    // Reset the height to get the correct scrollHeight
+    this.style.height = 'auto'; 
+
+    // Only set the height if the scrollHeight exceeds the current height
+    if (this.scrollHeight > this.clientHeight) {
+        this.style.height = this.scrollHeight + 'px'; // Set the new height
+    }
+}
+
+document.getElementById('text-input').addEventListener('input', autoResizeTextarea);
