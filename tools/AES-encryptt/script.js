@@ -68,9 +68,9 @@ function copyUrlWithEncryptedText() {
     }
 
     navigator.clipboard.writeText(newUrl).then(function() {
-        alert('URL copied to clipboard: ' + newUrl);
+        alert('URL copiada al portapapeles: ' + newUrl);
     }, function(err) {
-        alert('Error copying URL: ' + err);
+        alert('Error copiando la URL: ' + err);
     });
 }
 
