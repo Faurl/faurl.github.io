@@ -1,3 +1,9 @@
+document.getElementById('password-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                decryptText();
+            }
+        });
+
 document.getElementById('encrypt-button').addEventListener('click', function() {
     encryptText();
 });
@@ -30,10 +36,10 @@ document.getElementById('copy-button').addEventListener('click', function() {
 });
 
 document.getElementById('copy-url-button').addEventListener('click', function() {
-    copyUrlWithEncryptedText();
+    copyEncryptedTextURL();
 });
 
-function copyUrlWithEncryptedText() {
+function copyEncryptedTextURL() {
     var encryptedText = document.getElementById('result-output').value;
     var password = document.getElementById('password-input').value;
     var passwordInput = document.getElementById('password-input');
@@ -47,13 +53,13 @@ function copyUrlWithEncryptedText() {
     // Include encrypted text only if it exists
     if (encryptedText) {
         var encodedText = encodeURIComponent(encryptedText);
-        params.push(`text=${encodedText}`);
+        params.push(`s=${encodedText}`);
     }
 
     // Only include the password if it is visible
     if (passwordInput.type === 'text' && password) {
         var encodedPassword = CryptoJS.enc.Hex.stringify(CryptoJS.enc.Utf8.parse(password));
-        params.push(`password=${encodedPassword}`);
+        params.push(`kee=${encodedPassword}`);
     }
 
     // Include the CSS parameter if it exists in the current URL
@@ -143,8 +149,8 @@ function copyToClipboard() {
 
 window.onload = function() {
     let params = new URLSearchParams(window.location.search);
-    let encryptedText = params.get('text');
-    let encodedPassword = params.get('password');
+    let encryptedText = params.get('s');
+    let encodedPassword = params.get('kee');
     let cssParam = params.get('css');
 
     if (cssParam) {
