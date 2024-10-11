@@ -74,7 +74,7 @@ function copyEncryptedTextURL() {
     }
 
     navigator.clipboard.writeText(newUrl).then(function() {
-        alert('URL copiada al portapapeles: ' + newUrl);
+        alert('URL customizada copiada al portapapeles:\n\n' + newUrl);
     }, function(err) {
         alert('Error copiando la URL: ' + err);
     });
