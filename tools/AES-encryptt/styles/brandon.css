@@ -1,11 +1,23 @@
 :root {
-    --mainColor: #ff8cb1;
+    --mainColor: #688cec;
+    --alphaColor444444: rgba(68,68,68, 0.6); /*#444444*/
+    --color666666: rgba(102,102,102, 0.5);
+    --result-Alpha-color:rgba(51,51,51, 0.3);
 }
 
+html {
+    height: 100%;
+    overflow: hidden;
+    background-image: url('https://faurl.github.io/multimedia-links/brandon/brandonrodriguez.png');
+    background-repeat: round;      /* round=stretch, no-repeat=fit */
+    background-attachment: fixed;
+    background-size: 100%;
+}
 body {
     font-family: Arial, sans-serif;
     font-size: 16px;
-    background-color: #111111;
+    /*background-color: #111111;*/
+    background-color: rgba(19, 20, 26, 0.88);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,7 +27,7 @@ body {
 }
 
 .container {
-    background-color: #222222;
+    background-color: rgba(38,38,38, 0.6);
     padding: 20px;
     max-width: 520px;
     width: 100%;
@@ -33,7 +45,15 @@ body {
 h1 {
     text-align: center;
     color: var(--mainColor);
-    text-shadow: 1px 1px 2px #222222
+    text-shadow: 1px 1px 2px #222222;
+    text-indent: -9999px;
+    line-height: 0;
+}
+h1:after {
+    content: 'Brandon Crypt';
+    text-indent: 0;
+    display: block;
+    line-height: initial;
 }
 
 .form-group {
@@ -48,7 +68,7 @@ label {
 
 textarea, input {
     outline: none;
-    background-color: #333333;
+    background-color: transparent; 
     color: var(--mainColor);
     width: calc(100% - 20px);
     padding: 10px;
@@ -64,11 +84,12 @@ textarea, input {
 }
 
 .password-container input {
-    background-color: #444444;
+    background-color: transparent;
+    /*background-color: #444444;*/
     color: var(--mainColor);
     width: 78% !important;
     padding-right: 13px;
-    border: 2px solid #555555;
+    border: 2px solid #555555; 
 }
 
 #toggle-password {
@@ -82,7 +103,7 @@ textarea, input {
     right: 10px;
     width: 39px;
     height: 39px;
-    border: 2px solid #555555;
+    border: 2px solid #555555; 
     background-color: transparent;
     cursor: pointer;
     display: flex;
@@ -94,7 +115,7 @@ textarea, input {
 }
 
 .password-container button:hover {
-    background-color: #666666;
+    background-color: var(--color666666); 
 }
 
 button {
@@ -103,14 +124,14 @@ button {
     border: 5px solid var(--mainColor);
     margin-bottom: 10px;
     cursor: pointer;
-    background-color: #333333;
+    background-color: #333333; 
     color: var(--mainColor);
     transition-duration: 0.2s;
     font-size: 0.7rem;
 }
 
 #encrypt-button, #decrypt-button {
-    background-color: #444444;
+    background-color: var(--alphaColor444444);
     border-color: var(--mainColor);
     color: var(--mainColor);
     height: 40%;
@@ -121,13 +142,13 @@ button {
 }
 
 #encrypt-button:hover, #decrypt-button:hover, #copy-button:hover {
-    background-color: #666666;
+    background-color: var(--color666666);
     color: var(--mainColor);
     transition-duration: 0.2s;
 }
 
 #copy-button {
-    background-color: #444444;
+    background-color: var(--alphaColor444444);
     border-color: var(--mainColor);
     color: var(--mainColor);
     transform: translateX(364.5px);
@@ -139,8 +160,9 @@ button {
 }
 
 #result-output {
-    border: none;
+    border: 2px solid #555555;
     color: var(--mainColor);
+    background-color: var(--result-Alpha-color);
 }
 
 #auto-encrypt-checkbox {
@@ -149,7 +171,7 @@ button {
     -moz-appearance: none;
     width: 20px;
     height: 20px;
-    background-color: #444444;
+    background-color: var(--alphaColor444444);
     border: 2px solid #555555;
     cursor: pointer;
     vertical-align: middle;
@@ -159,7 +181,7 @@ button {
 }
 
 #auto-encrypt-checkbox:hover {
-    background-color: #666666;
+    background-color: var(--color666666);
     transition-duration: 0.2s;
 }
 
