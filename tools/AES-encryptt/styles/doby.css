@@ -1,5 +1,12 @@
 :root {
-    --mainColor: #9e6c4d;
+
+    --Title:'Doby Encryptor 7007 🐶';
+
+    --MainColor: #c37a4b;
+    --MainTextColor: #f4b48b;
+    --DetailColor: var(--MainColor);
+    --heathers: rgba(255, 255, 255, 0.5);
+
     --alphaColor444444: rgba(68,68,68, 0.6); /*#444444*/
     --color666666: rgba(102,102,102, 0.5);
     --result-Alpha-color:rgba(51,51,51, 0.3);
@@ -16,7 +23,6 @@ html {
 body {
     font-family: Arial, sans-serif;
     font-size: 16px;
-    /*background-color: #111111;*/
     background-color: rgba(19, 20, 26, 0.88);
     display: flex;
     justify-content: center;
@@ -31,7 +37,7 @@ body {
     padding: 20px;
     max-width: 520px;
     width: 100%;
-    border: 5px solid var(--mainColor);
+    border: 5px solid var(--MainColor);
     font-size: 1.1rem;
     font-weight: bold;
     color: #ffffff;
@@ -39,25 +45,22 @@ body {
 
 .ContrTextResult {
     font-size: 110%;
-    color: var(--mainColor);
+    color: var(--heathers);
 }
 
 h1 {
+    user-select: texts;
     text-align: center;
-    color: var(--mainColor);
+    color: var(--MainColor);
     text-shadow: 1px 1px 2px #222222;
     text-indent: -9999px;
     line-height: 0;
 }
 h1:after {
-    content: 'Doby-Cryptor';
+    content: var(--Title);
     text-indent: 0;
     display: block;
     line-height: initial;
-}
-
-.form-group {
-    margin-bottom: 15px;
 }
 
 label {
@@ -69,7 +72,7 @@ label {
 textarea, input {
     outline: none;
     background-color: transparent; 
-    color: var(--mainColor);
+    color: var(--MainTextColor);
     width: calc(100% - 20px);
     padding: 10px;
     border: 2px solid #555555;
@@ -86,7 +89,7 @@ textarea, input {
 .password-container input {
     background-color: transparent;
     /*background-color: #444444;*/
-    color: var(--mainColor);
+    color: var(--MainTextColor);
     width: 78% !important;
     padding-right: 13px;
     border: 2px solid #555555; 
@@ -94,7 +97,10 @@ textarea, input {
 
 #toggle-password {
     transform: translateY(0px) translateX(-31.8px);
-    color: var(--mainColor);
+    color: var(--DetailColor);
+}
+#copy-url-button {
+    color: var(--DetailColor);
 }
 
 .password-container button {
@@ -109,7 +115,7 @@ textarea, input {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--mainColor);
+    color: var(--MainColor);
     font-size: 1rem;
     padding: 0;
 }
@@ -121,19 +127,19 @@ textarea, input {
 button {
     width: 100.7%;
     padding: 1%;
-    border: 5px solid var(--mainColor);
+    border: 5px solid var(--MainColor);
     margin-bottom: 10px;
     cursor: pointer;
     background-color: #333333; 
-    color: var(--mainColor);
+    color: var(--MainColor);
     transition-duration: 0.2s;
     font-size: 0.7rem;
 }
 
 #encrypt-button, #decrypt-button {
     background-color: var(--alphaColor444444);
-    border-color: var(--mainColor);
-    color: var(--mainColor);
+    border-color: var(--MainColor);
+    color: var(--MainColor);
     height: 40%;
     transition-duration: 0.2s;
     font-size: 70%;
@@ -143,25 +149,25 @@ button {
 
 #encrypt-button:hover, #decrypt-button:hover, #copy-button:hover {
     background-color: var(--color666666);
-    color: var(--mainColor);
+    color: var(--MainColor);
     transition-duration: 0.2s;
 }
 
 #copy-button {
     background-color: var(--alphaColor444444);
-    border-color: var(--mainColor);
-    color: var(--mainColor);
+    border-color: var(--MainColor);
+    color: var(--MainColor);
     transform: translateX(364.5px);
     width: 14%;
 }
 
 #copy-button:hover {
-    color: var(--mainColor);
+    color: var(--MainColor);
 }
 
 #result-output {
     border: 2px solid #555555;
-    color: var(--mainColor);
+    color: var(--MainTextColor);
     background-color: var(--result-Alpha-color);
 }
 
@@ -186,8 +192,8 @@ button {
 }
 
 #auto-encrypt-checkbox:checked {
-    background-color: var(--mainColor);
-    /* border-color: var(--mainColor); */
+    background-color: var(--MainColor);
+    /* border-color: var(--MainColor); */
 }
 
 #auto-encrypt-checkbox:checked::after {
@@ -199,13 +205,16 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+#auto-text {
+    color: var(--DetailColor);
+}
 
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--mainColor);
+  background-color: var(--MainColor);
   cursor: pointer;
 }
 
