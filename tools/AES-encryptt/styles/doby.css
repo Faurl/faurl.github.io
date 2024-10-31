@@ -15,7 +15,8 @@
 html {
     height: 100%;
     overflow: hidden;
-    background-image: url('https://faurl.github.io/multimedia-links/gang.jpg');
+    background-image: url('../background/gang.jpg');
+    background-color: black;
     background-repeat: round;      /* round=stretch, no-repeat=fit */
     background-attachment: fixed;
     background-size: 100%;

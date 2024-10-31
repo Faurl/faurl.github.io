@@ -15,7 +15,8 @@
 html {
     height: 100%;
     overflow: hidden;
-    background-image: url('https://estaticos-cdn.epe.es/clip/166f1921-46e2-4d11-93d7-a4886753071a_alta-libre-aspect-ratio_default_0.jpg');
+    background-image: url('../background/ristomejide.jpg');
+    background-color: black;
     background-repeat: round;      /* round=stretch, no-repeat=fit */
     background-attachment: fixed;
     background-size: 100%;
