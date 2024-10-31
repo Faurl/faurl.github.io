@@ -22,7 +22,7 @@ document.getElementById('text-input').addEventListener('input', function() {
 
 document.getElementById('text-input').addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
-        event.preventDefault(); // Evita que se añada una nueva línea en el textarea
+        event.preventDefault(); // Evitar añadir nueva línea
         encryptText();
     }
 });
@@ -63,9 +63,9 @@ function copyEncryptedTextURL() {
     }
 
     // Include the CSS parameter if it exists in the current URL
-    var currentCssParam = new URLSearchParams(window.location.search).get('css');
+    var currentCssParam = new URLSearchParams(window.location.search).get('t');
     if (currentCssParam) {
-        params.push(`css=${currentCssParam}`);
+        params.push(`t=${currentCssParam}`);
     }
 
     // If there are any parameters, join them and append to the URL
@@ -151,7 +151,7 @@ window.onload = function() {
     let params = new URLSearchParams(window.location.search);
     let encryptedText = params.get('s');
     let encodedPassword = params.get('kee');
-    let cssParam = params.get('css');
+    let cssParam = params.get('t');
 
     if (cssParam) {
         let cssUrl = getCssUrl(cssParam);
@@ -179,7 +179,7 @@ function getCssUrl(cssFileName) {
     return 'styles/' + cssFileName + '.css';
 }
 
-// Function to auto-resize the textarea
+// auto-resize the textarea
 function autoResizeTextarea() {
     // Reset the height to get the correct scrollHeight
     this.style.height = 'auto'; 

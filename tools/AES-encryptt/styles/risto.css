@@ -1,0 +1,222 @@
+:root {
+    --mainColor: red;
+    --alphaColor444444: rgba(68,68,68, 0.6); /*#444444*/
+    --color666666: rgba(102,102,102, 0.5);
+    --result-Alpha-color:rgba(51,51,51, 0.3);
+}
+
+html {
+    height: 100%;
+    overflow: hidden;
+    background-image: url('https://estaticos-cdn.epe.es/clip/166f1921-46e2-4d11-93d7-a4886753071a_alta-libre-aspect-ratio_default_0.jpg');
+    background-repeat: round;      /* round=stretch, no-repeat=fit */
+    background-attachment: fixed;
+    background-size: 100%;
+}
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    /*background-color: #111111;*/
+    background-color: rgba(19, 20, 26, 0.88);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow-y: auto;
+}
+
+.container {
+    background-color: rgba(38,38,38, 0.6);
+    padding: 20px;
+    max-width: 520px;
+    width: 100%;
+    border: 5px solid var(--mainColor);
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.ContrTextResult {
+    font-size: 110%;
+    color: var(--mainColor);
+}
+
+h1 {
+    text-align: center;
+    color: var(--mainColor);
+    text-shadow: 1px 1px 2px #222222;
+    text-indent: -9999px;
+    line-height: 0;
+}
+h1:after {
+    content: 'Risto Mejide Encryption';
+    text-indent: 0;
+    display: block;
+    line-height: initial;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+textarea, input {
+    outline: none;
+    background-color: transparent; 
+    color: var(--mainColor);
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 2px solid #555555;
+    resize: none;
+    font-size: 15px;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    height: 39px;
+}
+
+.password-container input {
+    background-color: transparent;
+    /*background-color: #444444;*/
+    color: var(--mainColor);
+    width: 78% !important;
+    padding-right: 13px;
+    border: 2px solid #555555; 
+}
+
+#toggle-password {
+    transform: translateY(0px) translateX(-31.8px);
+    color: var(--mainColor);
+}
+
+.password-container button {
+    position: absolute;
+    transform: translateY(0px) translateX(14px);
+    right: 10px;
+    width: 39px;
+    height: 39px;
+    border: 2px solid #555555; 
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mainColor);
+    font-size: 1rem;
+    padding: 0;
+}
+
+.password-container button:hover {
+    background-color: var(--color666666); 
+}
+
+button {
+    width: 100.7%;
+    padding: 1%;
+    border: 5px solid var(--mainColor);
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #333333; 
+    color: var(--mainColor);
+    transition-duration: 0.2s;
+    font-size: 0.7rem;
+}
+
+#encrypt-button, #decrypt-button {
+    background-color: var(--alphaColor444444);
+    border-color: var(--mainColor);
+    color: var(--mainColor);
+    height: 40%;
+    transition-duration: 0.2s;
+    font-size: 70%;
+    /**/
+    font-weight: bold;
+}
+
+#encrypt-button:hover, #decrypt-button:hover, #copy-button:hover {
+    background-color: var(--color666666);
+    color: var(--mainColor);
+    transition-duration: 0.2s;
+}
+
+#copy-button {
+    background-color: var(--alphaColor444444);
+    border-color: var(--mainColor);
+    color: var(--mainColor);
+    transform: translateX(364.5px);
+    width: 14%;
+}
+
+#copy-button:hover {
+    color: var(--mainColor);
+}
+
+#result-output {
+    border: 2px solid #555555;
+    color: var(--mainColor);
+    background-color: var(--result-Alpha-color);
+}
+
+#auto-encrypt-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: var(--alphaColor444444);
+    border: 2px solid #555555;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 5px;
+    position: relative;
+    transition-duration: 0.2s;
+}
+
+#auto-encrypt-checkbox:hover {
+    background-color: var(--color666666);
+    transition-duration: 0.2s;
+}
+
+#auto-encrypt-checkbox:checked {
+    background-color: var(--mainColor);
+    /* border-color: var(--mainColor); */
+}
+
+#auto-encrypt-checkbox:checked::after {
+    content: '\2714';
+    font-size: 19px;
+    color: #555555;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--mainColor);
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ffa3c1;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #333333;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #333333;
+}

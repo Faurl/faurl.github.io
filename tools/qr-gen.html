@@ -110,7 +110,7 @@
             qrcode.innerHTML = '';
             errorMessage.textContent = '';
 
-            // Reset copy button text and hide it
+           
             const copyButton = document.querySelector('.copy-button');
             copyButton.style.display = 'none';
             copyButton.textContent = 'Copy QR';
@@ -121,9 +121,9 @@
             }
 
             const qrOptions = {
-                errorCorrectionLevel: 'L', // Lower error correction level to store more data
-                version: 'auto', // Automatically determine the appropriate version
-                width: qrSize || 'auto' // Width of the QR code, defaulting to 'auto'
+                errorCorrectionLevel: 'L',
+                version: 'auto',
+                width: qrSize || 'auto'
             };
 
             QRCode.toDataURL(text, qrOptions, function (error, url) {
@@ -136,7 +136,7 @@
                     img.draggable = true;
                     qrcode.appendChild(img);
 
-                    // Show the copy button after QR code is generated
+                   
                     copyButton.style.display = 'inline-block';
                 }
             });

@@ -105,30 +105,23 @@
 
         // Evento de escucha de teclas
         document.body.onkeyup = function(e) {
-			if (e.keyCode === 32) {
-				// Si la tecla es la barra espaciadora (código 32)
+			if (e.keyCode === 32) { //ESPACIO
 				if (isRunning) {
-					// Si el cronómetro está en marcha, lo detiene
 					stopTimer();
 				} else {
-					// Si el cronómetro está detenido, lo inicia
 					startTimer();
 				}
-			} else if (e.keyCode === 84) {
-				// Si la tecla es la "T" (código 84)
+			} else if (e.keyCode === 84) { //T
 				if (isRunning) {
-					// Si el cronómetro está en marcha, lo detiene
 					stopTimer();
 				} else {
-					// Si el cronómetro está detenido, lo inicia
 					startTimer();
 				}
-			} else if (e.keyCode === 82) {
-				// Si la tecla es la "R" (código 82)
+			} else if (e.keyCode === 82) { //R
 				resetTimer();
 			}
 		
-				if (e.keyCode === 187) { //+       <!--191-->
+				if (e.keyCode === 187) { //+   <!--191-->
 					increaseFontSize();
 				}
 				if (e.keyCode === 189) { //-

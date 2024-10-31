@@ -27,29 +27,22 @@
 
 
 <script>
-// Establecer la duración de la cuenta atrás en segundos
-let duration = 21;
+let duration = 21; //en segundos
 
-// Función para actualizar la cuenta atrás
+// actualizar la cuenta atrás
 function updateCountdown() {
-  // Mostrar la cuenta atrás en el elemento
   document.getElementById('countdown').textContent = duration;
-
-  // Decrementar el tiempo restante
   duration--;
-
-  // Verificar si la cuenta atrás ha llegado a cero
   if (duration < 0) {
     clearInterval(countdownInterval);
     document.getElementById('countdown').textContent = 'l';
   }
 }
 
-// Actualizar la cuenta atrás cada segundo
 const countdownInterval = setInterval(updateCountdown, 1000);
 
-// Actualizar la cuenta atrás inicialmente
 updateCountdown();
+
 </script>
 </body>
 </html>

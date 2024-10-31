@@ -120,14 +120,14 @@
             }
         }
 
-        // Stop playback when the page is refreshed
+        // Stop playback when page refreshed
         window.addEventListener('beforeunload', () => {
             if (isPlaying) {
                 stopPreviewSpeech();
             }
         });
 
-        // Handle Enter key press to trigger audio preview
+        // key press (Enter) to trigger audio preview
         function handleKeyDown(event) {
             if (event.key === 'Enter') {
                 togglePreviewSpeech();

@@ -85,18 +85,18 @@ function convertir() {
     reader.onload = function(event) {
       const imagenDataUrl = event.target.result;
       
-      // Mostrar la barra de progreso y el mensaje de carga
+      // mostrar barra de progreso y el mensaje de carga
       convertirBtn.style.display = 'none';
       progressBarContainer.style.display = 'block';
       
-      // Simular una carga de 5 segundos
+      // Cargando..
       let carga = 0;
       const interval = setInterval(() => {
         carga += 2;
         document.getElementById('progressBar').style.width = `${carga}%`;
         document.getElementById('progressText').innerText = `${carga}%`;
         
-        // Mostrar el mensaje de carga cuando la barra esté alrededor del 24%
+        // This may take a moment . . .
         if (carga >= 28 && carga < 100) {
           loadingMessage.style.display = 'block';
         } else {
@@ -105,9 +105,9 @@ function convertir() {
         
         if (carga >= 100) {
           clearInterval(interval);
-          // Mostrar el botón de descarga
+          // Mostrar botón de descarga
           descargarBtn.style.display = 'block';
-          // Almacenar la imagen convertida en el enlace de descarga
+          // Almacenar imagen convertida en enlace de descarga
           const enlaceDescarga = document.getElementById('enlaceDescarga');
           enlaceDescarga.href = imagenDataUrl;
           enlaceDescarga.download = fileName;
@@ -124,7 +124,7 @@ function convertir() {
 function descargar() {
   const enlaceDescarga = document.getElementById('enlaceDescarga');
   enlaceDescarga.click();
-  window.location.reload(true); // Recargar la página después de la descarga
+  window.location.reload(true); // Recargar la página tras descarga
 }
   
 document.getElementById('fileInput').addEventListener('change', mostrarBotonConvertir);

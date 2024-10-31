@@ -65,7 +65,7 @@ background-color: #F1F1F1;
 @media (max-width: 490px) {
     #button-gui {
         height: auto;
-        width: 80%; /* Ajusta el ancho como desees */
-        max-height: 70vh; /* Limita la altura máxima en dispositivos móviles */
+        width: 80%;
+        max-height: 70vh;
     }
 }

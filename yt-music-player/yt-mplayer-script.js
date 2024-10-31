@@ -120,22 +120,22 @@ var darkModeParam = urlParams.get('dark-mode');
 if (playlistParams.length > 0 && !darkModeParam) {
     var firstPlaylistParam = playlistParams[0];
     
-    // Si el primer parámetro 'playlist' no contiene comillas, se asume que es la URL de la playlist
+    // Si el primer parámetro 'playlist' no contiene comillas, asume que es la URL de la playlist
     if (!firstPlaylistParam.includes('"')) {
-        // Cargar el contenido del primer parámetro 'playlist' en el input playlistURL después de 3 segundos
+        // Cargar el contenido del primer parámetro 'playlist' en el input playlistURL tras 3 segundos
         setTimeout(function () {
             document.getElementById("playlistURL").value = firstPlaylistParam;
-            loadPlaylist(firstPlaylistParam); // Cargar la lista de reproducción
+            loadPlaylist(firstPlaylistParam); // Cargar playlist
         }, 300);
     } else {
-        // Si contiene comillas, se extrae el contenido entre comillas
-        var match = firstPlaylistParam.match(/"([^"]+)"/); // Encuentra el contenido entre comillas
-        var playlistUrl = match ? match[1] : null; // Obtén el contenido encontrado
+        // Si contiene comillas, se extrae el contenido entre ellas :
+        var match = firstPlaylistParam.match(/"([^"]+)"/); // Encuentra el contenido entre las comillas
+        var playlistUrl = match ? match[1] : null; // Obtiene el contenido encontrado
         if (playlistUrl) {
             // Cargar el contenido del primer parámetro 'playlist' (sin comillas) en el input playlistURL después de 3 segundos
             setTimeout(function () {
                 document.getElementById("playlistURL").value = playlistUrl;
-                loadPlaylist(playlistUrl); // Cargar la lista de reproducción
+                loadPlaylist(playlistUrl); // Cargar la playlist
             }, 300);
         }
     }
@@ -163,7 +163,7 @@ function displayPlaylist() {
 
 function loadPlayer(videoId, index) {
 	if (player) {
-		currentVolume = player.getVolume(); // Guardar el volumen actual
+		currentVolume = player.getVolume(); // Guardar volumen actual
 		player.destroy();
 	}
 	player = new YT.Player('player', {
@@ -236,7 +236,7 @@ function updateProgressBar() {
 		var duration = !player.getDuration ? 0.0 : player.getDuration();
 		var progressPercentage = (currentTime / duration) * 100;
 	
-		// Formatear el tiempo actual y la duración total en formato mm:ss
+		// Colocar tiempo actual y duración total en formato mm:ss
 		var currentTimeFormatted = formatTime(currentTime);
 		var durationFormatted = formatTime(duration);
 	
@@ -263,15 +263,13 @@ function setCurrentSong(index) {
 		if (i === index) {
 			button.classList.add("current-song");
 
-				// Verificar si el botón actual está fuera de la vista y hacer scroll si es necesario.
+				// Verificar si la canción(botón) actual está fuera de la vista (hace scroll si es necesario)
 
 	            if (typeof button.scrollIntoViewIfNeeded === 'function') {
 	                button.scrollIntoViewIfNeeded();
 	            } else if (typeof button.scrollIntoView === 'function') {
 	                button.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
 	            }
-
-	            // End.Verificar si el botón actual está fuera de la vista y hacer scroll si es necesario.
 
 		} else {
 			button.classList.remove("current-song");
@@ -369,6 +367,6 @@ clickCount++;
   
 if (clickCount === 4) {
 	toggleDarkMode();
-	clickCount = 0; // Reiniciar el contador de clics
+	clickCount = 0; // Reiniciar el contador clicks
 }
 });
