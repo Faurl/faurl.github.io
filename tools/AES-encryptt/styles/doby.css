@@ -17,7 +17,7 @@ html {
     overflow: hidden;
     background-image: url('../background/gang.jpg');
     background-color: black;
-    background-repeat: round;      /* round=stretch, no-repeat=fit */
+    background-repeat: round;       /* round=stretch, no-repeat=fit */
     background-attachment: fixed;
     background-size: 100%;
 }
