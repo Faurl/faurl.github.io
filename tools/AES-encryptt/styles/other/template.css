@@ -2,17 +2,17 @@
 
     /*========================~ MAIN ~========================*/
 
-    --Title:'Risto Mejide Encryption™';
+    --Title:'';
 
-    --MainColor: red;
-    --MainTextColor: white;
+    --MainColor: ;
+    --MainTextColor: ;
     
-    --heathers: rgba(255, 255, 255, 0.5);
     --PasswordButtons:var(--heathers);
-    --autoMode-text: var(--heathers);
+    --autoMode-text: rgba(255, 255, 255, 0.5);
+    --heathers: rgba(255, 255, 255, 0.5);
     --BorderColor: #555555;
 
-    --BackgroundImg:url('../background/ristomejide.jpg');
+    --BackgroundImg:url('');
 
     /*=====================~ SECONDARY ~======================*/
 

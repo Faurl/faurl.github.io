@@ -173,7 +173,7 @@ window.onload = function() {
             console.error('Error al desencriptar la contraseña desde la URL.');
         }
     }
-};
+}
 
 function getCssUrl(cssFileName) {
     return 'styles/' + cssFileName + '.css';
@@ -191,3 +191,15 @@ function autoResizeTextarea() {
 }
 
 document.getElementById('text-input').addEventListener('input', autoResizeTextarea);
+
+//
+//function update_title() {
+//    const title = getComputedStyle(document.documentElement).getPropertyValue('--Title').replace(/'/g, "").trim();
+//    document.getElementById('Title').textContent = title;
+//}
+//
+//document.addEventListener('DOMContentLoaded', function () {
+//    update_title()
+//})
+//
+//
