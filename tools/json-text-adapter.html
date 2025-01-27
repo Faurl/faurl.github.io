@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="/assets/icons/generic/tools.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>json-text-adapter</title>
+    <style>
+        body {
+            background-color:#CFCDCA;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+            background-color: gray;
+            cursor: default;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        pre {
+            background-color: transparent;
+            border: 1px solid gray;
+            cursor: pointer;
+            
+            padding: 10px;
+            white-space: pre-wrap;
+        }
+        #resultTitle {display: none;}
+        #result {display: none;}
+    </style>
+</head>
+<body>
+
+<h2>json-text-adapter</h2>
+<textarea id="inputText"></textarea>
+<button onclick="convertToJSON()">Convertir a JSON</button>
+
+<h3 id="resultTitle">Resultado:</h3>
+<pre id="result" onclick="copyToClipboard()"></pre>
+
+<script>
+    function convertToJSON() {
+        const inputText = document.getElementById('inputText').value;
+
+        const escapedText = inputText.replace(/\\/g, '\\\\')
+                                      .replace(/"/g, '\\"')
+                                      .replace(/\n/g, '\\n');
+
+        result.textContent = escapedText;
+        document.getElementById('resultTitle').style.display = "block"
+        document.getElementById('result').style.display = "block";
+    }
+
+    function copyToClipboard() {
+        const resultText = document.getElementById('result').textContent;
+
+        const tempInput = document.createElement('textarea');
+        tempInput.value = resultText;
+        document.body.appendChild(tempInput);
+
+        tempInput.select();
+        tempInput.setSelectionRange(0, 99999);
+
+        document.execCommand('copy');
+
+        document.body.removeChild(tempInput);
+
+        alert('Texto copiado!');
+    }
+</script>
+
+</body>
+</html>

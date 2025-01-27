@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="lock_icon.png">
+    <title>AES-256 Encrypt</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta property="theme-color" content="#00ff00">
+    <!--<meta property="og:site_name" content="Herramienta de cifrado AES-256">-->
+    <meta property="og:title" content="AES-256 Encrypt">
+    <meta property="og:description" content="Encriptador de texto usando el algoritmo de cifrado 'AES-256' (Advanced Encryption Standard).">
+    <meta property="og:image" content="https://faurl.github.io/assets/icons/U2FsdGVkX18F6nHXUQDOgJZ3GM1sov3OHDnmAmPRNebBUmuyUVyrjbpBJVEHSJ2j.jpg">
+    <!-- hacked_site_down -->
+</head>
+<body>
+<div class="container">
+    <h1>AES-256 Crypt</h1>
+    <div class="form-group">
+        <label for="password-input" class="ContrTextResult">Contraseña:</label>
+        <div class="password-container">
+            <input type="password" id="password-input" placeholder="Introduce la contraseña...">
+            <button type="button" id="toggle-password"><i class="fas fa-eye-slash"></i></button>
+            <button type="button" id="copy-url-button" title="Copiar url con el texto encriptado. Si la contraseña está visible se incluirá también (en Base64)"><i class="fas fa-copy"></i></button>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="text-input" class="ContrTextResult">Texto:</label>
+        <textarea autocomplete="off" id="text-input" rows="4" placeholder="Introduce el texto aquí..."></textarea>
+    </div>
+    <button id="encrypt-button">E n c r i p t a r</button>
+    <button id="decrypt-button">D e s e n c r i p t a r</button>
+    <div class="form-group">
+        <br>
+        <label for="result-output" class="ContrTextResult">Resultado:</label>
+        <textarea id="result-output" rows="4" readonly></textarea>
+    </div>
+    <div id="auto-encrypt-text">Auto
+        <input type="checkbox" id="auto-encrypt-checkbox" title="Encripta automáticamente al escribir en el cuadro de texto.">
+        <button id="copy-button" title="Copiar al portapapeles.">Copiar</button>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-base64/3.7.2/base64.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

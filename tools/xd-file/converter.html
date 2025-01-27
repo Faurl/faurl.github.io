@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convertir a .xd</title>
+<style type="text/css">
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: dimgray;
+    margin: 0;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: gray;
+    padding: 2%;
+  }
+  input, #fileInput, button:hover {
+    cursor: pointer;
+  }
+  .progress-bar-container {
+    width: 100%;
+    background-color: black;
+    height: 20px;
+    margin-top: 10px;
+    border: 2px solid dimgray;
+    display: none;
+    position: relative;
+  }
+  .progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: hotpink;
+  }
+  .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+  .loading-message {
+    text-align: center;
+    color: white;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <input type="file" id="fileInput" accept="image/*"><br>
+  <button id="convertirBtn" style="display: none;" onclick="convertir()">Convertir a .xd</button>
+  <div class="progress-bar-container" id="progressBarContainer">
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="progress-text" id="progressText">0%</div>
+  </div><br>
+  <div class="loading-message" id="loadingMessage">This may take a moment . . .</div>
+  <a id="enlaceDescarga" style="display: none;"></a>
+  <button id="descargarBtn" style="display: none;" onclick="descargar()">Download converted File</button>
+</div>
+
+<script>
+function mostrarBotonConvertir() {
+  const convertirBtn = document.getElementById('convertirBtn');
+  convertirBtn.style.display = 'block';
+}
+
+function convertir() {
+  const fileInput = document.getElementById('fileInput');
+  const file = fileInput.files[0];
+  const progressBarContainer = document.getElementById('progressBarContainer');
+  const descargarBtn = document.getElementById('descargarBtn');
+  const loadingMessage = document.getElementById('loadingMessage');
+  
+  if (file) {
+    const fileName = file.name.split('.').slice(0, -1).join('.') + '.xd';
+    const reader = new FileReader();
+    
+    reader.onload = function(event) {
+      const imagenDataUrl = event.target.result;
+      
+      // mostrar barra de progreso y el mensaje de carga
+      convertirBtn.style.display = 'none';
+      progressBarContainer.style.display = 'block';
+      
+      // Cargando..
+      let carga = 0;
+      const interval = setInterval(() => {
+        carga += 2;
+        document.getElementById('progressBar').style.width = `${carga}%`;
+        document.getElementById('progressText').innerText = `${carga}%`;
+        
+        // This may take a moment . . .
+        if (carga >= 28 && carga < 100) {
+          loadingMessage.style.display = 'block';
+        } else {
+          loadingMessage.style.display = 'none';
+        }
+        
+        if (carga >= 100) {
+          clearInterval(interval);
+          // Mostrar botón de descarga
+          descargarBtn.style.display = 'block';
+          // Almacenar imagen convertida en enlace de descarga
+          const enlaceDescarga = document.getElementById('enlaceDescarga');
+          enlaceDescarga.href = imagenDataUrl;
+          enlaceDescarga.download = fileName;
+        }
+      }, 1000);
+    };
+    
+    reader.readAsDataURL(file);
+  } else {
+    alert('El contenedor .xd solo acepta archivos de imagen.');
+  }
+}
+  
+function descargar() {
+  const enlaceDescarga = document.getElementById('enlaceDescarga');
+  enlaceDescarga.click();
+  window.location.reload(true); // Recargar la página tras descarga
+}
+  
+document.getElementById('fileInput').addEventListener('change', mostrarBotonConvertir);
+</script>
+
+</body>
+</html>

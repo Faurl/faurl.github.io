@@ -1,0 +1,246 @@
+:root {
+
+    --Title:'AES-256 Crypt';
+
+    --BackgroundImg:'';
+    --BackgroundColor:#111111;
+    --MainColor: #00ff00;
+    --MainTextColor: var(--extraColor);
+    --ContainerBg:#222222;
+    --heathers: #ffffff;
+    --BorderColor: var(--BackgroundColor);
+    /*--DetailColor: var(--MainColor);*/
+
+    --textarea-bg: var(--BackgroundColor);
+    --hoverColor: rgba(102,102,102, 0.5);
+    --ResultBorderColor: var(--BorderColor);
+    --ResultBgColor:var(--textarea-bg);
+    --Password-bg: var(--textarea-bg);
+    --PasswordButtons:var(--MainColor);
+    --ScrollbarColor: var(--textarea-bg);
+    
+    --EncDecButton:var(--extraColor);
+    --EncDecButton-bgColor: #2B2B2B; /*#444444*/
+    --EncDecButton-hover: var(--ContainerBg);
+    --EncDecButton-text-hover: #915EAA;
+
+    --extraColor:#b273d1;
+    --extraBorderColor:#555555;
+    --autoMode-text: rgba(255, 255, 255, 1.0);
+    --autoMode-chk-bg: var(--extraColor);
+    --autoMode-tick: var(--ContainerBg);
+    --autoMode-border: var(--extraColor);
+    --autoMode-bgColor: var(--ContainerBg);
+    --copyButton-hoverColor:#00C300;
+
+    --HeatherPassword:var(--MainColor);
+    --HeatherInput:var(--MainTextColor);
+    --HeatherResult:var(--MainColor);
+}
+
+html {
+    background-image: var(--BackgroundImg);
+    background-repeat: round;       /* round=stretch, no-repeat=fit */
+    background-size: 100%;
+    /*background-attachment: fixed;*/
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow-y: auto;
+    background-color: var(--BackgroundColor);
+}
+
+.container {
+    max-width: 520px;
+    width: 100%;
+    padding: 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--MainTextColor);
+    background-color: var(--ContainerBg);
+    border: 5px solid var(--MainColor);
+    border-radius: var(--borderRadius);
+}
+
+.ContrTextResult {
+    font-size: 110%;
+    color: var(--heathers);
+}
+
+h1 {
+    line-height: 0;
+    text-align: center;
+    text-indent: -9999px;
+    text-shadow: 1px 1px 2px #222222;
+    color: var(--MainColor);
+}
+h1:after {
+    line-height: initial;
+    content: var(--Title);
+    text-indent: 0;
+    display: block;
+}
+
+.form-group { margin-bottom: 15px }
+
+label {
+    margin-bottom: 5px;
+    display: block;
+    color: var(--MainTextColor);
+}
+
+textarea, input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-size: 15px;
+    resize: vertical;
+    outline: none;
+    color: var(--HeatherInput);
+    background-color: var(--textarea-bg);
+    border: 2px solid var(--BorderColor);
+    border-radius: var(--borderRadius);
+}
+textarea {
+    height: auto;
+    overflow-y: auto;
+    min-height: 50px;
+    max-height: 250px;
+}
+
+.password-container {
+    height: 39px;
+    position: relative;
+    display: flex;
+}
+.password-container input {
+    width: 78% !important;
+    padding-right: 13px;
+    color: var(--HeatherPassword);
+    background-color: var(--Password-bg);
+    border: 2px solid var(--BorderColor);
+}
+.password-container button {
+    width: 39px;
+    height: 39px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(0px) translateX(14px);
+    right: 10px;
+    display: flex;
+    padding: 0;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    font-size: 1rem;
+    color: var(--MainColor);
+    background-color: transparent;
+    border: 2px solid var(--extraBorderColor); /*111111*/
+    border-radius: var(--borderRadius);
+}
+.password-container button:hover {
+    transition-duration: 0.2s;
+    background-color: var(--hoverColor);
+}
+#toggle-password {
+    transform: translateY(0px) translateX(-31.8px);
+}
+#copy-url-button, #toggle-password {
+    color: var(--PasswordButtons);
+}
+
+#encrypt-button, #decrypt-button, #copy-button {
+    height: 40%;
+    width: 100.7%;
+    margin-bottom: 10px;
+    padding: 1%;
+    transition-duration: 0.2s;
+    font-size: 70%;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--EncDecButton);
+    background-color: var(--EncDecButton-bgColor);
+    border: 5px solid var(--EncDecButton);
+    border-radius: var(--borderRadius);
+}
+#encrypt-button:hover, #decrypt-button:hover, #copy-button:hover {
+    transition-duration: 0.2s;
+    color: var(--EncDecButton-text-hover);
+    background-color: var(--EncDecButton-hover);
+}
+
+#copy-button {
+    width: 14%;
+    transform: translateX(367.5px); /* 368 */
+    color: var(--MainColor);
+    background-color: var(--EncDecButton-bgColor);
+    border-color: var(--MainColor);
+    border-radius: var(--borderRadius);
+}
+#copy-button:hover {
+    color: var(--copyButton-hoverColor);
+}
+
+#result-output {
+    color: var(--HeatherResult);
+    background-color: var(--ResultBgColor);
+    border: 2px solid var(--ResultBorderColor);
+}
+
+#auto-encrypt-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+    position: relative;
+    appearance: none;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    background-color: var(--autoMode-bgColor);
+    border: 2px solid var(--autoMode-border);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+#auto-encrypt-checkbox:hover {
+    transition-duration: 0.2s;
+    background-color: var(--hoverColor);
+}
+#auto-encrypt-checkbox:checked {
+    background-color: var(--autoMode-chk-bg);
+}
+#auto-encrypt-checkbox:checked::after {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    content: '\2714';
+    font-size: 19px;
+    font-weight: unset;
+    color: var(--autoMode-tick);
+}
+#auto-encrypt-text {
+    color: var(--autoMode-text);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background-color: #555;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #777;
+}
+::-webkit-scrollbar-track {
+    background-color: var(--ScrollbarTrack);
+}
+::-webkit-scrollbar-corner {
+    background-color: #333;
+}

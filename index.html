@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Faurl Webbe</title>
+  <link rel="icon" href="/assets/icons/faurl4web.ico">
+  <meta http-equiv="Content-Security-Policy" content="frame-src 'self' *">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" type="text/css" href="index_styles.css">
+
+  <meta charset="utf-8">
+	<meta property="theme-color" content="#FF7C66">
+  <meta property="og:site_name" content="Epic Web">
+	<meta property="og:title" content="Faur Webbe">
+  <meta property="og:description" content="Multitool Web ✓ 👀👀👀👀 😱😱😱😱😱">
+	<meta property="og:image" content="https://faurl.github.io/assets/image/thumbs_up.jpg">
+
+</head>
+<body>
+  <button class="accordion" id="prevent-select">Load Html files</button>
+  <div class="panel">
+    <div id="panel-button">
+    <!--<button onclick="cargarWeb('path'); cerrarPanel()">Texto Boton</button>-->
+
+        <button onclick="cargarWeb('web_rosa.html'); cerrarPanel()">Cargar Web 1</button>
+        <a href="https://faurl.github.io"><button>Main Web 🏠</button></a>
+        <button onclick="cargarWeb('tools/codificadorZa.html'); cerrarPanel()">Codificador</button>
+        <button onclick="cargarWeb('tools/cronómetro.html'); cerrarPanel()">Cronómetro</button>
+        
+        <a href="https://faurl.github.io/yt-music-player"><button>Music Player</button></a>
+        <a href="https://faurl.github.io/yt-music-player" onclick="window.open(this.href, '_blank', 'width=450,height=653'); return false;"><button class="music-ext-window">↗</button></a>
+        
+        <button onclick="cargarWeb('https://www.friv.com/z/games/bloxorz/game.html'); cerrarPanel()">Bloxorz [Friv.com]</button>
+    </div>
+    
+      <div id="panel-chiquito">
+          <button onclick="cargarWeb('mtos.html'); cerrarPanel()">Min to Secs</button>
+          <button onclick="cargarWeb('mtomil.html'); cerrarPanel()">Min to <a style="font-size: 60%;">Milisecs</a></button>
+          <button><a href="https://faurl.github.io/salmo">salmo.html</a></button>
+          <button onclick="cargarWeb('three.js/gui-loader.html'); cerrarPanel()">Three.js</button>
+          <button onclick="cargarWeb('tools/'); cerrarPanel()">All tuls 🛠</button>
+      </div>
+  </div>
+
+<div id="contenedor-web">
+  <iframe src="/epikweb/index.html"></iframe>
+</div>
+
+  <script>
+    function cargarWeb(url) {
+      var contenedorWeb = document.getElementById('contenedor-web');
+      contenedorWeb.innerHTML = '<iframe src="' + url + '"></iframe>';
+    }
+
+    function cerrarPanel() {
+      var acc = document.getElementsByClassName("accordion");
+      for (var i = 0; i < acc.length; i++) {
+        acc[i].classList.remove("active");
+        var panel = acc[i].nextElementSibling;
+        panel.style.display = "none";
+      }
+    }
+
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+
+/*
+    window.addEventListener('keydown', function(event) {
+      var iframe = document.getElementById('cronometroFrame');
+      var iframeWindow = iframe.contentWindow || iframe;
+
+      var keyCode = event.keyCode;
+      if (keyCode === 32 || keyCode === 84) {
+        iframeWindow.postMessage({ event: 'toggle' }, '*');
+      } else if (keyCode === 82) {
+        iframeWindow.postMessage({ event: 'reset' }, '*');
+      } else if (keyCode === 187) {
+        iframeWindow.postMessage({ event: 'increaseFontSize' }, '*');
+      } else if (keyCode === 191) {
+        iframeWindow.postMessage({ event: 'decreaseFontSize' }, '*');
+      }
+    });
+*/
+ 
+
+
+  var iframe = document.getElementById('contenedor-web').querySelector('iframe');
+  var panel = document.querySelector('.panel');
+  var timeout;
+
+  iframe.addEventListener('mouseover', function() {
+    timeout = setTimeout(function() {
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none';
+      }
+    }, 100); // 1000 = 1s
+  });
+
+  iframe.addEventListener('mouseout', function() {
+    clearTimeout(timeout);
+  });
+  
+</script>
+</body>
+</html>
