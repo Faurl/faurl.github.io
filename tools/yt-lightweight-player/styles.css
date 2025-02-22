@@ -69,7 +69,7 @@ input:focus {outline: none;}
     top: 0;
     left: 0;
     bottom: 0;
-    width: 9vw;
+    width: 10vw;
     background-color: transparent;
     transition: none;
 
@@ -80,7 +80,7 @@ input:focus {outline: none;}
 .sidebar {
     position: absolute;
     width: 6.3vw;
-    height: 20vh;
+    height: 29vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -115,10 +115,20 @@ input:focus {outline: none;}
     background-color: #595959;
 }
 
+
 #toggleInputButton {
     border-radius: var(--borderRadiusSidebar) var(--borderRadiusSidebar) 0 0;
 }
 
 #fullscreenButton {
     border-radius: 0 0 var(--borderRadiusSidebar) var(--borderRadiusSidebar);
+}
+
+#pasteVideo {
+    margin-top: 1.3vh;
+    border-radius: var(--borderRadiusSidebar);
+}
+
+.ytp-pause-overlay {
+    display: none !important;
 }

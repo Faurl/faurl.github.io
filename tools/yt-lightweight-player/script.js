@@ -1,8 +1,11 @@
-var inputContainer = document.querySelector(".input-container");
-var videoContainer = document.querySelector(".video-container");
+const inputContainer = document.querySelector(".input-container");
+const videoContainer = document.querySelector(".video-container");
 
-document.getElementById("videoURL").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
+const pasteButton = document.getElementById('pasteVideo');
+const videoInput = document.getElementById('videoURL');
+
+function checkVideo(event) {
+
         var videoURL = document.getElementById("videoURL").value.trim();
 
         if (videoURL === "") {
@@ -15,9 +18,17 @@ document.getElementById("videoURL").addEventListener("keypress", function(event)
             loadVideo(videoId);
         } else {
             alert("Please enter a valid YouTube video URL.");
+            videoInput.value = '';
         }
+}
+
+document.getElementById("videoURL").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        checkVideo()
     }
 });
+
+
 
 function extractVideoId(url) {
     var regExp = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S+[\?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -55,5 +66,19 @@ document.getElementById("fullscreenButton").addEventListener("click", function()
         iframe.webkitRequestFullscreen();
     } else if (iframe.msRequestFullscreen) { /* IE/Edge */
         iframe.msRequestFullscreen();
+    }
+});
+
+// Add event listener for button click
+pasteButton.addEventListener('click', async () => {
+    try {
+    // Get clipboard text
+    const text = await navigator.clipboard.readText();
+
+    // Set the clipboard content into the input field
+    videoInput.value = text;
+    checkVideo();
+    } catch (err) {
+    console.error('Failed to read clipboard contents: ', err);
     }
 });
