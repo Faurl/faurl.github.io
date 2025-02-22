@@ -1,0 +1,124 @@
+:root {
+    --borderRadius: 0px;       /* 10px */
+    --borderRadiusSidebar: 1vw; /* 1vw */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212;
+    overflow-x: hidden;
+}
+
+.container-main {
+    max-width: 650px;
+    width: 100%;
+    padding: 1.5px;
+    background-color: #444; /*#1f1f1f*/
+    border-radius: var(--borderRadius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    height: 365px;
+    background-color: black;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 0 0 var(--borderRadius) var(--borderRadius);
+}
+
+.video-player {
+    width: 100%;
+    height: 100%;
+}
+
+.input-container {display: block;}
+
+input {
+    padding: 5px;
+    width: 100%;
+    font-size: 14px;
+    background-color: #333;
+    color: gray;
+    border: 1px solid #444;
+    border-bottom: 2.5px solid #444;
+    border-radius: var(--borderRadius) var(--borderRadius) 0 0;
+}
+
+::placeholder {color: #616161;}
+
+input:focus {outline: none;}
+
+.sidebar-container {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 9vw;
+    background-color: transparent;
+    transition: none;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar {
+    position: absolute;
+    width: 6.3vw;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    background-color: #2b2b2b;
+    border-radius: 0 var(--borderRadiusSidebar) var(--borderRadiusSidebar) 0;
+    justify-content: center;
+
+    left: -7vw; /* Compactar barra*/
+}
+
+.sidebar-container:hover .sidebar {
+    left: 0vw; /* Expandir barra */
+}
+
+.sidebar button {
+    color: white;
+    font-size: 2vw;
+    cursor: pointer;
+    background-color: #333; /*444*/
+    border: 3px solid #444;
+    width: 4.5vw;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.sidebar button:hover {
+    background-color: #595959;
+}
+
+#toggleInputButton {
+    border-radius: var(--borderRadiusSidebar) var(--borderRadiusSidebar) 0 0;
+}
+
+#fullscreenButton {
+    border-radius: 0 0 var(--borderRadiusSidebar) var(--borderRadiusSidebar);
+}
