@@ -14,7 +14,7 @@ function extractVideoId(url) {
 }
 
 function loadVideo(videoId, timestamp) {
-    let url = "https://www.youtube.com/embed/" + videoId + "?rel=0&modestbranding=1&autoplay=0&showinfo=0&controls=1";
+    var url = "https://www.youtube.com/embed/" + videoId + "?rel=0&modestbranding=1&autoplay=0&showinfo=0&controls=1";
     if (timestamp) {
         url += `&start=${timestamp}`;
     }
@@ -50,7 +50,7 @@ async function pasteURL() {
     checkVideo();
 
     setTimeout(function(){
-    if (videoInput.value === text) {
+    if (videoInput.value === text && !isFullScreen) {
             fullScreen();
         } else {
             return;
@@ -83,6 +83,13 @@ function fullScreen() {
         iframe.style.width = '100vw';
         iframe.style.height = '100vh';
 
+        videoContainer.style.position = 'fixed';
+        videoContainer.style.top = '0';
+        videoContainer.style.left = '0';
+        videoContainer.style.width = '100vw';
+        videoContainer.style.height = '100vh';
+        videoContainer.style.maxWidth = 'unset';
+
         isFullScreen = true;
     } else {
         // Reset iframe size
@@ -91,7 +98,13 @@ function fullScreen() {
         iframe.style.left = '';
         iframe.style.width = '';
         iframe.style.height = '';
-        iframe.style.zIndex = '';
+
+        videoContainer.style.position = '';
+        videoContainer.style.top = '';
+        videoContainer.style.left = '';
+        videoContainer.style.width = '';
+        videoContainer.style.height = '';
+        videoContainer.style.maxWidth = '';
 
         isFullScreen = false;
     }
