@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
 <div class="container-main">
     <div class="input-container">
         <input type="text" id="videoURL" placeholder="Enter video URL" autocomplete="off" />
@@ -17,14 +18,15 @@
     </div>
 </div>
 
-<div class="sidebar-container">
+<div class="sidebar-container" id="sidebar-container">
+    <p class="sidebarIndicator">Hover here</p>
     <div class="sidebar">
-        <button id="toggleInputButton" title="Toggle Input Field">&#9706;</button>
-        <button id="fullscreenButton" title="Fullscreen">&#x26F6;</button>
-        <button id="pasteVideo" title="Paste from clipboard">&#10148;</button>
+        <button id="toggleInputButton" title="Show / Hide url field." onclick="toggleVideoInput()">&#9706;</button>
+        <button id="fullscreenButton" title="Enter Fullscreen" onclick="fullScreen()">&#x26F6;</button>
+        <button id="pasteVideo" title="Paste from clipboard." onclick="pasteURL()">&#10148;</button>
     </div>
 </div>
-<script src="script.js"></script>
 
+<script src="script.js"></script>
 </body>
 </html>
