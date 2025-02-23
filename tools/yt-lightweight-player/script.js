@@ -8,25 +8,30 @@ var iframe = document.getElementById("video-player");
 let isFullScreen = false;
 
 function extractVideoId(url) {
-    const regExp = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S+[\?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    const regExp = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S+[\?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})(?:\?t=(\d+))?/;
     const match = url.match(regExp);
-    return match ? match[1] : null;
+    return match ? { videoId: match[1], timestamp: match[2] || 0 } : null;
 }
 
-function loadVideo(videoId) {
-    iframe.src = "https://www.youtube.com/embed/" + videoId + "?rel=0&modestbranding=1&autoplay=0&showinfo=0&controls=1";
+function loadVideo(videoId, timestamp) {
+    let url = "https://www.youtube.com/embed/" + videoId + "?rel=0&modestbranding=1&autoplay=0&showinfo=0&controls=1";
+    if (timestamp) {
+        url += `&start=${timestamp}`;
+    }
+    iframe.src = url;
 }
 
 function checkVideo(event) {
-    const cleanURL = videoInput.value.trim(); //eliminar espacios
+    const cleanURL = videoInput.value.trim(); // Remove spaces
 
     if (cleanURL === "") {
         alert("Please enter a valid YouTube URL.");
         return;
     }
-    var videoId = extractVideoId(cleanURL);
-    if (videoId) {
-        loadVideo(videoId);
+
+    const videoData = extractVideoId(cleanURL);
+    if (videoData) {
+        loadVideo(videoData.videoId, videoData.timestamp);
     } else {
         alert("Please enter a valid YouTube video URL.");
         videoInput.value = '';
