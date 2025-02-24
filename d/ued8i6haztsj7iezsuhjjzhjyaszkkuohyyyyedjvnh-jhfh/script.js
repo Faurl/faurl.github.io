@@ -140,9 +140,9 @@ function jimage0Click() {
 //jimage0 hover
 function jimage0hover(x) {
 	if(jimage0_clicked == false) {
-		x.src = "/resources/ddk_i.png";
+		x.src = "resources/jimage/ddk_i.png";
 	} else {return}
 }
 function jimage0NOThover(x) {
-	x.src = "/resources/ddk.png";
+	x.src = "resources/jimage/ddk.png";
 }
