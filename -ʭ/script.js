@@ -102,6 +102,7 @@ function jimage0Loop() {
 }
 
 function jimage0Click() {
+	document.getElementById("dup").play();
 	jimage0_clicked = true;
 
 	jimage0.style.opacity = '';
@@ -134,7 +135,7 @@ function jimage0Click() {
 
 		},66600); //66600
 
-	},100); // 22256.mp3 play delay
+	},670); // 22256.mp3 play delay
 }
 
 //jimage0 hover
