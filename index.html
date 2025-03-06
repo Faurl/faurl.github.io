@@ -28,89 +28,76 @@
         <button onclick="cargarWeb('tools/cronómetro.html'); cerrarPanel()">Cronómetro</button>
         
         <a href="https://faurl.github.io/yt-music-player"><button>Music Player</button></a>
-        <a href="https://faurl.github.io/yt-music-player" onclick="window.open(this.href, '_blank', 'width=450,height=653'); return false;"><button class="music-ext-window">↗</button></a>
+        <a href="https://faurl.github.io/yt-music-player" onclick="window.open(this.href, '_blank', 'width=450,height=653'); return false;">
+          <img title="Open as separate window." src="/assets/icons/popup.png" id="music-ext-window" onmouseover="popupHover()" onmouseout="popupNotHover()">
+        </a>
         
         <button onclick="cargarWeb('https://www.friv.com/z/games/bloxorz/game.html'); cerrarPanel()">Bloxorz [Friv.com]</button>
     </div>
     
       <div id="panel-chiquito">
           <button onclick="cargarWeb('tools/mtos.html'); cerrarPanel()">Min to Secs</button>
-          <button onclick="cargarWeb('tools/mtomil.html'); cerrarPanel()">Min to <a style="font-size: 60%;">Milisecs</a></button>
+          <button onclick="cargarWeb('tools/mtomil.html'); cerrarPanel()" id="MinToMils">Min to <a id="milisecs">Milisecs</a></button>
           <button><a href="https://faurl.github.io/salmo">salmo.html</a></button>
           <button onclick="cargarWeb('three.js/gui-loader.html'); cerrarPanel()">Three.js</button>
-          <button onclick="cargarWeb('tools/'); cerrarPanel()">All tuls 🛠</button>
+          <button onclick="cargarWeb('tools/'); cerrarPanel()" id="alltools-button">All tuls 🛠
+            <img id="thumbsup" src="/assets/image/thumbs_up.jpg">
+          </button>
       </div>
   </div>
 
 <div id="contenedor-web">
   <iframe src="/epikweb/index.html"></iframe>
 </div>
+<script>
 
-  <script>
-    function cargarWeb(url) {
-      var contenedorWeb = document.getElementById('contenedor-web');
-      contenedorWeb.innerHTML = '<iframe src="' + url + '"></iframe>';
+function popupHover(){document.getElementById("music-ext-window").src = "/assets/icons/popup_hover.png"}
+function popupNotHover(){document.getElementById("music-ext-window").src = "/assets/icons/popup.png"}
+
+function cargarWeb(url) {
+  var contenedorWeb = document.getElementById('contenedor-web');
+  contenedorWeb.innerHTML = '<iframe src="' + url + '"></iframe>';
+}
+
+function cerrarPanel() {
+  var acc = document.getElementsByClassName("accordion");
+  for (var i = 0; i < acc.length; i++) {
+    acc[i].classList.remove("active");
+    var panel = acc[i].nextElementSibling;
+    panel.style.display = "none";
+  }
+}
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
     }
-
-    function cerrarPanel() {
-      var acc = document.getElementsByClassName("accordion");
-      for (var i = 0; i < acc.length; i++) {
-        acc[i].classList.remove("active");
-        var panel = acc[i].nextElementSibling;
-        panel.style.display = "none";
-      }
-    }
-
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-        } else {
-          panel.style.display = "block";
-        }
-      });
-    }
-
-/*
-    window.addEventListener('keydown', function(event) {
-      var iframe = document.getElementById('cronometroFrame');
-      var iframeWindow = iframe.contentWindow || iframe;
-
-      var keyCode = event.keyCode;
-      if (keyCode === 32 || keyCode === 84) {
-        iframeWindow.postMessage({ event: 'toggle' }, '*');
-      } else if (keyCode === 82) {
-        iframeWindow.postMessage({ event: 'reset' }, '*');
-      } else if (keyCode === 187) {
-        iframeWindow.postMessage({ event: 'increaseFontSize' }, '*');
-      } else if (keyCode === 191) {
-        iframeWindow.postMessage({ event: 'decreaseFontSize' }, '*');
-      }
-    });
-*/
- 
-
-
-  var iframe = document.getElementById('contenedor-web').querySelector('iframe');
-  var panel = document.querySelector('.panel');
-  var timeout;
-
-  iframe.addEventListener('mouseover', function() {
-    timeout = setTimeout(function() {
-      if (panel.style.display === 'block') {
-        panel.style.display = 'none';
-      }
-    }, 100); // 1000 = 1s
   });
+}
 
-  iframe.addEventListener('mouseout', function() {
-    clearTimeout(timeout);
-  });
+var iframe = document.getElementById('contenedor-web');
+var panel = document.querySelector('.panel');
+var timeout;
+
+iframe.addEventListener('mouseover', function() {
+  timeout = setTimeout(function() {
+    if (panel.style.display === 'block') {
+      panel.style.display = 'none';
+    }
+  }, 100); // 1000 = 1s
+});
+
+iframe.addEventListener('mouseout', function() {
+  clearTimeout(timeout);
+});
   
 </script>
 </body>
