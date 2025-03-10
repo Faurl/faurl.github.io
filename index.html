@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Faurl Webbe</title>
+  <link rel="icon" href="/assets/icons/faurl4web.ico">
+  <meta http-equiv="Content-Security-Policy" content="frame-src 'self' *">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" type="text/css" href="/index/styles.css">
+
+  <meta charset="utf-8">
+	<meta property="theme-color" content="#FF7C66">
+  <meta property="og:site_name" content="Epic Web">
+	<meta property="og:title" content="Faur Webbe">
+  <meta property="og:description" content="Multitool Web ✓ 👀👀👀👀 😱😱😱😱😱">
+	<meta property="og:image" content="https://faurl.github.io/assets/image/thumbs_up.jpg">
+
+</head>
+<body>
+  <button class="accordion" id="prevent-select">Load Html files</button>
+  <div class="panel">
+    <div id="panel-button">
+    <!--<button onclick="cargarWeb('path'); cerrarPanel()">Texto Boton</button>-->
+
+        <button onclick="cargarWeb('web_rosa.html'); cerrarPanel()">Cargar Web 1</button>
+        <button onclick="cargarWeb('/epikweb'); cerrarPanel()">Main Web 🏠</button>
+        <!--<a href="https://faurl.github.io"><button>Main Web 🏠</button></a>-->
+        <button onclick="cargarWeb('tools/codificadorZa.html'); cerrarPanel()">Codificador</button>
+        <button onclick="cargarWeb('tools/cronómetro.html'); cerrarPanel()">Cronómetro</button>
+        
+        <a href="https://faurl.github.io/yt-music-player"><button>Music Player</button></a>
+        <a href="https://faurl.github.io/yt-music-player" onclick="window.open(this.href, '_blank', 'width=450,height=653'); return false;">
+          <img title="Open as separate window." src="/assets/icons/popup.png" id="music-ext-window" onmouseover="popupHover()" onmouseout="popupNotHover()">
+        </a>
+        
+        <button onclick="cargarWeb('https://www.friv.com/z/games/bloxorz/game.html'); cerrarPanel()">Bloxorz [Friv.com]</button>
+    </div>
+    
+      <div id="panel-chiquito">
+          <button onclick="cargarWeb('tools/mtos.html'); cerrarPanel()">Min to Secs</button>
+          <button onclick="cargarWeb('tools/mtomil.html'); cerrarPanel()" id="MinToMils">Min to <a id="milisecs">Milisecs</a></button>
+          <button><a href="https://faurl.github.io/salmo">salmo.html</a></button>
+          <button onclick="cargarWeb('three.js/gui-loader.html'); cerrarPanel()">Three.js</button>
+          <button onclick="cargarWeb('tools/'); cerrarPanel()" id="alltools-button">All tuls 🛠
+            <img id="thumbsup" src="/assets/image/thumbs_up.jpg">
+          </button>
+      </div>
+  </div>
+
+<div id="contenedor-web">
+  <iframe src="/epikweb/index.html"></iframe>
+</div>
+
+<script type="text/javascript" src="/index/script.js"></script>
+</body>
+</html>

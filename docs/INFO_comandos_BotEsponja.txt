@@ -1,0 +1,117 @@
+
+		#	-------------------------------------------------------		#
+		#	Prefix: !                                                   	#
+		#	-------------------------------------------------------		#
+		#	                                                            	#
+		#	                                                            	#
+		#	---------------                                             	#
+			MISCELANEOUS:                                             
+		#	---------------                                            	#
+		#	                                                           	#
+		#	!clein.flag                                                	#
+		#	                                                            	#
+		#	!sus                                                        	#
+		#	                                                            	#
+		#	!chad                                                       	#
+		#	                                                            	#
+		#	!doby                                                       	#
+		#	                                                            	#
+		#	!segador                                                    	#
+		#	                                                            	#
+		#	!jariodmi                                                   	#
+		#	                                                            	#
+		#	!trato                                                      	#
+		#	                                                            	#
+		#	!zzz                                                       	#	
+		#	                                                            	#
+		#	!brah                                                       	#
+		#	                                                            	#
+		#	!c rie de él                                                	#
+		#	                                                            	#
+		#	!foñiñe                                                     	#
+		#	                                                            	#
+		#	!sp                                                         	#
+		#	                                                            	#
+		#	!num (Número random entre 0 y 100)           	 		#
+		#	                                                            	#
+		#	                                                            	#
+		#	---------------                                             	#
+			JOVANI:                                                  
+		#	---------------                                             	#
+		#	                                                            	#
+		#	!eldenring                                                  	#
+		#	                                                            	#
+		#	!viernes                                                    	#
+		#	                                                            	#
+		#	!jueves                                                     	#
+		#	                                                            	#
+		#	!sabado                                                     	#
+		#	                                                            	#
+		#	sabadoo                                                     	#
+		#		                                                   	#
+		#	elden ring                                                    	#
+		#	                                                            	#
+		#	                                                            	#
+		#	------------------------------                              	#
+			MESSAGE CONTENT INCLUDES:                          	 
+		#	------------------------------                              	#
+		#	                                                            	#
+		#	"diaman"                                                    	#
+		#	                                                            	#
+		#	"m" (probabilidad 0.2%)                                     	#
+		#	                                                            	#
+		#	"tiktok"                                                    	#
+		#	                                                            	#
+		#	"tenor.com"                                                 	#
+		#	                                                            	#
+		#	"cdn.discordapp.com"                                        	#
+		#	                                                            	#
+		#	"youtube.com/watch"                                         	#
+		#	                                                            	#
+		#	"youtu.be"                                                  	#
+		#	                                                            	#
+		#	                                                            	#
+		#	------------------------------                              	#
+			BOTESPONJA INTERACTIONS:                           		
+		#	------------------------------                              	#
+		#	                                                            	#
+		#	"holo @BotEsponja" (holo <@1050489655612678244>)		#
+		#	                                                       		#
+		#	"???????????"	                                                #
+		#	                                                            	#
+		#	"???"                                                       	#
+		#	                                                            	#
+		#	"??"                                                      	#
+		#	                                                            	#
+		#	"???"                                                 		#
+		#	                                                            	#
+		#	Message includes: "🖐"                                      	#
+		#	                                                            	#
+		#	Message includes: "h" (probabilidad 0.05%)			#
+		#	                                                            	#
+		#	------------------------------                              	#
+			NEXT LETTER OR NUMBER:                                  	
+		#	------------------------------                              	#
+		#	                                                            	#
+		#	Ej:                                                         	#
+		#		"a"	-> b                       	 		#
+		#		"H"	-> i                        	 		#
+		#		"725"	-> 726                                          #
+		#		"1679"	-> 1680                                         #
+		#	                                                            	#
+		#	                                                            	#
+		#	-------------------------------------------------------		#
+		#	MUSIC BOT COMMANDS:                                             
+		#	-------------------------------------------------------		#
+		#	Prefix: j                                                       #
+		#	                                                            	#
+		#	Play Song/ Add to queqe: jp [song name]                  	#
+		#	Stop Queqe/ bot leaves:  js                        	 	#
+		#	Skip Current Song:	 jsk                                    #
+		#	Pause Current Song:	 jps                                    #
+		#	Current Playing Song:    jnp                                    #
+		#	                                                            	#
+		#	                                                            	#
+		#	-------------------------------------------------------		#
+
+

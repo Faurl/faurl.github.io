@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="/assets/icons/generic/tools.png">
+    <meta charset="utf-8">
+    <title>Cronómetro en HTML</title>
+    <style>
+        body {background-color:#CFCDCA;}
+
+        #timer {
+            font-size: 4em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cronómetro</h1>
+    <button onclick="increaseFontSize()">+</button>
+    <button onclick="decreaseFontSize()">-</button>
+    <div id="timer">00:00:00.000</div><br><br>
+    <button onclick="startTimer()">► Iniciar</button>
+    <button onclick="stopTimer()">ӀӀ Detener</button>
+    <button onclick="resetTimer()">↺ Reiniciar</button><br><br>
+    <div id="KeyboardInfo"></div><br>
+    <button id="KeyInfButton" onclick="showKeyboardInfo(), hideButton()">⌨ Keyboard Shortcuts</button>
+    <script>
+        var startTime = null;
+        var hours = 0;
+        var minutes = 0;
+        var seconds = 0;
+        var milliseconds = 0;
+        var isRunning = false;
+        var fontSize = 4; // Tamaño de fuente inicial en em
+
+        function showKeyboardInfo() {
+            var textElement = document.getElementById("KeyboardInfo");
+            textElement.innerHTML =
+                "<br>Pulsa la tecla \"T\" o espacio para iniciar, pausar o reanudar.<br><br>Pulsa la tecla \"R\" para reiniciar el cronómetro.<br><br>Pulsa \"+\" , \" ` \" o \"-\" para reescalar el cronómetro.";
+        }
+
+        function hideButton() {
+            var button = document.getElementById("KeyInfButton");
+            button.style.display = "none";
+        }
+
+        function updateTimer(currentTime) {
+            if (!startTime) startTime = currentTime;
+            var elapsedTime = currentTime - startTime;
+            milliseconds = Math.floor(elapsedTime) % 1000;
+            seconds = Math.floor(elapsedTime / 1000) % 60;
+            minutes = Math.floor(elapsedTime / (1000 * 60)) % 60;
+            hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+            displayTime();
+            if (isRunning) {
+                requestAnimationFrame(function() {
+                    updateTimer(performance.now());
+                });
+            }
+        }
+
+
+		function startTimer() {
+		    if (!isRunning) {
+		        var currentTime = performance.now();
+		        if (startTime === null) {
+		            startTime = currentTime - (milliseconds + (seconds * 1000) + (minutes * 60 * 1000) + (hours * 60 * 60 * 1000));
+		        }
+		        isRunning = true;
+		        requestAnimationFrame(updateTimer);
+		    }
+		}
+
+        function stopTimer() {
+            if (isRunning) {
+                isRunning = false;
+            }
+        }
+
+        function resetTimer() {
+            stopTimer();
+            startTime = null;
+            hours = 0;
+            minutes = 0;
+            seconds = 0;
+            milliseconds = 0;
+            displayTime();
+        }
+
+        function displayTime() {
+            var displayHours = hours.toString().padStart(2, "0");
+            var displayMinutes = minutes.toString().padStart(2, "0");
+            var displaySeconds = seconds.toString().padStart(2, "0");
+            var displayMilliseconds = milliseconds.toString().padStart(3, "0");
+            document.getElementById("timer").textContent = `${displayHours}:${displayMinutes}:${displaySeconds}.${displayMilliseconds}`;
+        }
+
+        function increaseFontSize() {
+            fontSize += 1.5;
+            document.getElementById("timer").style.fontSize = fontSize + "em";
+        }
+
+        function decreaseFontSize() {
+            if (fontSize > 0.1) {
+                fontSize -= 0.8;
+                document.getElementById("timer").style.fontSize = fontSize + "em";
+            }
+        }
+
+        // Evento de escucha de teclas
+        document.body.onkeyup = function(e) {
+			if (e.keyCode === 32) { //ESPACIO
+				if (isRunning) {
+					stopTimer();
+				} else {
+					startTimer();
+				}
+			} else if (e.keyCode === 84) { //T
+				if (isRunning) {
+					stopTimer();
+				} else {
+					startTimer();
+				}
+			} else if (e.keyCode === 82) { //R
+				resetTimer();
+			}
+		
+				if (e.keyCode === 187) { //+   <!--191-->
+					increaseFontSize();
+				}
+				if (e.keyCode === 189) { //-
+					decreaseFontSize();
+				}
+                if (e.keyCode === 186) { //`
+                    decreaseFontSize();
+                }
+					
+		};
+    </script>
+</body>
+</html>

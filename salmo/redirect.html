@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="refresh" content="59; URL=https://faurl.github.io/salmo">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+
+	body {
+		margin-top: 1%;
+		display: flex;
+  	justify-content: center;
+  	background-color:#CFCDCA;
+	}
+
+	video {
+		transform: translateY(110px);
+	}
+
+</style>
+</head>
+<body>
+	
+<h1 style="position: absolute; transform: translateY(-10px);">Loading . . .
+	<div id="countdown" style="font-size: 100%; margin-top: 3%; font-weight: bold; text-align: center; z-index: 99999;"></div>
+</h1>
+
+<video width="540" height="520" autoplay muted onclick="playaudio()"src="../assets/video/gameplay.mp4"></video>
+<audio id="mp3-onload" src="dross.mp3" loop></audio>
+
+<script>
+function playaudio() {document.getElementById("mp3-onload").play();}
+
+let duration = 59; //segundos
+
+const countdownInterval = setInterval(updateCountdown, 1000);
+function updateCountdown() {
+  document.getElementById('countdown').textContent = duration;
+  duration--;
+  if (duration < 0) {
+    clearInterval(countdownInterval);
+    document.getElementById('countdown').textContent = 'l';
+  }
+}
+
+updateCountdown();
+</script>
+</body>
+</html>

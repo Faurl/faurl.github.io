@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link type="image/png" rel="icon" href="/assets/icons/tools/qr/gen.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR-generator</title>
+    <style>
+        body {
+            margin-left: 2%;
+            background-color:#CFCDCA;
+        }
+        
+        #text-input {
+            background-color: pink;
+            width: 98%;
+            margin-bottom: 10px;
+        }
+
+        .qr-size-input-container {
+            margin-bottom: 20px;
+        }
+
+        #qr-size-input {
+            width: 65px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: pink;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: lightcoral;
+        }
+
+        #qrcode img {
+            margin-top: 10px;
+        }
+
+        #error-message {
+            color: red;
+            margin-top: 20px;
+        }
+
+        #auto-mode-checkbox {
+            width: 20px;
+            height: 20px;
+            appearance: none;
+            cursor: pointer;            
+
+            border: solid 2px black;
+            background-color: white;
+        }
+        #auto-mode-checkbox:checked {
+            background-color: #8fc7ff;
+        }
+        #auto-mode-checkbox:checked:after {
+            position: absolute;
+            transform: translate(16%, -10%);
+            content: '\2714';
+            font-size: 15px;
+            font-weight: unset;
+        }
+        #auto-mode-checkbox:hover {background-color: #DADDE0;}
+        #auto-mode-checkbox:checked:hover {background-color: #67A6DE;}
+
+        .checkbox-container {
+            font-size: 90%;
+            margin-top: 7px;
+            align-items: center;
+            display: flex;
+        }
+
+        .copy-button {
+            background-color: #8fc7ff;
+            margin-left: 5px;
+            display: none;
+        }
+        .copy-button:hover {
+            background-color: #67A6DE;
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+
+    <input type="text" id="text-input" placeholder="Enter text / url">
+    <div class="qr-size-input-container">
+        <label for="qr-size-input" id="size-text">Size:</label>
+        <input type="text" id="qr-size-input" placeholder="(optional)">
+    </div>
+   
+    <button onclick="generateQRCode()">Generate QR Code</button>
+    <button class="copy-button" onclick="copyQRCodeToClipboard()">Copy QR</button>
+    
+    <div class="checkbox-container">
+        <label for="auto-mode-checkbox">Auto Mode</label>
+        <input type="checkbox" id="auto-mode-checkbox" title="Auto-generates QR codes while typing.">
+    </div>
+
+    <div id="qrcode"></div>
+    <p id="error-message"></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script>
+        document.getElementById('text-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                generateQRCode();
+            }
+        });
+        document.getElementById('qr-size-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                generateQRCode();
+            }
+        });
+
+        document.getElementById('text-input').addEventListener('input', function() {
+            if (document.getElementById('auto-mode-checkbox').checked) {
+                generateQRCode();
+            }
+        });
+
+        function generateQRCode() {
+            const text = document.getElementById('text-input').value;
+            const qrSize = document.getElementById('qr-size-input').value.trim();
+            const qrcode = document.getElementById('qrcode');
+            const errorMessage = document.getElementById('error-message');
+            qrcode.innerHTML = '';
+            errorMessage.textContent = '';
+
+           
+            const copyButton = document.querySelector('.copy-button');
+            copyButton.style.display = 'none';
+            copyButton.textContent = 'Copy QR';
+
+            if (!text.trim()) {
+                errorMessage.textContent = 'Error: The text input is empty.';
+                return;
+            }
+
+            const qrOptions = {
+                errorCorrectionLevel: 'L',
+                version: 'auto',
+                width: qrSize || 'auto'
+            };
+
+            QRCode.toDataURL(text, qrOptions, function (error, url) {
+                if (error) {
+                    console.error(error);
+                    errorMessage.textContent = 'Error: The data is too large to encode in a QR code.';
+                } else {
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.draggable = true;
+                    qrcode.appendChild(img);
+
+                   
+                    copyButton.style.display = 'inline-block';
+                }
+            });
+        }
+
+        function copyQRCodeToClipboard() {
+            const img = document.querySelector('#qrcode img');
+            if (!img) {
+                console.error('No QR code image found.');
+                return;
+            }
+
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            context.drawImage(img, 0, 0);
+
+            canvas.toBlob(blob => {
+                navigator.clipboard.write([new ClipboardItem({'image/png': blob})])
+                    .then(() => {
+                        const copyButton = document.querySelector('.copy-button');
+                        copyButton.textContent = 'Copied!';
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        alert('Failed to copy QR Code Image to clipboard.');
+                    });
+            }, 'image/png');
+        }
+    </script>
+
+</body>
+</html>

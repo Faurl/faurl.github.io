@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link type="image/png" rel="icon" href="/assets/icons/tools/player/yt.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightweight YouTube Player</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container-main">
+    <div class="input-container">
+        <input type="text" id="videoURL" placeholder="Enter video URL" autocomplete="off" />
+    </div>
+    <div class="video-container">
+        <iframe id="video-player" class="video-player" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
+<div class="sidebar-container" id="sidebar-container">
+    <p class="sidebarIndicator">Hover here</p>
+    <div class="sidebar">
+        <button id="toggleInputButton" title="Show / Hide url field." onclick="toggleVideoInput()">&#9706;</button>
+        <button id="fullscreenButton" title="Enter Fullscreen" onclick="fullScreen()">&#x26F6;</button>
+        <button id="pasteVideo" title="Paste from clipboard." onclick="pasteURL()">&#10148;</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

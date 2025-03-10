@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="icon" href="/assets/icons/faurl4web.ico">
+   <meta charset="utf-8">
+   <title>Epico</title>
+   <style>
+   	html {color-scheme: ;}
+   	body {
+   		overflow-x: hidden;
+   	}
+   	a { text-decoration: none; }
+   	
+		/* Popup container */
+		.popup {
+		position: relative;
+		display: inline-block;
+		cursor: pointer;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		}
+		
+		/* the popup */
+		.popup .popuptext {
+		visibility: hidden;
+		width: 160px;
+		background-color: #555;
+		color: #fff;
+		text-align: center;
+		border-radius: 6px;
+		padding: 8px 0;
+		position: absolute;
+		z-index: 1;
+		bottom: 125%;
+		left: 50%;
+		margin-left: -80px;
+		}
+		
+		/* Popup arrow */
+		.popup .popuptext::after {
+		content: "";
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		margin-left: -5px;
+		border-width: 5px;
+		border-style: solid;
+		border-color: #555 transparent transparent transparent;
+		}
+		
+		/* Hide and show the popup */
+		.popup .show {
+		visibility: visible;
+		-webkit-animation: fadeIn 1s;
+		animation: fadeIn 1s;
+		}
+		
+		iframe {
+			position: absolute;
+			transform: translateY(-80%) translateX(320%);
+			border: none;
+			text-align: right;
+		}
+		@media (max-width: 1197px) {
+			iframe {
+				position: absolute;
+				transform: translateY(-85%) translateX(35%);
+			}
+		}
+
+		.titlee {
+			color: #adacac;
+		}
+
+</style>
+</head>
+
+<body>
+<h1 class="titlee">Venvenuty dü the BEsto Page Webbé >:D</h1>
+<div><font color="orange">a jajjajj</font></div>
+<div class="nav-link">
+
+		<div class="form-check form-switch">
+            <input type="text" class="form-check-input" id="darkmode" autocomplete="off">
+            <label class="custom-control-label">Dark Mode</label>
+            <a id="icon"><img src="/assets/image/hacker-meme.png" width = "80" height = "45" alt = "Haquer"></a>
+		</div>
+
+<script>
+var darkmode = document.getElementById("darkmode");
+const array = ['Dark Mode', 'dark mode','Dark mode','dark Mode'];
+
+	//aplicar el modo oscuro si está guardado en localStorage
+function applyDarkMode() {
+   if (localStorage.getItem('dark-mode') === 'enabled') {
+      document.documentElement.style.setProperty('color-scheme', 'dark');
+   }
+}
+	//cargar valor guardado
+function loadInputValue() {
+   const savedInputValue = localStorage.getItem('input-value');
+   if (savedInputValue) {
+      darkmode.value = savedInputValue; // Restablecer el valor en el input
+   }
+}
+applyDarkMode();
+loadInputValue();
+
+darkmode.addEventListener('keyup', function() {
+
+	if (array.includes(this.value)) {
+	   document.documentElement.style.setProperty('color-scheme', 'dark');
+	   localStorage.setItem('dark-mode', 'enabled');
+	   localStorage.setItem('input-value', this.value); // guardar valor del input en localStorage
+	} else {
+	   document.documentElement.style.setProperty('color-scheme', 'light');
+	   localStorage.setItem('dark-mode', 'disabled');
+	   localStorage.setItem('input-value', '');
+	}
+});
+</script>
+</div>
+<div class="popup" onclick="clickhere()">Click Here
+  <span class="popuptext" id="Popup">fciriwuwuiruwhruweywkkbeucdwuinñ</span>
+</div>
+<div>
+	<iframe src="../three.js/apps/for-mainpage.html"></iframe>
+</div>
+
+<header>
+   <section>
+   <a id="logo" href="https://rb.gy/gqldkr">
+      
+      <img src="big-alfredo.png">
+      <img src="https://c.tenor.com/bNLdWjv-mMUAAAAS/dead-chat-xd-dead-cat-xd.gif">
+      <img src="pixel-ninja.gif">
+      <img src="big-alfredo.png">
+      <img src="meme-shaggy.gif">
+      <img src="dog-dance.gif">
+      <img src="rtx-minecraft.gif">
+      <img src="big-alfredo.png">
+      <img src="kids-cartoons.jpg">
+      <img src="big-alfredo.png">
+      <img src="there.jpg">
+      <img src="big-alfredo.png">
+      <img src="robotobama.gif">
+      <img src="big-alfredo.png">
+      <img src="https://c.tenor.com/-YA82G77g3IAAAAd/bruh-gpo.gif">
+      <img src="big-alfredo.png">
+      <img src="big-alfredo.png">
+      <img src="big-alfredo.png">
+      <img src="big-alfredo.png">
+      <img src="big-alfredo.png">
+      <img src="big-alfredo.png">
+      <img src="big-alfredo.png">
+      <img src="big-alfredo.png">
+      <img src="big-alfredo.png">
+
+   </a>
+   </section>
+</header>
+<script type ="text/javascript">
+    alert('¿Acepta compartir todos sus datos personales junto con su número de cuenta bancaria y contraseñas?');
+</script>
+
+<!--<script nomodule="">window.MSInputMethodContext && document.documentMode && document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-ie11@5/css/bootstrap-ie11.min.css"><script src="https://cdn.jsdelivr.net/npm/ie11-custom-properties@4/ie11CustomProperties.min.js"><\/script>');
+</script>
+-->
+<script>
+	// when click on div, open the popup
+	function clickhere() {
+		var popup = document.getElementById("Popup");
+		popup.classList.toggle("show");
+	}
+</script>
+</body>	
+<html>

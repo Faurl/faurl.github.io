@@ -1,0 +1,161 @@
+:root {
+    --borderRadius: 0px;       /* 10px */
+    --borderRadiusSidebar: 1vw; /* 1vw */
+    --sidebarFade: 1.5s;
+    --input_container_Hide: all 0.2s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212;
+    overflow-x: hidden;
+}
+
+.container-main {
+    max-width: 650px;
+    width: 100%;
+    padding: 1.5px;
+    background-color: #444; /*#1f1f1f*/
+    border-radius: var(--borderRadius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    /*transition: transform 0.3s ease;*/
+}
+
+.input-container {
+    height: 32px;
+    transition: var(--input_container_Hide);
+}
+
+.input-container.closed {
+    height: 0.1px;
+    transition: var(--input_container_Hide);
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    height: 365px;
+    background-color: black;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: var(--borderRadius);
+}
+
+.video-player {
+    width: 100%;
+    height: 100%;
+}
+
+
+input {
+    padding: 5px;
+    width: 100%;
+    font-size: 15px;
+    background-color: #333;
+    color: gray;
+    border: 1px solid #444;
+    border-bottom: 2.5px solid #444;
+    border-radius: var(--borderRadius) var(--borderRadius) 0 0;
+}
+
+::placeholder {color: #616161;}
+
+input:focus {outline: none;}
+
+.sidebar-container {
+    position: absolute;
+    display: flex;
+    height: 50%;
+    width: 10vw;
+    left: 0;
+    bottom: 0;
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    border: 2px dashed #444;
+    border-width: 2px 2px 2px 0;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    transition: none;   /*transition is enabled by js to prevent the line jigglin when resizing page*/
+}
+.sidebar-container:hover .sidebar {
+    left: 0vw; /* Expandir sidebar */
+}
+
+.sidebar-container.faded {
+    border-color: transparent;
+}
+.sidebar-container.faded .sidebarIndicator {
+    color: transparent;
+}
+
+.sidebarIndicator{
+    color: #444;
+    font-size: 130%;
+    transition: 0.5s;
+}
+
+.sidebar {
+    position: absolute;
+    width: 6.3vw;
+    height: 29vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    background-color: #2b2b2b;
+    border-radius: 0 var(--borderRadiusSidebar) var(--borderRadiusSidebar) 0;
+    justify-content: center;
+
+    left: -7vw; /* contraer sidebar*/
+}
+
+.sidebar button {
+    color: white;
+    font-size: 2vw;
+    cursor: pointer;
+    background-color: #333; /*444*/
+    border: 3px solid #444;
+    width: 4.5vw;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.sidebar button:hover {
+    background-color: #595959;
+}
+
+
+#toggleInputButton {
+    border-radius: var(--borderRadiusSidebar) var(--borderRadiusSidebar) 0 0;
+}
+
+#fullscreenButton {
+    border-radius: 0 0 var(--borderRadiusSidebar) var(--borderRadiusSidebar);
+}
+
+#pasteVideo {
+    margin-top: 1.3vh;
+    border-radius: var(--borderRadiusSidebar);
+}
+
+.ytp-pause-overlay {
+    display: none !important;
+}

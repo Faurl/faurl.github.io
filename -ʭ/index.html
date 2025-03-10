@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" href="resources/icon.png">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+<style>
+	* {
+		user-select: none;
+	}
+	body {
+		background-color:#4F4C41;
+		transition: 0.7s;
+		overflow: hidden;
+	}
+	#screen {
+		z-index: 1;
+		display: block;
+		background-color: black;
+		position: absolute;
+		margin: 0;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		cursor: none;
+		display: none;
+	}
+	.metalborder {
+		position: absolute;
+		margin: 0;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border: 15vh solid black;
+		border-image: url(resources/rddro.jpg) 30 round;
+		opacity: 40%;
+		transition: 4s;
+		filter: blur(0.7px);
+	}
+	#line_0, #line_1, #line_2, #line_3 {
+		z-index: 4;
+		position: absolute;
+		width: 1px;
+		top: 0;
+		bottom: 0;
+		display: flex;
+		transform: translateX(10px);
+		background-color: white;
+	}
+
+	#jimage0, #jimage1, #jimage2, #jimage0_d {
+		opacity: 100%;
+		width: 25vw;
+		height: 35vh;
+		position: absolute;
+		margin: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		right: 37%;
+		justify-content: center;
+		pointer-events: none;
+	}
+	#jimage0{
+		z-index: 3;
+		cursor: pointer;
+		pointer-events: auto;
+		display: none;	/*enabled in js*/
+	}
+	#jimage0_d{
+		z-index: 1;
+	}
+	#jimage1{
+		z-index: 2;
+		right: 63%;
+	}
+	#jimage2{
+		z-index: 2;
+		right: 13%;
+	}
+
+/*
+#jimage1{
+	right: 53%;
+}
+#jimage2{
+	right: 23%;
+}
+*/
+
+</style>
+</head>
+<body>
+<div id="metalborder" class="metalborder"></div>
+<div id="jimages">
+	<img id="jimage0" src="resources/jimage/ddk.png" onclick="jimage0Click()" draggable="false" onmouseover="jimage0hover(this)" onmouseout="jimage0NOThover(this)">
+	<img id="jimage1" src="resources/jimage/fvos.png">
+	<img id="jimage2" src="resources/jimage/xavier.png">
+	<img id="jimage0_d" src="resources/jimage/ddk_black.png">
+</div>
+<div id="lines">
+	<div id="line_0"></div>
+	<div id="line_1"></div>
+	<div id="line_2"></div>
+	<div id="line_3"></div>
+</div>
+<audio id="audiio" src="resources/audio/22256.mp3"></audio>
+<audio id="browniano" src="resources/audio/browniano.ogg"></audio>
+<audio id="dup" src="resources/audio/dup.ogg"></audio>
+
+<div id="screen"></div>
+</body>
+<script type="text/javascript" src="script.js"></script>
+</html>
