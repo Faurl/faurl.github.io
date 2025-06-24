@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" href="/assets/icons/generic/tools.png">
+	<title>CodificadorZA</title>
+</head>
+<style type="text/css">
+	body {
+		background-color:#CFCDCA;
+		margin-left: 20px;
+		font-size:120%;
+	}
+	textarea {
+		background-color: darkgray;
+		margin-bottom: 0px;
+		font-size: 130%;
+		width: 500px;
+		height: 200px;
+	}
+	button {
+		cursor: pointer;
+		border-radius: 0;
+		font-size: 70%;
+	}
+	#output {
+
+	}
+</style>
+<body>
+
+	<label for="input">Texto:</label><br>
+	<textarea id="input" rows="10" cols="50" onkeydown="if(event.keyCode==13) { event.preventDefault(); encodeText(); }"></textarea>
+	<br>
+	<button onclick="encodeText()">Codificar</button>
+	<button onclick="decodeText()">Decodificar</button>
+
+	<br><br>
+	<label for="output">Texto codificado:</label><br>
+	<textarea readonly id="output" rows="10" cols="50"></textarea><br>
+
+	<button onclick="copyToClipboard()">Copiar texto codificado</button>
+
+<script>
+	function encodeText() {
+		var input = document.getElementById("input").value;
+		var output = "";
+		for (var i = 0; i < input.length; i++) {
+			var charCode = input.charCodeAt(i);
+			if ((charCode >= 65 && charCode < 90) || (charCode >= 97 && charCode < 122)) {
+				output += String.fromCharCode(charCode + 1);
+			} else if (charCode === 90) {
+				output += 'A';
+			} else if (charCode === 122) {
+				output += 'a';
+			} else {
+				output += input.charAt(i);
+			}
+		}
+		document.getElementById("output").value = output;
+	}
+
+	function decodeText() {
+		var input = document.getElementById("input").value;
+		var output = "";
+		for (var i = 0; i < input.length; i++) {
+			var charCode = input.charCodeAt(i);
+			if ((charCode > 65 && charCode <= 90) || (charCode > 97 && charCode <= 122)) {
+				output += String.fromCharCode(charCode - 1);
+			} else if (charCode === 65) {
+				output += 'Z';
+			} else if (charCode === 97) {
+				output += 'z';
+			} else {
+				output += input.charAt(i);
+			}
+		}
+		document.getElementById("output").value = output;
+	}
+
+	function copyToClipboard() {
+		var output = document.getElementById("output");
+		output.select();
+		document.execCommand("copy");
+		//alert("Mensaje copiado al portapapeles");
+	}
+</script>
+</body>
+</html>
