@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<link rel="icon" href="/assets/icons/generic/tools.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ghost-ping-maker.html</title>
 <style type="text/css">
@@ -39,10 +40,12 @@
 	}
 	.result-cont {
 		display: none;
+		width: 50%;
 	}
+
 	#resultText {
   		font-size: 12px;
-		width: 50%;
+		width: 100%;
   		height: 150px;
 		background-color: black!important;
 		color:white;
@@ -54,10 +57,10 @@
 </head>
 <body>
 <div class="main">
-	<p>Ping <input id="UserId" type="text" placeholder="User ID / role name" autocomplete=off> with message <textarea id="inputMessage" type="text" autocomplete=off></textarea></p>
-	<button id="makeMessage" onclick="genMessage()">Generate</button>
+	<p>Ping <input id="UserId" type="text" placeholder="User ID / role name" autocomplete=on onkeyup="genMessage()"> with message <textarea id="inputMessage" type="text" autocomplete=off onkeyup="genMessage()"></textarea></p>
+	<!--<button id="makeMessage" onclick="genMessage()">Generate</button>-->
 </div>
-<br>
+
 <div class="result-cont" id="result-cont">
 	<button type="button" id="copybutton"onclick="copyResult()">Copy</button><br>
 	<textarea id="resultText" autocomplete=off></textarea>
