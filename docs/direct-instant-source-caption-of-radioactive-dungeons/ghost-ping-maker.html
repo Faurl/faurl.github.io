@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="icon" href="/assets/icons/generic/tools.png">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ghost-ping-maker.html</title>
 <style type="text/css">
@@ -29,20 +30,30 @@
 	#UserId, #inputMessage {
 		color: #6E6E6E;
 		font-size: 17px;
-		border:3px outset white;
+		border:3px inset white;
+		border-color: #CFCDCA;
 	}
 	#UserId {
 		width: 200px;
 	}
 	#inputMessage {
 		width: 50%;
-		resize:vertical;
-	}
-	.result-cont {
-		display: none;
-		width: 50%;
+		/*resize:vertical;*/
 	}
 
+
+	#result-container {
+		position: flex;
+		width: 50%;
+		display: none;
+	}
+	.resultbuttons {display: flex;}
+	#copybutton {
+		display: block;
+	}
+	#prewviewbutton {
+		width: 100px;
+	}
 	#resultText {
   		font-size: 12px;
 		width: 100%;
@@ -52,25 +63,36 @@
 		border: 2px solid black;
   		padding: 12px 20px;
   		resize: none;
+
+  		display: block;
 	}
+	#previewbutton {
+		width: 35px;
+	}
+	
 </style>
 </head>
 <body>
-<div class="main">
-	<p>Ping <input id="UserId" type="text" placeholder="User ID / role name" autocomplete=on onkeyup="genMessage()"> with message <textarea id="inputMessage" type="text" autocomplete=off onkeyup="genMessage()"></textarea></p>
-	<!--<button id="makeMessage" onclick="genMessage()">Generate</button>-->
-</div>
 
-<div class="result-cont" id="result-cont">
-	<button type="button" id="copybutton"onclick="copyResult()">Copy</button><br>
+<p>Ping <input id="UserId" type="text" placeholder="User ID / role name" autocomplete=on onkeyup="genMessage()"> with message <textarea id="inputMessage" type="text" autocomplete=off onkeyup="genMessage()"></textarea></p>
+<!--<button id="makeMessage" onclick="genMessage()">Generate</button>-->
+
+<div id="result-container">
+	<div class="resultbuttons">
+		<button id="copybutton" onclick="copyResult()">Copy</button>
+		<button id="previewbutton" onclick="showhidepreview()" title="Show / hide message preview"><i class="fa fa-sort-desc"></i></button>
+	</div>
 	<textarea id="resultText" autocomplete=off></textarea>
 </div>
 <script type="text/javascript">
 
 let inputMessage = document.getElementById("inputMessage");
 let inputUserID = document.getElementById("UserId");
-let resultCont = document.getElementById("result-cont");
+
+let resultCont = document.getElementById("result-container");
 let result = document.getElementById("resultText");
+let copyButton = document.getElementById("copybutton");
+preview = false;
 
 function copyResult() {
 	result.select();
@@ -90,12 +112,34 @@ function copyResult() {
 }
 
 function genMessage() {
-	var message = inputMessage.value;
-	var userID = inputUserID.value;
-	var ghostping = "||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​|| || ";
+	if ((event.keyCode ||event.which) != 9 &&
+		(event.keyCode ||event.which) != 16 &&
+		(event.keyCode ||event.which) != 17 &&
+		(event.keyCode ||event.which) != 18 ) { //aVOID tab, shift, ctrl & alt key presses.
 
-	resultCont.style.display = "block";
-	result.innerHTML = message + ghostping + "<@" + userID+ ">";
+		var message = inputMessage.value;
+		var userID = inputUserID.value;
+		var ghostping = "||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​|| || ";
+
+		resultCont.style.display = "block";
+		result.innerHTML = message + ghostping + "<@" + userID+ ">";
+	} else{
+		return;
+	}
+}
+
+function showhidepreview() {
+	if(preview == true) {
+		result.style.display = "block";
+
+		previewbutton.innerHTML = '<i class="fa fa-sort-desc"></i>';
+		preview = false;
+	} else if(preview == false) {
+		result.style.display = "none";
+
+		previewbutton.innerHTML = '<i class="fa fa-sort-asc"></i>';
+		preview = true;
+	}
 }
 </script>
 </body>
