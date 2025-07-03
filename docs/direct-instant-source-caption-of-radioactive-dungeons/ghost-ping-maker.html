@@ -41,10 +41,9 @@
 		/*resize:vertical;*/
 	}
 
-
 	#result-container {
 		position: flex;
-		width: 50%;
+		width: 60%;
 		display: none;
 	}
 	.resultbuttons {display: flex;}
@@ -69,20 +68,18 @@
 	#previewbutton {
 		width: 35px;
 	}
-	
+
 </style>
 </head>
 <body>
-
 <p>Ping <input id="UserId" type="text" placeholder="User ID / role name" autocomplete=on onkeyup="genMessage()"> with message <textarea id="inputMessage" type="text" autocomplete=off onkeyup="genMessage()"></textarea></p>
-<!--<button id="makeMessage" onclick="genMessage()">Generate</button>-->
 
 <div id="result-container">
 	<div class="resultbuttons">
 		<button id="copybutton" onclick="copyResult()">Copy</button>
-		<button id="previewbutton" onclick="showhidepreview()" title="Show / hide message preview"><i class="fa fa-sort-desc"></i></button>
+		<button id="previewbutton" onclick="showhidepreview()" title="Show / hide output"><i class="fa fa-sort-desc"></i></button>
 	</div>
-	<textarea id="resultText" autocomplete=off></textarea>
+	<textarea id="resultText" autocomplete=off readonly></textarea>
 </div>
 <script type="text/javascript">
 
@@ -92,8 +89,8 @@ let inputUserID = document.getElementById("UserId");
 let resultCont = document.getElementById("result-container");
 let result = document.getElementById("resultText");
 let copyButton = document.getElementById("copybutton");
-preview = false;
 
+copied = 0;
 function copyResult() {
 	result.select();
 	result.setSelectionRange(0, 99999); // mobile
@@ -102,12 +99,15 @@ function copyResult() {
 
 	var copybutton = document.getElementById('copybutton');
 
-	existingName = copybutton.innerHTML
-	copybutton.innerHTML = existingName + " ✔";
-
+	if(copied == '0') {
+		existingName = copybutton.innerHTML
+		copybutton.innerHTML = existingName + " ✔";
+		copied ++;
+	}
 	setTimeout(function() {
 		existingName = existingName.replace(' ✔','');
 		copybutton.innerHTML = existingName;
+		copied = 0;
 	}, 1500);
 }
 
@@ -128,19 +128,20 @@ function genMessage() {
 	}
 }
 
+preview = false;
 function showhidepreview() {
+
 	if(preview == true) {
 		result.style.display = "block";
-
 		previewbutton.innerHTML = '<i class="fa fa-sort-desc"></i>';
 		preview = false;
 	} else if(preview == false) {
 		result.style.display = "none";
-
 		previewbutton.innerHTML = '<i class="fa fa-sort-asc"></i>';
 		preview = true;
 	}
 }
+
 </script>
 </body>
 </html>
