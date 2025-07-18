@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="../assets/icons/ultrenc.png">
+  <link href="https://db.onlinewebfonts.com/c/a0e1b1883c0cf520e9c50d0cd91cd0d0?family=Papyrus+W01" rel="stylesheet">
+  <title>untraencode(r)</title>
+  <style>
+      html {
+        height: 100%;
+      }
+      body {
+        color: white;
+        text-shadow: 5px 5px black;
+        background-color:#CFCDCA;
+        background-image: url(../assets/image/bg/ultrenc.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        font-size: 150%;
+        margin-left: 90px;
+        margin-bottom: 90px;
+      }
+      *::selection{background-color: darkred;}
+      h2 {
+        font-family: "Papyrus W01";
+        font-size: 180%;
+        width: 50%;
+        user-select: none;
+      }
+      h2 a{
+        /*
+        background-image: linear-gradient(90deg,rgba(255, 0, 0, 0.4) 0%, rgba(139, 255, 0, 0.4) 50%, rgba(0, 128, 0, 0.4) 100%);
+        */
+        color: transparent;
+        background-image: linear-gradient(0deg,rgba(0, 255, 0, 1) 30%, rgba(0, 128, 0, 0.4) 100%);
+        background-color: rgba(0, 255, 0, 0.01);
+        background-clip: text;
+
+        text-shadow: none;
+        filter: drop-shadow(5px 5px black);
+      }
+
+      p {letter-spacing: 9px;}
+      button {cursor:pointer;}
+      textarea {
+        color: rgba(0, 255, 0, 0.7);
+        background-color: rgba(139, 0, 180, 0.3);
+        border:3px ridge white;
+        border-color: #CFCDCA;
+        font-size: 17px;
+      }
+      textarea, #copybutton{
+        width: 60%;
+        box-sizing: border-box;
+      }
+      textarea:focus,button:focus {
+        outline: 0;
+        border-color: red !important;
+      }
+      button {
+        color: white;
+        font-size: 15px;
+        border:3px ridge white;
+        background-color: rgba(0, 255, 0, 0.4);
+        text-shadow: 2px 2px black;
+        transition: 0.1s ease;
+        padding: 5px;
+        width: 100px;
+        height: 34px;
+      }
+      button:hover {
+        color: white;
+        border-color:darkgray;
+        background-color: rgba(0, 255, 0, 0.7);
+      }
+      #copybutton {
+        margin-top: -1px;
+        letter-spacing: 5px;
+      }
+
+      #outputText {
+        background-color: rgba(139, 0, 100, 0.3);
+        border-right-color: white;
+        border-bottom-style: none;
+        margin-bottom:0;
+        /*height: 300px;*/
+        resize: none;
+      }
+      #outputText:focus ~ #copybutton{
+        border-color: red;
+      }
+      #inputText {
+        resize: none;
+      }
+
+      #foottext {
+        color: green;
+        font-family: arial;
+        opacity: 50%;
+        letter-spacing: 5px;
+        margin-bottom: 3px;
+        margin-left:5px;
+        text-shadow: 3px 3px black;
+        position: absolute;
+        font-size: 60%;
+        bottom: 0;
+        left: 0;
+        user-select: none;
+      }
+  </style>
+</head>
+<body>
+
+  <h2><a>ultraencode(r)</a></h2>
+  <p>encode:</p>
+  <textarea id="inputText" rows="6" placeholder="<input>"></textarea><br>
+  <p>decode:</p>
+  <textarea id="outputText" rows="16" placeholder="<output>"></textarea><br>
+  <button id="copybutton" onclick="copyResult()">copy output</button>
+<p id="foottext">Base64 > Hex > Binary > Caesar (+3 shift) > Base64 > Hex > Caesar (+3 shift) > Base64</p>
+<script>
+  // Base64
+  const toBase64 = str => btoa(unescape(encodeURIComponent(str)));
+  const fromBase64 = str => decodeURIComponent(escape(atob(str)));
+
+  // Hex
+  const toHex = str => Array.from(str).map(c => c.charCodeAt(0).toString(16).padStart(2, '0')).join('');
+  const fromHex = hex => hex.match(/.{1,2}/g).map(h => String.fromCharCode(parseInt(h, 16))).join('');
+
+  // Binary
+  const toBinary = str => Array.from(str).map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' ');
+  const fromBinary = bin => bin.split(' ').map(b => String.fromCharCode(parseInt(b, 2))).join('');
+
+  // Caesar Cipher
+  const caesar = (str, shift) => {
+    return Array.from(str).map(char => {
+      const code = char.charCodeAt(0);
+      return String.fromCharCode(code + shift);
+    }).join('');
+  }
+
+  function encodeText(text) {
+    try {
+      text = toBase64(text);
+      text = toHex(text);
+      text = toBinary(text);
+      text = caesar(text, 3);
+      text = toBase64(text);
+      text = toHex(text);
+      text = caesar(text, 3);
+      text = toBase64(text);
+      return text;
+    } catch {
+      return "";
+    }
+    }
+
+  function decodeText(text) {
+    try {
+      text = fromBase64(text);
+      text = caesar(text, -3);
+      text = fromHex(text);
+      text = fromBase64(text);
+      text = caesar(text, -3);
+      text = fromBinary(text);
+      text = fromHex(text);
+      text = fromBase64(text);
+      return text;
+    } catch {
+      return "";
+    }
+  }
+
+  const inputText = document.getElementById("inputText");
+  const outputText = document.getElementById("outputText");
+
+  let isAutoEncoding = false;
+  let isAutoDecoding = false;
+
+  inputText.addEventListener("input", () => {
+    if (isAutoDecoding) return;
+    isAutoEncoding = true;
+    outputText.value = encodeText(inputText.value);
+    isAutoEncoding = false;
+  });
+
+  outputText.addEventListener("input", () => {
+    if (isAutoEncoding) return;
+    isAutoDecoding = true;
+    inputText.value = decodeText(outputText.value);
+    isAutoDecoding = false;
+  });
+
+let result = document.getElementById("outputText");
+let copyButton = document.getElementById("copybutton");
+
+copied = 0;
+function copyResult() {
+  result.select();
+  result.setSelectionRange(0, 99999); // mobile
+
+  navigator.clipboard.writeText(result.value);
+
+  var copybutton = document.getElementById('copybutton');
+
+  if(copied == '0') {
+    existingName = copybutton.innerHTML
+    copybutton.innerHTML = existingName + " ✔";
+    copied ++;
+  }
+  setTimeout(function() {
+    existingName = existingName.replace(' ✔','');
+    copybutton.innerHTML = existingName;
+    copied = 0;
+  }, 1500);
+}
+
+
+  </script>
+
+</body>
+</html>
