@@ -58,11 +58,11 @@
       #copybutton:focus{
         color:white;
         border-color: white;
-        background-color: rgba(0, 255, 0, 0.8);
+        background-color: rgba(0, 255, 0, 0.6);
         outline: 0;
       }
       #copybutton:focus:hover{
-        background-color: rgba(0, 255, 0, 1);
+        background-color: rgba(0, 255, 0, 0.7);
       }
       #outputText:focus ~ #copybutton{
         border-color: red;
@@ -123,7 +123,7 @@
   <p>decode:</p>
   <textarea id="outputText" rows="16" placeholder="<output>"></textarea><br>
   <button id="copybutton" onclick="copyResult()">copy output</button>
-<p id="foottext">*'+Y+-('*V)-**+V)W,.()(')X)()Z)').(%*++W+)+Y+,(*)Z,.)Z)').(%,)+[+*,.)Z)').(%*V+[+)+Y*'(&).,.,(,,)Z))*&,(</p>
+<p id="foottext">%"&T&(#"%Q$(%%&Q$R')#$#"$S$#$U$"$)# %&&R&$&T&'#%$U')$U$"$)# '$&V&%')$U$"$)# %Q&V&$&T%"#!$)')'#''$U$$&R'#</p>
 <script>
   // Base64
   const toBase64 = str => btoa(unescape(encodeURIComponent(str)));
@@ -150,7 +150,7 @@
       text = caesar(text, 3);
       text = toBase64(text);
       text = toHex(text);
-      text = caesar(text, -11);
+      text = caesar(text, -16); // -11, -16, -3, -5 || 10
       return text;
     } catch {
       return "";
@@ -159,7 +159,7 @@
 
   function decodeText(text) {
     try {
-      text = caesar(text, 11);
+      text = caesar(text, 16);
       text = fromHex(text);
       text = fromBase64(text);
       text = caesar(text, -3);
@@ -204,8 +204,8 @@ function copyResult() {
 
   if(copied == '0') {
     existingName = copybutton.innerHTML
-    copybutton.innerHTML = " ✔";
-    copybutton.style.backgroundColor = "rgba(0, 255, 0, 0.8)";
+    copybutton.innerHTML = existingName+" ✔";
+    copybutton.style.backgroundColor = "rgba(0, 255, 0, 0.6)";
     copied ++;
   }
   setTimeout(function() {
