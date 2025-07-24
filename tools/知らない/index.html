@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8" />
+  <meta name="darkreader-lock">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" href="../../assets/icons/ultrenc.png">
   <link href="https://db.onlinewebfonts.com/c/a0e1b1883c0cf520e9c50d0cd91cd0d0?family=Papyrus+W01" rel="stylesheet">
@@ -9,17 +10,19 @@
   <style>
       html {
         height: 100%;
+        background-repeat: no-repeat;
       }
       body {
         color: white;
         text-shadow: 5px 5px black;
-        background-color:#CFCDCA;
+        background-color:black;
         background-image: url(../../assets/image/bg/ultrenc.png);
         background-repeat: no-repeat;
         background-size: 100% 100%;
         font-size: 150%;
         margin-left: 100px;
         margin-bottom: 80px;
+        display: none;
       }
       *::selection{background-color: darkred;}
       h2 {
@@ -111,7 +114,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        user-select: auto;
+        user-select: none;
       }
   </style>
 </head>
@@ -124,70 +127,54 @@
   <textarea id="outputText" rows="16" placeholder="<output>"></textarea><br>
   <button id="copybutton" onclick="copyResult()">copy output</button>
 <p id="foottext">%"&T&(#"%Q$(%%&Q$R')#$#"$S$#$U$"$)# %&&R&$&T&'#%$U')$U$"$)# '$&V&%')$U$"$)# %Q&V&$&T%"#!$)')'#''$U$$&R'#</p>
+
+<script type="text/javascript" src="load.js"></script>
+<script type="text/javascript" src="/indxmor/scripts/encod.js"></script>
 <script>
-  // Base64
-  const toBase64 = str => btoa(unescape(encodeURIComponent(str)));
-  const fromBase64 = str => decodeURIComponent(escape(atob(str)));
 
-  // Hex
-  const toHex = str => Array.from(str).map(c => c.charCodeAt(0).toString(16).padStart(2, '0')).join('');
-  const fromHex = hex => hex.match(/.{1,2}/g).map(h => String.fromCharCode(parseInt(h, 16))).join('');
-
-  // Binary
-  const toBinary = str => Array.from(str).map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' ');
-  const fromBinary = bin => bin.split(' ').map(b => String.fromCharCode(parseInt(b, 2))).join('');
-
-  // Caesar Cipher
-  const caesar = (str, shift) => {
-    return Array.from(str).map(char => {
-      const code = char.charCodeAt(0);
-      return String.fromCharCode(code + shift);
-    }).join('');
+function encodeText(text) {
+  try {
+    text = caesar(text, 3);
+    text = toBase64(text);
+    text = toHex(text);
+    text = caesar(text, -16); // -11, -16, -3, -5 || 10
+    return text;
+  } catch {
+    return "";
   }
+}
 
-  function encodeText(text) {
-    try {
-      text = caesar(text, 3);
-      text = toBase64(text);
-      text = toHex(text);
-      text = caesar(text, -16); // -11, -16, -3, -5 || 10
-      return text;
-    } catch {
-      return "";
-    }
+function decodeText(text) {
+  try {
+    text = caesar(text, 16);
+    text = fromHex(text);
+    text = fromBase64(text);
+    text = caesar(text, -3);
+    return text;
+  } catch {
+    return "";
   }
+}
 
-  function decodeText(text) {
-    try {
-      text = caesar(text, 16);
-      text = fromHex(text);
-      text = fromBase64(text);
-      text = caesar(text, -3);
-      return text;
-    } catch {
-      return "";
-    }
-  }
+const inputText = document.getElementById("inputText");
+const outputText = document.getElementById("outputText");
 
-  const inputText = document.getElementById("inputText");
-  const outputText = document.getElementById("outputText");
+let isAutoEncoding = false;
+let isAutoDecoding = false;
 
-  let isAutoEncoding = false;
-  let isAutoDecoding = false;
+inputText.addEventListener("input", () => {
+  if (isAutoDecoding) return;
+  isAutoEncoding = true;
+  outputText.value = encodeText(inputText.value);
+  isAutoEncoding = false;
+});
 
-  inputText.addEventListener("input", () => {
-    if (isAutoDecoding) return;
-    isAutoEncoding = true;
-    outputText.value = encodeText(inputText.value);
-    isAutoEncoding = false;
-  });
-
-  outputText.addEventListener("input", () => {
-    if (isAutoEncoding) return;
-    isAutoDecoding = true;
-    inputText.value = decodeText(outputText.value);
-    isAutoDecoding = false;
-  });
+outputText.addEventListener("input", () => {
+  if (isAutoEncoding) return;
+  isAutoDecoding = true;
+  inputText.value = decodeText(outputText.value);
+  isAutoDecoding = false;
+});
 
 let result = document.getElementById("outputText");
 let copyButton = document.getElementById("copybutton");
@@ -217,6 +204,5 @@ function copyResult() {
 
 
   </script>
-
 </body>
 </html>

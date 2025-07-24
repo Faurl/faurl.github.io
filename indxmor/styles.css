@@ -142,11 +142,12 @@ a { text-decoration: none; }
 #milisecs {
   color: black;
   font-size: 30%; /*60*/
-  transition: 1s;
+  transition: 0.5s;
 }
 #MinToMils:hover #milisecs {
   font-size: 90%;
   color: yellow;
+  text-shadow: 1px 1px black;
 }
 
 #alltools-button:hover #thumbsup {
