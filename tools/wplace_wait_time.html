@@ -28,9 +28,9 @@
 			/*background: radial-gradient(circle,rgba(238, 174, 202, 1) 0%, rgba(0, 0, 0, 1) 80%);
 			background-image: radial-gradient(circle,rgba(238, 174, 202, 1) 0%, rgba(0, 0, 0, 1) 100%);*/
 			background-repeat: round;
-      		background-size: cover;
+      background-size: cover;
 			margin: 0;
-            justify-content: center;
+      justify-content: center;
 			display: flex;
 		}
 		h2 {
@@ -40,6 +40,7 @@
 			border:5px outset gray;
 			padding: 15px;
 			display: inline-block;
+			/*width: 297px;*/
 		}
 		#mainbox {
 			background-color: #CFCDCA;
@@ -51,9 +52,9 @@
 			width: 340px;
 
 			top: 50%;
-  			left: 50%;
-  			-ms-transform: translate(-50%, -50%);
-  			transform: translate(-50%, -50%);
+  		left: 50%;
+  		-ms-transform: translate(-50%, -50%);
+  		transform: translate(-50%, -50%);
 			margin-top: -3%; /*20px, margin-left: 40px;*/
 			display: inline-block;
 			position: absolute;
@@ -91,7 +92,7 @@
 			color: black;
 			background-color: var(--pink2);
 			/*max-width: 105px;*/
-			margin-left: 8px;
+			margin-left: 7px;
 			padding: 8px;
 
 			--pdngUpDow: 2px;
@@ -123,9 +124,9 @@
 		<h2>Cacluladora tiempo esepra Wplace</h2>
 		<div id="conversion">
 			<p id="texto1">Pixeles: </p>
-			<input id="input1" title="pilexes disopibles (opcional)" placeholder="0" autocomplete="off" type="text" maxlength="11" onkeyup="main()">
+			<input id="input1" title="pilexes disopibles (opcional)" placeholder="0" maxlength="10" oninput="main()" autocomplete="off" type="text">
 			<p>/</p>
-			<input id="input2" title="máxima capacidad pitseles" placeholder="max" autocomplete="off" type="text" maxlength="11" onkeyup="main()">
+			<input id="input2" title="máxima capacidad pitseles" placeholder="max" maxlength="10" oninput="main()" autocomplete="off" type="text">
 			<br>
 			<p>timepo resante <span class="glyphicon glyphicon-arrow-right"></span></p><p id="output">0:00</p>
 		</div>
@@ -149,22 +150,15 @@ function bounce(thing) {
 document.body.onkeydown = function(e) {bounce(img1)};
 
 function fancyTimeFormat(duration) {
-  const hrs = ~~(duration / 3600);
-  const mins = ~~((duration % 3600) / 60);
-  const secs = ~~duration % 60;
-  // Output like "1:01" or "4:03:59" or "123:03:59"
-  let ret = "";
-
-  if (hrs > 0) {
-    ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-  }
-
-  ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-  ret += "" + secs;
-
-  return ret;
+	const secs = Math.floor(duration % 60);
+	const mins = Math.floor((duration % 3600) / 60);
+	const days = Math.floor(duration / 86400);
+	const hrs = Math.floor((duration % 86400) / 3600);
+	let ret = "";
+	if (days > 0) { ret += days + " día" + (days > 1 ? "s" : "") + ", "; }
+	if (hrs > 0 || days > 0) { ret += hrs + ":"; }
+	ret += (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs; return ret;
 }
-//function from https://stackoverflow.com/questions/3733227/javascript-seconds-to-minutes-and-seconds/11486026#11486026
 
 function main(){
 	num1 = input1.value;
