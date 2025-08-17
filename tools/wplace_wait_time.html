@@ -146,7 +146,6 @@ function bounce(thing) {
     thing.style.animation = '';
   });
 }
-
 document.body.onkeydown = function(e) {bounce(img1)};
 
 function fancyTimeFormat(duration) {
@@ -180,5 +179,12 @@ function main(){
 	} else {return;}
 }
 main();
+
+
+input2.onkeydown = function() {
+    if( event.keyCode == 8 && input2.value == '')
+        input1.focus();
+};
+
 </script>
 </html>
