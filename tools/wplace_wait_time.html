@@ -180,10 +180,30 @@ function main(){
 }
 main();
 
+function hasLeftText(input, num){ // num = displacement to the left.
+	var cursorPos = input.selectionStart;
+	var pre_side = input.value.substring(num,cursorPos);
+	return pre_side.length === 0;
+}
 
-input2.onkeydown = function() {
-    if( event.keyCode == 8 && input2.value == '')
-        input1.focus();
+input2.onkeydown = function(e) {
+  if( e.keyCode == 8 && hasLeftText(input2, 0)){
+  	// 'backspace' key, got to input1
+  	setTimeout(function(){ input1.focus()}, 1);
+  }
+  if (e.keyCode == 36) {input1.focus();}
+  // 'begin' key, go to input1
+};
+
+input1.onkeydown = function(e) {
+  if( e.keyCode == 32 && hasLeftText(input1, 11)){
+  	// 'space' key, got to input2
+    setTimeout(function(){
+    	input1.value = input1.value.trimEnd();
+    	input2.focus()}, 1);
+  }
+  if (e.keyCode == 35) {input2.focus();}
+  // 'end' key, go to input2
 };
 
 </script>
