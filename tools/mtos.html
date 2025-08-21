@@ -9,20 +9,20 @@
     <h1>Conversor de Minutos a Segundos</h1>
 
     <label for="minutos">Minutos:</label>
-    <input type="number" id="minutos" oninput="convertirMinutosASegundos()">
+    <input type="number" id="minutos" oninput="convert()">
     
     <p>Segundos: <span id="segundos">0</span></p>
 
     <script>
-        function convertirMinutosASegundos() {
-            var minutosInput = document.getElementById("minutos").value;
-            var segundosOutput = document.getElementById("segundos");
+        function convert() {
+            var minsInput = document.getElementById("minutos").value;
+            var secsOutput = document.getElementById("segundos");
             
             // conversión
-            var segundos = minutosInput * 60;
+            var secs = minsInput * 60;
             
             // actualizar resultado
-            segundosOutput.textContent = segundos;
+            secsOutput.textContent = secs;
         }
     </script>
 </body>

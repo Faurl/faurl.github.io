@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="/assets/icons/generic/tools.png">
+    <title>Conversor de Segundos a Minutos</title>
+<style> body {background-color:#CFCDCA;} </style>
+</head>
+<body>
+    <h1>Conversor de Segundos a Minutos</h1>
+
+    <label for="segundos">Segundos:</label>
+    <input type="number" id="segundos" oninput="convert()">
+    
+    <p>Minutos: <span id="minutos">0</span></p>
+
+    <script>
+        function convert() {
+            var secsInput = document.getElementById("segundos").value;
+            var minsOutput = document.getElementById("minutos");
+            
+            // conversión
+            var mins = secsInput / 60;
+            
+            // actualizar resultado
+            minsOutput.textContent = mins;
+        }
+    </script>
+</body>
+</html>

@@ -14,20 +14,20 @@
     <h1>Conversor de Minutos a <a class="mils-text">Milisegundos</a></h1>
 
     <label for="minutos">Minutos:</label>
-    <input type="number" id="minutos" oninput="convertirMinutosAMilisegundos()">
+    <input type="number" id="minutos" oninput="convert()">
     
     <p>Milisegundos: <span id="milisegundos">0</span></p>
 
     <script>
-        function convertirMinutosAMilisegundos() {
-            var minutosInput = document.getElementById("minutos").value;
-            var milisegundosOutput = document.getElementById("milisegundos");
+        function convert() {
+            var minsInput = document.getElementById("minutos").value;
+            var milisecsOutput = document.getElementById("milisegundos");
             
             // Realizar la conversión
-            var milisegundos = minutosInput * 60 * 1000; // Convertir minutos a milisegundos
+            var milisecs = minsInput * 60 * 1000; // Convertir minutos a milisegundos
             
             // Actualizar el resultado en la página
-            milisegundosOutput.textContent = milisegundos;
+            milisecsOutput.textContent = milisecs;
         }
     </script>
 </body>
