@@ -128,17 +128,19 @@
 		}
 		.e{
 			opacity: 0;
-			transition: ease-in 20s;
+			transition: ease-in 1s;
 			#w{cursor: auto; color: transparent;}
 		}
-		.lv{opacity:100% !important; filter:unset !important; transition: steps(5) .8s; margin-bottom: 53vh;/*margin-left: 107vh*/}
+		.lv{opacity:100% !important; filter:unset !important; transition: steps(5) .8s;/*margin-left: 107vh*/}
 
 		.fw{
 			opacity: 100% !important;
 			transition: 2s;
 			transition-delay: .9s !important;
 		}
-
+		.up{
+			margin-bottom: 53vh;
+		}
 		#s-bg {
 			z-index: 1;
 			opacity: 0;
@@ -248,8 +250,9 @@ function w(){
 	setTimeout(function(){
 		mainbox.style.display="none";
 		img1.classList.add("lv");
+		img1.classList.add("up");
 		document.getElementById("s-bg").classList.add("fw");
-	},21000); //delay 21s
+	},1000); //delay 21s
 }
 
 </script>
