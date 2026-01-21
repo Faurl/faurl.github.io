@@ -1,20 +1,3 @@
-		// Obtener la URL actual
-        var currentUrl = window.location.href;
-
-        // Verificar si la URL contiene la etiqueta "playlist"
-        if (currentUrl.includes("playlist")) {
-            // Obtener el valor de la etiqueta "playlist" de la URL
-            var playlistUrl = new URL(currentUrl).searchParams.get("playlist");
-
-            // Construir el texto de la descripción con el formato deseado
-            var descriptionText = 'Playlist: ' + playlistUrl;
-
-            // Modificar la descripción en la etiqueta <meta property="og:description">
-            var ogDescription = document.querySelector('meta[property="og:description"]');
-            ogDescription.setAttribute("content", descriptionText);
-        }
-        //EL CÓDIGO ANTERIOR ES SOLO PARA MOSTRAR LA PLAYLIST EN LA PREVIEW DE UN ENLACE (no funciona akwhkahws)
-
 var player;
 var playlist = [];
 var currentSongIndex = 0;
@@ -29,7 +12,6 @@ function onYouTubeIframeAPIReady() {
 	hideLoadingTimeout = setTimeout(function() {
 		hideLoadingMessage();
 	}, 0);
-
 //	loadPlaylist();
 }
 
@@ -267,7 +249,7 @@ function setCurrentSong(index) {
 	            if (typeof button.scrollIntoViewIfNeeded === 'function') {
 	                button.scrollIntoViewIfNeeded();
 	            } else if (typeof button.scrollIntoView === 'function') {
-	                button.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
+	                button.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
 	            }
 
 		} else {
@@ -326,7 +308,7 @@ volumeSliderProgress.style.width = (progress * 100) + "%";
 volumeSliderThumb.style.right = "calc(" + (100 - progress * 100) + "% - 5px)";
 
 if (player) {
-	player.setVolume(progress * 100);
+	player.setVolume(progress * 30); //100
 }
 var volumePercentage = document.getElementById("volume-percentage");
 volumePercentage.textContent = Math.round(progress * 100) + "%";

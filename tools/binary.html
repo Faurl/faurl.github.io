@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="../assets/media/icons/generic/tools.png">
+  <link rel="stylesheet" type="text/css" href="./_styles/encoders.css">
+  <title>binary encode/decode tool</title>
+</head>
+<body>
+<!--<div id="background-img"></div>-->
+<main>
+  <h2><a href="./" title="back to tools">< </a>binary translate</h2><br>
+  <p>Encode</p>
+  <textarea id="inputText" rows="10" placeholder="*" autofocus></textarea><br>
+  <button id="copydecoded" onclick="copy(input, this)">copy</button><span id="input_tick"> ✔</span>
+
+  <p>Decode</p>
+  <textarea id="outputText" rows="10" placeholder="00101010"></textarea><br>
+  <button id="copyencoded" onclick="copy(output, this)">copy</button><span id="output_tick"> ✔</span>
+</main>
+
+<script type="text/javascript" src="../assets/scripts/encode.js"></script>
+<script>
+function encode(text) {try {text = toBinary(text);return text;} catch {return "";}}
+function decode(text) {try {text = fromBinary(text);return text;} catch {return "";}}
+
+outputText.addEventListener("input", () => {
+  inputText.value = decode(outputText.value);
+  if (outputText.value == '') {inputText.value = '';}
+});
+
+inputText.addEventListener("input", () => {
+  outputText.value = encode(inputText.value);
+});
+
+</script>
+</body>
+</html>

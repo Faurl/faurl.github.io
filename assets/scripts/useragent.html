@@ -1,0 +1,9 @@
+<!DOCTYPE html><html>
+<head><meta charset="utf-8"><title>get user agent</title>
+<style>body{background-color:rgb(39, 66, 66);color:white;font-size: 150%;text-shadow: 2px 2px 2px black;}</style>
+</head><body><span id="agent"></span><br>
+<script type="text/javascript">
+const agent = document.getElementById('agent');
+function nav_get(n){return navigator[n];}
+window.onload = function(){agent.innerHTML = nav_get('userAgent');}
+</script></body></html>

@@ -110,13 +110,15 @@ body {
 }
 
 .play-pause-button::before {
-	content: "►"; <!--▶-->
+	content: "ІІ"; /*▶*/
 	font-weight: 900;
+	font-family: Arial, sans-serif !important;
 }
 
 .play-pause-button.paused::before {
-	content: "ІІ";
+	content: "►";
 	font-weight: 900;
+	font-family: Arial, sans-serif !important;
 }
 
 .volume-control { margin-top: 10px; }

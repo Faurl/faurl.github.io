@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>random number</title>
+<style>
+	body{background-color:pink;margin:50px;margin-top:40px;}
+	input{width:50px;color:white;background-color:black;}
+	input:focus{outline:none;border-color:white;border-style:solid;}
+	textarea:focus{outline:none;}
+
+	button{border:1px solid #8f8f9d;border-radius:3px 3px 0 0;border-bottom:none;
+		padding-bottom:2.9px;right:0;}
+
+	#main{background-color:skyblue;display:table;padding:10px;border:2px ridge white;
+		box-shadow:2px 3px 7px black;border-radius:5px;position:relative;
+		
+	}
+
+	#result{resize:vertical;width:142.1px;min-height:15px;height:auto;margin:0;
+		border:1px solid #8f8f9d;border-radius:0 0 3px 3px;}
+	
+	.wrapper{display:flex;align-items:flex-start;}
+
+</style>
+</head>
+<body>
+<div id="main">
+	<span>
+		<input id="min" type="number"><input id="max" type="number">
+		<button onclick="gen_num();">roll</button>
+	</span>
+	<br>
+	<div class="wrapper"><textarea id="result" readonly>0</textarea></div>
+</div>
+<script>
+
+function gen_num(){
+	const min = parseInt(document.getElementById('min').value);
+	const max = parseInt(document.getElementById('max').value);
+	const result = document.getElementById("result");
+
+	const random_num = Math.floor(Math.random() * (max - min + 1)) + min;
+	result.innerHTML = random_num;
+}
+
+
+
+</script>
+</body>
+</html>

@@ -1,28 +1,132 @@
 <!DOCTYPE html><html><head>
 <meta charset="utf-8">
-<link rel="icon" href="/assets/icons/generic/tools.png">
-<title>Tools</title><style>body{font-size: 130%; margin-left: 2%;}</style></head><body><p>
-<style>body {background-color:#CFCDCA;} </style>
+<link rel="icon" href="../assets/media/icons/generic/tools.png">
+<title>Tools</title></head>
+<style>
+	@import url("../assets/css/usedcolors.css");
+	:root{
+		--bg:#1f3535;  /*rgba(39, 66, 66, 1)*/;
+		--light-bg:#2B4A4A;
+	}
+	body {
+		background-color:var(--bg);
+		font-family: MS Gothic;
+		color:white;
+		font-size: 130%;
+		margin: 0 auto;
+      	max-width: 1600px;
+	}
 
-<li><a href="mtos.html">Mins to Secs</a></li>
-<li><a href="mtomil.html">Mins to Milisecs</a></li>
-<li><a href="stomin.html">Secs to Mins</a></li>
-<br>
-<li><a href="encoder.html">Codificador</a><br></li>
-<li><a href="cronómetro.html">Cronómetro</a><br></li>
-<li><a href="json-text-adapter.html">json-text-adapter</a></li>
-<li><a href="AES-encryptt">AES-256 Crypt</a></li>
-<li><a href="base64enc.html">Base64 encode/decode</a><br></li>
-<li><a href="hexenc.html">Hex encode/decode</a><br></li>
-<br>
-<li><a href="qr/generator">QR code Generator</a></li>
-<li><a href="qr/reader">QR code Reader</a></li>
-<br>
-<li><a href="xd-file/converter.html">.xd Converter</a></li>
-<li><a href="xd-file/viewer.html">.xd File Viewer</a></li>
-<br>
-<li><a target="_blank" href="twitch-lightweight-player.html">Twitch Lightweight Player</a></li>
-<li><a target="_blank" href="yt-lightweight-player">Youtube Lightweight Player</a></li>
+	main{
+		padding: 3em;
+		padding-top: 2em;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2em;
+		white-space: nowrap;
+	}
 
-</p></body></html>
-<!-- <li><a href="path">text</a></li> -->
+	.visual-help {
+		width:100px; opacity: 100;
+		margin-left: 13px; padding-top: 20px;
+		bottom: 0;
+		right: 0;
+
+	}
+
+	section {
+		flex:1 1 250px;
+		transition: .05s;
+		outline: 2px dashed #3c6666;
+		padding-bottom: 10px;
+	}
+
+	section:hover {
+		background-color: var(--light-bg);
+		outline: 2px solid #3c6666;
+
+		.visual-help{opacity: 100;}
+	}
+
+	h2 {
+		font-family:Consolas;margin:0;margin-bottom:7px;margin-top:0;
+		background-color: #3c6666;display:table;
+		padding-left:5px; padding-right: 5px
+	}
+
+	.mid:before{content: "├ "}
+	.end:before{content: "└ "}
+
+	a{text-decoration:none;}
+	a:link, a:visited{color: var(--pink1);text-shadow:2px 2px 2px black;}
+
+	p{display:table; padding-right:10px; margin:0; margin-left:0px; font-weight: bold;}/*20px*/
+	p:hover{color: black;background-color:white;}
+	p:hover a{color: black;background-color:white;text-shadow:none;}
+
+	.eyes:after{
+		content: "👀";
+		animation: eyesmove 2s infinite;
+	}
+
+	@keyframes eyesmove {
+		0%{content: " 👀";}
+		50%{content: "👀";}
+		100%{content: " 👀";}
+	}
+
+</style>
+</head>
+<body>
+<main>
+	<section id="converters">
+		<h2>converters</h2>
+		<p class="mid"><a href="encoder.html">Codificador</a></p>
+		<p class="mid"><a href="wplace_wait_time.html">WPlace wait time</a></p>
+		<br/>
+		<p class="mid"><a href="AES-encryptt">AES-256 Crypt</a></p>
+		<p class="mid"><a href="binary.html">Binary</a></p>
+		<p class="mid"><a href="base64.html">Base64</a></p>
+		<p class="end"><a href="hex.html">Hexadecimal</a></p>
+		<img src="./../assets/media/image/webgif/2_computers.gif" style="width: 120px !important;" class="visual-help">
+	</section>
+
+	<section id="time">
+		<h2>time</h2>
+		<p class="mid"><a href="mtos.html">Mins to Secs</a></p>
+		<p class="mid"><a href="mtomil.html">Mins to Milisecs</a></p>
+		<p class="end"><a href="stomin.html">Secs to Mins</a></p>
+		<img src="./../assets/media/image/webgif/clock.gif" class="visual-help">
+	</section>
+
+	<section id="qr">
+		<h2>QR</h2>
+		<p class="mid"><a href="./qr/generator.html">Generator</a></p>
+		<p class="end"><a href="./qr/reader.html">Reader</a></p>
+		<img src="./../assets/media/image/webgif/computer-red-eyes.gif" class="visual-help">
+	</section>
+
+	<section id="unsorted">
+		<h2>unsorted</h2>
+		<p class="mid"><a href="crono.html">Cronómetro</a></p>
+		<p class="mid"><a href="json-text-adapter.html">json-text-adapter</a></p>
+		<p class="end"><a href="AI-CHATBOT.html">AI Chatbot</a></p>
+		<img src="./../assets/media/image/webgif/teeth-fill.gif" class="visual-help">
+	</section>
+
+	<section id="media-players">
+		<h2>media players</h2>
+		<p class="mid"><a target="_blank" href="twitch-lightweight-player.html">Twitch Lightweight Player</a></p>
+		<p class="end"><a target="_blank" href="yt-lightweight-player">Youtube Lightweight Player</a></p>
+		<img src="./../assets/media/image/webgif/mr-stereo.gif" class="visual-help">
+	</section>
+
+	<section id="xd-file">
+		<h2>.xd file</h2>
+		<p class="mid"><a href="./xd-file/converter.html">.xd Converter</a></p>
+		<p class="end"><a href="./xd-file/viewer.html">.xd Viewer</a></p>
+		<img src="./../assets/media/image/webgif/rainbowXD.gif" class="visual-help">
+	</section>
+</main>
+</body>
+</html>

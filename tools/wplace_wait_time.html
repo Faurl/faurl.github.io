@@ -35,11 +35,13 @@
 		}
 		h2 {
 			font-weight: bold;
+			width: 100%;
 			background-image: linear-gradient(0deg, gray 0%, white 100%);;
 			background-color: transparent;
 			border:5px outset gray;
 			padding: 15px;
 			display: inline-block;
+			user-select:none;
 			/*width: 297px;*/
 		}
 		#mainbox {
@@ -49,7 +51,7 @@
 			padding: 20px;
 			padding-top: 5px !important;
 			padding-bottom: 25px !important;
-			width: 340px;
+			width: auto;/*345px*/
 
 			top: 50%;
   		left: 50%;
@@ -101,13 +103,15 @@
 		}
 
 		#img1 {
-			filter: contrast(100%) saturate(1) hue-rotate(-70deg) opacity(30%);
+			z-index: 2;
+			filter: contrast(100%) saturate(1) hue-rotate(-70deg);
+			opacity: 30%;
 			image-rendering: pixelated;
 			width: 15vh;
-            bottom:0;
+      bottom:0;
 			position: absolute;
 			user-select: none;
-			pointer-events: none;
+			pointer-events:none;
 
 			animation-duration: .1s !important;
 			animation-timing-function: ease-in-out;
@@ -117,24 +121,57 @@
 		  50% { bottom: 2vh;}
 		  100% {bottom: 0;}
 		}
+
+		#w{color:black;cursor: pointer;}
+		#w:hover{
+			color: white;
+		}
+		.e{
+			opacity: 0;
+			transition: ease-in 20s;
+			#w{cursor: auto; color: transparent;}
+		}
+		.lv{opacity:100% !important; filter:unset !important; transition: steps(5) .8s; margin-bottom: 53vh;/*margin-left: 107vh*/}
+
+		.fw{
+			opacity: 100% !important;
+			transition: 2s;
+			transition-delay: .9s !important;
+		}
+
+		#s-bg {
+			z-index: 1;
+			opacity: 0;
+			position: absolute;
+			bottom: 0;
+			height: 100%;
+			width: 100%;
+			background-image: url(https://frutigeraeroarchive.org/images/wallpapers/asadal_stock/asadal_stock_1.jpg);
+			background-repeat: round;
+			background-size: cover;
+			pointer-events: none;
+		}
+
 	</style>
 </head>
 <body>
 	<div id="mainbox">
-		<h2>Cacluladora tiempo esepra Wplace</h2>
+		<h2>Cacluladora<br>tiempo esepra<br><span id="w" onclick="w();">W</span>place</h2>
 		<div id="conversion">
-			<p id="texto1">Pixeles: </p>
-			<input id="input1" title="pilexes disopibles (opcional)" placeholder="0" maxlength="10" oninput="main()" autocomplete="off" type="text">
+			<p>Pixeles: </p>
+			<input id="input1" title="pilexes disopibles (opcional)" placeholder="0" maxlength="24" oninput="main()" autocomplete="off" type="text">
 			<p>/</p>
-			<input id="input2" title="máxima capacidad pitseles" placeholder="max" maxlength="10" oninput="main()" autocomplete="off" type="text">
+			<input id="input2" title="máxima capacidad pitseles" placeholder="max" maxlength="24" oninput="main()" autocomplete="off" type="text">
 			<br>
 			<p>timepo resante <span class="glyphicon glyphicon-arrow-right"></span></p><p id="output">0:00</p>
 		</div>
 	</div>
 	<img id="img1" src="data:image/png;base64,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">
+	<div id="s-bg"></div>
 </body>
 
 <script type="text/javascript">
+const mainbox = document.getElementById("mainbox");
 const input1 = document.getElementById("input1");
 const input2 = document.getElementById("input2");
 const output = document.getElementById("output");
@@ -205,6 +242,15 @@ input1.onkeydown = function(e) {
   if (e.keyCode == 35) {input2.focus();}
   // 'end' key, go to input2
 };
+
+function w(){
+	mainbox.classList.add("e");
+	setTimeout(function(){
+		mainbox.style.display="none";
+		img1.classList.add("lv");
+		document.getElementById("s-bg").classList.add("fw");
+	},21000); //delay 21s
+}
 
 </script>
 </html>

@@ -2,7 +2,6 @@ body, #playlist, .control-button, .play-pause-button::before, .volume-slider, .v
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-
 body.dark-mode {
 	background-color: #222;
 	color: #5d805e;

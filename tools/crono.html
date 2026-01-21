@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="../assets/media/icons/generic/tools.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8">
+    <title>Cronómetro en HTML</title>
+    <style>
+        body {background-color:#CFCDCA;}
+        button{cursor: pointer;}
+        button:hover{background: #d0d0d7;}
+
+        #main{z-index: 1; position: relative;}
+        #shortcuts{z-index: 2; position: relative;}
+
+        #timer {font-size: 4em; text-align: center;}
+        #shortcuts {
+            display: table; padding: 10px; padding-top: 0px; padding-bottom: 0px;
+            opacity: 100%; user-select: none; transition: 2s cubic-bezier(0,0,0,0);pointer-events: none;
+            transform: translateX(-24.5%) translateY(-57.5%) rotate(2880deg) scale(0);}
+
+        .shortcutsOpen {
+            user-select: text !important;opacity: 100% !important; transition-timing-function:cubic-bezier(0.175, 0.885, 0.32, 1.275)!important;
+            transform: translateX(0%) translateY(0%) rotate(0deg) !important;}
+
+        #shortcuts, button {border: 1px solid #8f8f9d; border-radius: 5px; background-color:#e9e9ed}
+
+        #keysButton{z-index:9999;}
+        #keysButton:after{content:" ►";color:gray;} /*▲▼►*/
+        .keysButtonOpen:after{content:" ▼" !important;}
+    </style>
+</head>
+<body>
+    <h1>Cronómetro</h1>
+    <div id="crono">
+        <div id="main">
+            <button onclick="increaseFontSize()">+</button>
+            <button onclick="decreaseFontSize()">-</button>
+            <div id="timer">00:00:00.000</div><br><br>
+            <button onclick="startTimer()">► Iniciar</button>
+            <button onclick="stopTimer()">II Detener</button>
+            <button onclick="resetTimer()">↺ Reiniciar</button><br><br>
+            <!--title="Show keyboard shortbcyts"-->
+            <button onclick="toggleShortcutsInfo()" id="keysButton">⌨ Keyboard Shörtcuts</button>
+        </div>
+        <div id="shortcuts">
+            <p>Pulsa la tecla "T" o espacio para iniciar, pausar o reanudar.</p>
+            <p>Pulsa la tecla "R" para reiniciar el cronómetro.</p>
+            <p>Pulsa "+" , " ` " o "-" para reescalar el cronómetro.</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var startTime = null;
+        var hours = 0;
+        var minutes = 0;
+        var seconds = 0;
+        var milliseconds = 0;
+        var isRunning = false;
+        var fontSize = 4; // Tamaño de fuente inicial en em
+
+        const kinfo = document.getElementById("shortcuts");
+        const keysButton = document.getElementById("keysButton");
+        const kinfo_display = "table";
+
+        kinfotoggled = false;
+        function toggleShortcutsInfo() {
+            if (kinfotoggled === false) {
+              kinfotoggled = true;
+              keysButton.classList.add("keysButtonOpen");
+              kinfo.classList.add("shortcutsOpen");
+
+            } else if (kinfotoggled === true) {
+              kinfotoggled = false;
+              keysButton.classList.remove("keysButtonOpen");
+              kinfo.classList.remove("shortcutsOpen");
+            }
+        }
+
+        /*
+        function toggleShortcutsInfo() {
+            if (kinfo.style.display === kinfo_display) {
+              kinfo.style.display = 'none';
+              keysButton.classList.remove("keysButtonOpen");
+              kinfo.classList.remove("shortcutsOpen");
+
+            } else if (kinfo.style.display === 'none' || kinfo.style.display === '') {
+              kinfo.style.display = kinfo_display;
+              keysButton.classList.add("keysButtonOpen");
+              kinfo.classList.add("shortcutsOpen");
+            }
+        }
+        */
+
+        //function hideButton() {
+        //    var button = document.getElementById("KeyInfButton");
+        //    button.style.display = "none";
+        //}
+
+        function updateTimer(currentTime) {
+            if (!startTime) startTime = currentTime;
+            var elapsedTime = currentTime - startTime;
+            milliseconds = Math.floor(elapsedTime) % 1000;
+            seconds = Math.floor(elapsedTime / 1000) % 60;
+            minutes = Math.floor(elapsedTime / (1000 * 60)) % 60;
+            hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+            displayTime();
+            if (isRunning) {
+                requestAnimationFrame(function() {
+                    updateTimer(performance.now());
+                });
+            }
+        }
+
+
+		function startTimer() {
+		    if (!isRunning) {
+		        var currentTime = performance.now();
+		        if (startTime === null) {
+		            startTime = currentTime - (milliseconds + (seconds * 1000) + (minutes * 60 * 1000) + (hours * 60 * 60 * 1000));
+		        }
+		        isRunning = true;
+		        requestAnimationFrame(updateTimer);
+		    }
+		}
+
+        function stopTimer() {
+            if (isRunning) {
+                isRunning = false;
+            }
+        }
+
+        function resetTimer() {
+            stopTimer();
+            startTime = null;
+            hours = 0;
+            minutes = 0;
+            seconds = 0;
+            milliseconds = 0;
+            displayTime();
+        }
+
+        function displayTime() {
+            var displayHours = hours.toString().padStart(2, "0");
+            var displayMinutes = minutes.toString().padStart(2, "0");
+            var displaySeconds = seconds.toString().padStart(2, "0");
+            var displayMilliseconds = milliseconds.toString().padStart(3, "0");
+            document.getElementById("timer").textContent = `${displayHours}:${displayMinutes}:${displaySeconds}.${displayMilliseconds}`;
+        }
+
+        function increaseFontSize() {
+            fontSize += 1.5;
+            document.getElementById("timer").style.fontSize = fontSize + "em";
+        }
+
+        function decreaseFontSize() {
+            if (fontSize > 0.1) {
+                fontSize -= 0.8;
+                document.getElementById("timer").style.fontSize = fontSize + "em";
+            }
+        }
+
+        // Evento de escucha de teclas
+        document.body.onkeyup = function(e) {
+			if (e.keyCode === 32) { //ESPACIO
+				if (isRunning) {
+					stopTimer();
+				} else {
+					startTimer();
+				}
+			} else if (e.keyCode === 84) { //T
+				if (isRunning) {
+					stopTimer();
+				} else {
+					startTimer();
+				}
+			} else if (e.keyCode === 82) { //R
+				resetTimer();
+			}
+
+			if (e.keyCode === 171) { //+   <!--191-->
+				increaseFontSize();
+			}
+			if (e.keyCode === 173) { //-
+				decreaseFontSize();
+			}
+            if (e.keyCode === 192) { //`
+                decreaseFontSize();
+            }
+		};
+    </script>
+</body>
+</html>

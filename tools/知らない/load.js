@@ -13,15 +13,14 @@ async function onloadcheck(){
 	html = document.documentElement.style;
 	if(await sha256(encId) == keyhash){
 		document.body.style.display = "block";
-
 		html.backgroundColor = "transparent";
 		html.backgroundImage = "unset";
 		html.backgroundPositionX = "0%";
 		html.backgroundSize = "auto";
 	} else {
-
+		document.body.remove();
 		html.backgroundColor = "black";
-		html.backgroundImage = "url(/assets/image/saulgoodman.png)";
+		html.backgroundImage = "url(../../assets/media/image/saulgoodman.png)";
 		html.backgroundPositionX = "49%";
 		html.backgroundSize = "40% 100%";
 	}

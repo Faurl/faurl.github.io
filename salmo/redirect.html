@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="refresh" content="59; URL=https://faurl.github.io/salmo">
+	<meta id="redirect" http-equiv="refresh" content="59; URL=./">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
@@ -11,10 +11,72 @@
 		display: flex;
   	justify-content: center;
   	background-color:#CFCDCA;
+  	overflow: hidden;
+
+		/*transition set in js*/
 	}
 
 	video {
 		transform: translateY(110px);
+		/*transition set in js*/
+	}
+
+	#unmute-button{
+		position: absolute;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 10px;
+		font-size: 20px;
+		user-select: none;
+		transition: 1s;
+	}
+
+	#unmute-button{cursor: pointer; border:5px ridge yellow; background-color: yellow; margin-top: 350px;}
+	#unmute-button:hover{animation: rainbow-bg 1s linear infinite;}
+
+	#mute-indicator{
+		opacity: 0;
+		display: none;
+		position: fixed;
+		padding: 5vh !important;
+		margin-left: auto;
+		margin-right: auto;
+		bottom:0 !important;
+		font-size: 3.5vh;
+		user-select: none;
+		filter: saturate(0%);
+	}
+
+	.hidden {
+		opacity: 0%;
+		transition: 1s;
+		transform: rotate(2880deg) scale(50);
+	}
+
+	.alt {
+		filter: saturate(200) contrast(400%);
+		transition: 0.5s !important;
+		background-color: black !important;
+
+		video{
+			transform: scale(3) translateY(100px);
+			transition: ease-out 2s !important;
+		}
+	}
+
+	@keyframes rainbow-bg{
+			100%,0%{background-color: rgb(255,0,0);}
+			8%{background-color: rgb(255,127,0);}
+			16%{background-color: rgb(255,255,0);}
+			25%{background-color: rgb(127,255,0);}
+			33%{background-color: rgb(0,255,0);}
+			41%{background-color: rgb(0,255,127);}
+			50%{background-color: rgb(0,255,255);}
+			58%{background-color: rgb(0,127,255);}
+			66%{background-color: rgb(0,0,255);}
+			75%{background-color: rgb(127,0,255);}
+			83%{background-color: rgb(255,0,255);}
+			91%{background-color: rgb(255,0,127);}
 	}
 
 </style>
@@ -25,13 +87,67 @@
 	<div id="countdown" style="font-size: 100%; margin-top: 3%; font-weight: bold; text-align: center; z-index: 99999;"></div>
 </h1>
 
-<video width="540" height="520" autoplay muted onclick="playaudio()"src="../assets/video/gameplay.mp4"></video>
-<audio id="mp3-onload" src="dross.mp3" loop></audio>
+<video id="gampley" width="540" height="520" autoplay loop muted=true src="../assets/media/video/gameplay.mp4"></video>
+<div id="unmute-button" onclick="button_unmute()">Click to Unmute</div>
 
+<audio id="click" src="../assets/media/audio/sfx/impact_0.mp3"></audio>
+<div id="mute-indicator">🔇</div>
 <script>
-function playaudio() {document.getElementById("mp3-onload").play();}
+const doc = document.body;
+const vid = document.getElementById("gampley");
+const muteInd = document.getElementById("mute-indicator");
+
+const clicksound = document.getElementById("click");
+
+let muted = true;
+function toggleAudio() {
+	if(muted === true){
+		vid.muted = false;
+		muteInd.style.opacity="0";
+
+		muted = false;
+	} else if(muted === false){
+		vid.muted = true;
+		muteInd.style.opacity="100";
+		muted = true;
+	}
+}
+
+function button_unmute() {
+	//play hit sound
+	clicksound.play();
+
+	//remove button
+	e=document.getElementById("unmute-button");
+	e.classList.add("hidden");
+	e.style.cursor="auto";
+
+
+	//efectos visuales varios
+	doc.classList.add("alt");
+
+	//set video y body transitions.
+	vid.setAttribute("style","transition: 5s;");
+	doc.setAttribute("style","transition: 5s;");
+
+	setTimeout(function(){
+		setTimeout(function(){
+			doc.classList.remove("alt");
+
+			//enable toggle audio by clicking	video.
+			vid.setAttribute('onclick','toggleAudio()');
+			muteInd.style.display="block";
+		},1200); //1s
+
+		//unmute video
+		toggleAudio();
+		//hide giant button
+		e.style.display="none";
+	},1000); //1s
+}
 
 let duration = 59; //segundos
+//document.getElementById("redirect").content = duration + "; URL=./";
 
 const countdownInterval = setInterval(updateCountdown, 1000);
 function updateCountdown() {
@@ -44,6 +160,7 @@ function updateCountdown() {
 }
 
 updateCountdown();
+
 </script>
 </body>
 </html>

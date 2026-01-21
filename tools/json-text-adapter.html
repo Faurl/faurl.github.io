@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="icon" href="/assets/icons/generic/tools.png">
+    <link rel="icon" href="../assets/media/icons/generic/tools.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>json-text-adapter</title>
@@ -15,11 +15,14 @@
             width: 100%;
             height: 200px;
             margin-bottom: 10px;
-            background-color: gray;
+            background-color: darkgray;
+            border: 2px solid gray;
+            color: black;
             cursor: default;
         }
         button {
             padding: 10px 15px;
+            border: 2px solid darkgray;
             font-size: 16px;
             cursor: pointer;
         }
@@ -42,7 +45,7 @@
 <button onclick="convertToJSON()">Convertir a JSON</button>
 
 <h3 id="resultTitle">Resultado:</h3>
-<pre id="result" onclick="copyToClipboard()"></pre>
+<pre id="result" onclick="copyToClipboard()" title="Click to copy"></pre>
 
 <script>
     function convertToJSON() {

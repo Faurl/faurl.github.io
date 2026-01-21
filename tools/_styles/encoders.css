@@ -1,0 +1,91 @@
+:root{--bgcolor:rgba(39, 66, 66, 1);}
+
+    #background-img{
+      z-index: -1;
+      filter: blur(5px);
+      background-image: url(../../assets/media/image/bg/binary1.png);
+      background-repeat: round;
+      background-size: cover;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      position: absolute;
+    }
+
+h2::selection,a::selection{background-color: white;color:cadetblue;}
+p::selection{background-color: white;color:var(--bgcolor);}
+
+body{
+	background-color:var(--bgcolor);
+	color:white;
+	font-family: MS Gothic;
+	font-size: 100%;
+	margin-left:0;
+	margin-right: 20px;
+	margin-top: 40px;
+	margin-bottom: 50px;
+}
+
+main{
+	padding: 40px;
+	padding-top: 0;
+	padding-right: 3em;
+}
+
+h2{
+	margin:0;margin-bottom:7px;margin-top:0;
+	background-color: #3c6666; display:table;
+	padding-left:5px; padding-right: 5px
+}
+/*
+p{display: ; background-color: rgb(29, 49, 49); padding:2px;margin: 0;margin-top:20px;font-size: 19px}
+*/
+
+p{display: table;padding:2px;margin:0;margin-top:20px;font-size: 19px}
+p:hover{background-color: cadetblue;
+		border-radius: 5px 5px 0 0 ;}
+/*a{color: black;background-color:white;text-shadow:none;}*/
+
+
+#input_tick,#output_tick {color:cadetblue; display: none; margin-left: 10px}
+
+#outputText{
+	height: 250px !important;
+}
+
+textarea{
+	height: 100px;
+	width: 100%;
+	background-color: black;
+	color: cadetblue;
+	font-family: MS Gothic;font-size: 100%;
+	border: 5px solid black;padding: 8px;
+	resize: vertical;
+	display: table;
+}
+textarea:focus{
+	border: 5px ridge cadetblue;
+	outline: none;
+	:has(+ &) {
+		background-color: cadetblue;
+		border-radius: 5px 5px 0 0 ;
+    }
+}
+
+textarea::selection{background-color: cadetblue; color: black;}
+
+button{
+	color: cadetblue;
+	background-color: transparent;
+	border: 3px dotted cadetblue;
+	font-family: MS Gothic;font-size: 20px;
+	padding: 2px;
+	--pddng:40px;padding-left: var(--pddng);padding-right: var(--pddng);
+	cursor:pointer;
+	display: inline-block;
+	margin-bottom:10px;	/*darkslategray*/
+}
+button:hover{background-color: cadetblue;color: white;}
+button:focus{background-color: cadetblue;color: white;outline:none}
+
+a, a:link, a:visited{color: white;text-decoration: none;}
+a:hover{color: cadetblue;}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Privacy Policy and Terms of Service</title>
+	<link  rel="icon" href="../assets/media/icons/doc.png">
+</head>
+<style>
+	html{height: 100%;}
+	body{background-color: black;margin: 0;background-size:100% 100%;}
+	#bg{
+		z-index: -1;
+		bottom: 0;
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		background-image: url(../assets/media/image/bg/binary1.png);
+		background-repeat: round;
+		background-size:50%;
+		cursor: pointer;
+	}
+	.spin180{transform: rotate(1260deg);transition: 3s;} /* 180x7 = 1260 */
+	.spin360{transform: rotate(1440deg);transition: 3s;} /* 360x4 = 1440 */
+	.rotate180{transform: rotate(180deg);}
+
+	p{color: white;margin:0;}
+	img{margin: 10px 0 0 0;}
+
+	#thing{
+		/*background-color:brown;*/
+		position:relative;display:table;margin:0px /*20px*/;padding:20px;
+	}
+
+</style>
+<body>
+	<div id="thing">
+		<p>Privacy Policy and Trems of Service:</p>
+		<br>
+		<br>
+		<br>
+		<p>hello</p>
+		<img src="../assets/media/image/mrfrog.jpg" width="100px">
+	</div>
+	<div id="bg" onclick="spin();" title="cilck to spin"></div>
+<script>
+const bg = document.getElementById("bg");
+
+let canflip = 0;
+let speed = 3000;
+
+function spin(){
+
+	if(canflip==0) {
+
+		bg.classList.add("spin180");
+
+		setTimeout(function(){
+			bg.classList.add("rotate180");
+			bg.classList.remove("spin180");
+			canflip++;
+		},speed);
+
+	} else if(canflip>0){
+
+		bg.classList.remove("rotate180");
+		bg.classList.add("spin360");
+
+		setTimeout(function(){
+			bg.classList.remove("spin360");
+			canflip=0;
+		},speed);
+	}
+}
+
+//window.onload = function(){spin();}
+
+</script>
+</body>
+</html>

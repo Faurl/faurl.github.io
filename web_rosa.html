@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" href="/assets/icons/web_rosa.png">
+<link rel="icon" href="./assets/media/icons/web_rosa.png">
 <meta charset="utf-8">
 <title>Página web rouseada</title>
 <style>
@@ -10,6 +10,8 @@ body {
   margin: 0;
   padding: 0;
   background-image: linear-gradient(to bottom, #ffe6e6, #ff4d94);
+  background-repeat: no-repeat;
+  background-color: black;
   text-align: center;
   position: relative;
   min-height: 100vh;
@@ -83,7 +85,7 @@ z-index: 1;
 
 </style>
 </head>
-<body onmouseleave="mouseleave()">
+<body>
 <div id="main">
   <h1>¡¡ Bienvenidos a la web rosa !!</h1>
   <p>¡Esta página está diseñada en diferentes ttonos de rosa para crear un ambiente cálido y acogedor!</p>
@@ -100,13 +102,13 @@ z-index: 1;
     <li class="motivos">Acceso exlcusivo a la hora REAL!</li>
     <li class="motivos">Diferemtes tonos de rosa. &lt;div&gt;</li>
     <li class="motivos">Visualizar la fecha actual REAL.</li>
-    <li class="motivos">Motivos para visitar la <a id="wr" onmouseover="mouseover()">w̶e̷b̶ ̸r̵o̶s̴a̸!</a></li>
+    <li class="motivos">Motivos para visitar la <a id="wr" onmouseover="alert('¡¡ Bienvenidos a la web rosa !!');">w̶e̷b̶ ̸r̵o̶s̴a̸!</a></li>
     <div id="e" onclick="gxek()"></div>
   </div>
   <div id="date"></div>
   <p style="color: #ff1a8c;">Para más información, visite nuestra <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbbznUl1hyboFJGZ6D1beXgJxGQ0i7hrRugw&usqp=CAU">página de contacto</a>.</p>
   </div>
-<img id="roses" src="/assets/image/imagen-de-rosas-hola.jfif">
+<img id="roses" src="./assets/media/image/imagen-de-rosas-hola.jfif">
 <script>
 
 var date = new Date();
@@ -126,25 +128,10 @@ setInterval(displayDate, 1000);
 function gxek(){
   document.getElementById("main").style.display = "none";
   document.getElementById("roses").style.display = "none";
-  document.body.style.backgroundImage = "url('https://pbs.twimg.com/media/GkpSer_WkAA53f2.jpg')";
+  document.body.style.backgroundImage = "none";
   setTimeout(function(){
-    location.replace("https://faurl.github.io");
-  },80);
-}
-
-function mouseover() {
-  alert("¡¡ Bienvenidos a la web rosa !!");
-  setTimeout(function(){
-    alert("¡¡ Bienvenidos a ̴l̸a̵ ̵w̵e̶b̶ ̸r̷o̸s̶a̶ ̵!̸!̴");
-    setTimeout(function(){
-      alert("¡¡ Bienveni̶d̷o̸s̷ ̸a̶ ̷l̸a̷ ̷w̸e̶b̵ ̵r̷o̴s̵a̸ ̸!̸!̷");
-      setTimeout(function(){alert("¡¡ Bienvenidos a la web rosa !!");},4500);
-    },4000);
+    window.location.replace("./-ʭ","_top");
   },2000);
-}
-
-function mouseleave(){
-  alert("¡¡ Bienvenidos a la web rosa !!");
 }
 
 </script>
