@@ -24,6 +24,9 @@
   input, #fileInput, button:hover {
     cursor: pointer;
   }
+  #convertirBtn,#descargarBtn{
+    margin-top: 10px;
+  }
   .progress-bar-container {
     width: 100%;
     background-color: black;
@@ -50,6 +53,15 @@
     color: white;
     display: none;
   }
+
+  #chrome-warn{
+    padding-top: 20px; position:absolute;
+    margin-left: 0;margin-right: 0;margin-top: 20px;
+    top:0;
+
+    padding: 5px;
+    background-color: orange;
+  }
 </style>
 </head>
 <body>
@@ -64,12 +76,17 @@
   <div class="loading-message" id="loadingMessage">This may take a moment . . .</div>
   <a id="enlaceDescarga" style="display: none;"></a>
   <button id="descargarBtn" style="display: none;" onclick="descargar()">Download converted File</button>
+  <div id="chrome-warn">⚠️ Only works in chrome-based browsers.</div>
 </div>
 
 <script>
+const enlaceDescarga = document.getElementById('enlaceDescarga');
+
 function mostrarBotonConvertir() {
   const convertirBtn = document.getElementById('convertirBtn');
   convertirBtn.style.display = 'block';
+  //remove chrome warning
+  document.getElementById('chrome-warn').style.display="none";
 }
 
 function convertir() {
@@ -109,7 +126,6 @@ function convertir() {
           // Mostrar botón de descarga
           descargarBtn.style.display = 'block';
           // Almacenar imagen convertida en enlace de descarga
-          const enlaceDescarga = document.getElementById('enlaceDescarga');
           enlaceDescarga.href = imagenDataUrl;
           enlaceDescarga.download = fileName;
         }
@@ -123,7 +139,6 @@ function convertir() {
 }
   
 function descargar() {
-  const enlaceDescarga = document.getElementById('enlaceDescarga');
   enlaceDescarga.click();
   window.location.reload(true); // Recargar la página tras descarga
 }

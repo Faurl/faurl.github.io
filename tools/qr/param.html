@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link type="image/png" rel="icon" href="../../assets/media/icons/tools/qr/gen.png">
+    <meta charset="UTF-8">
+    <meta name="darkreader-lock">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR-generator</title>
+    <style>
+        @font-face{
+            font-family: "PixelOperator";
+            src: url("../../assets/fonts/PixelOperator.ttf");
+        }
+        :root{
+            --mainfont:"PixelOperator";
+
+            --blu:#8fc7ff;
+            --blu-hover:#67A6DE;
+            --blu-hover-darker:#4C7AA3;
+        }
+
+        body {
+            background-color:black; /*darkgray*/
+            font-family: var(--mainfont);
+            margin: 0;
+        }
+
+        main{
+            --sides:1.2em;
+            max-width: 500px;
+            margin: 4%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: var(--sides);
+            padding-right: var(--sides);
+            border: 5px ridge lightgray;
+
+            background-color: gray; /*#CFCDCA*/
+            display: table;
+        }
+
+        #qrcode{
+            box-sizing: border-box;
+            width: 100%;
+        }
+        #qrcode img {
+            box-sizing: border-box;
+            display: block;
+            margin-top: 17px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 5px 5px gray;
+            height: 250px;
+        }
+
+        #error-message {
+            display: none;
+            color: red;
+            font-size: 18px;
+            padding: 3px;
+            background-color: black;
+            margin-top: 20px;
+        }
+
+        .qr-size {margin-bottom: 20px;}
+
+        #qrtext {color:white;}
+        #tick {display:none;margin-left:6px;color: var(--blu);}
+
+        #usealert{font-size:20px;display: none;}
+
+    </style>
+</head>
+<body>
+    <main>
+    <div id="qrcode"></div>
+    <p id="error-message"></p>
+    <p id="usealert">To use, insert the content inside a parameter called "<a href="?data=mega care">data</a>".
+        <br>
+        <br>
+        Example:
+        <br>
+        https:\\exampledomain.bart\?data=hola picoco
+    </p>
+    <p id="qrtext"></p>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script>
+        const qrcode = document.getElementById('qrcode');
+        const errorMessage = document.getElementById('error-message');
+
+        function displayError(text){
+            errorMessage.style.display = 'table';
+            errorMessage.textContent=text;
+        }
+
+        // cargar parámetros url
+        let params = new URLSearchParams(location.search);
+
+        let qr_text = null;
+        function loadParameters() {
+          if (params.has('data')) {
+            qr_text = params.get('data');
+            generateQRCode();
+          } else {document.getElementById("usealert").style.display="inline-block"}
+        }
+
+        function generateQRCode() {
+            //const qrSize = document.getElementById('qr-size-input').value.trim();
+            const text = qr_text;
+            document.getElementById("qrtext").innerHTML=qr_text;
+            qrcode.innerHTML = '';
+            errorMessage.textContent = '';
+
+            if (!text.trim()) {
+                displayError('Error: The text input is empty.');
+                return;
+            }
+
+            const qrOptions = {
+                errorCorrectionLevel: 'L',
+                version: 'auto',
+               // width: qrSize || 'auto',
+            };
+
+            QRCode.toDataURL(text, qrOptions, function (error, url) {
+                if (error) {
+                    console.error(error);
+                    displayError('Error: The data is too large to encode in a QR code.');
+                } else {
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.draggable = true;
+                    qrcode.appendChild(img);
+                }
+            });
+        }
+
+        loadParameters();
+    </script>
+</body>
+</html>
