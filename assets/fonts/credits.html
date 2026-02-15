@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>fonts/credits.html</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="../media/icons/globe.png">
+<style>
+    body{background-color: gray;font-size: 110%}
+    table{background-color: white;margin-left: auto;margin-right: auto;margin-top: 7vh;margin-bottom: 20px}
+    table,td,tr{border: 1px solid black; border-collapse: collapse; padding: 5px;padding-left: 10px;padding-right: 10px}
+    img{height: 50px}
+    .notas{width: 135px}
+
+    @font-face{
+        font-family: "fontstuck";
+        src: url("fontstuck.ttf");
+    }
+    @font-face{
+        font-family: "PapyrusW01";
+        src: url("PapyrusW01.ttf");
+    }
+    @font-face{
+        font-family: "PixelOperator";
+        src: url("PixelOperator.ttf");
+    }
+
+    .fontstuck{font-family:fontstuck}
+    .PapyrusW01{font-family:PapyrusW01;font-size: 120%}
+    .PixelOperator{font-family:PixelOperator; font-size: 150%}
+
+    .example:after{content:"Example"}
+
+</style>
+</head>
+<body>
+<base target="_blank" rel="noopener noreferrer">
+<table>
+    <tr style="font-weight: bold; text-align: center; background-color: yellow;">
+    <td>File Name</td><td>Source</td><td>Example</td><td>Author</td></tr>
+
+    <tr><td>PapyrusW01</td><td><a href="">
+        https://www.webfontfree.com/en/download/PapyrusW01
+        </a></td>
+        <td class="example PapyrusW01"></td>
+        <td class="author">Chris Costello</td>
+    </tr>
+    <tr><td>PixelOperator</td><td><a href="">
+        https://www.dafont.com/pixel-operator.font
+        </a></td>
+        <td class="example PixelOperator"></td>
+        <td class="author">Jayvee Enaguas</td>
+    </tr>
+    <tr><td>fontstuck</td><td><a href="">
+        https://fontstruct.com/fontstructions/show/675134/fontstuck_2
+        </a></td>
+        <td class="example fontstuck"></td>
+        <td class="author">KevinHilt</td>
+    </tr>
+
+
+</table>
+<script>
+document.querySelectorAll('a').forEach(elem => {
+    if (!elem.getAttribute('href')) {
+        elem.href = elem.textContent.trim();
+    }});
+</script>
+</body>
+</html>

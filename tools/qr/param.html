@@ -20,14 +20,17 @@
             margin: 0;
         }
 
+        a{text-decoration: none;}
+        a:hover{text-decoration: underline;}
+        a:link,a:visited {color: yellow;}/*#0000ee*/
+        p{margin: 20px 0 0 0}
+
         main{
-            --sides:1.2em;
-            max-width: 500px;
+            max-width: 550px !important;
             margin: 4%;
             margin-left: auto;
             margin-right: auto;
-            padding-left: var(--sides);
-            padding-right: var(--sides);
+            padding: 20px;
             border: 5px ridge lightgray;
 
             background-color: gray; /*#CFCDCA*/
@@ -41,25 +44,26 @@
         #qrcode img {
             box-sizing: border-box;
             display: block;
-            margin-top: 17px;
             margin-left: auto;
             margin-right: auto;
-            height: 250px;
+            min-height: 200px;
+            max-height: 400px;
         }
 
         #error-message {
             display: none;
             color: red;
-            font-size: 18px;
+            font-size: 20px;
             padding: 3px;
+
             background-color: black;
-            margin-top: 20px;
         }
 
-        #qrtext {color:white;}
-        #tick {display:none;margin-left:6px;color: var(--blu);}
+        #qrtext {color:white; word-break: break-all; display: none; font-size: 100%}
 
-        #usealert{font-size:20px;display: none;}
+        #usealert{font-size:20px;display: none; padding: 5px; margin: 0 0 2px 0}
+
+        .example{color:lightgray;}
 
     </style>
 </head>
@@ -67,19 +71,21 @@
     <main>
     <div id="qrcode"></div>
     <p id="error-message"></p>
-    <p id="usealert">To use, insert the content inside a parameter called "<a href="?data=mega care">data</a>".
+    <p id="qrtext"></p>
+    <p id="usealert">
+        To use, insert your text inside a parameter named "<span class="example">data</span>" in the url.
         <br>
         <br>
         Example:
         <br>
-        https:\\exampledomain.bart\?data=hola picoco
+        https:\\exampledomain.bart\<a href="?data=textoso de EJEMPLO">?data=textoso de EJEMPLO</a>
     </p>
-    <p id="qrtext"></p>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <script>
         const qrcode = document.getElementById('qrcode');
         const errorMessage = document.getElementById('error-message');
+        const qrtext = document.getElementById("qrtext");
 
         function displayError(text){
             errorMessage.style.display = 'table';
@@ -100,7 +106,9 @@
         function generateQRCode() {
             //const qrSize = document.getElementById('qr-size-input').value.trim();
             const text = qr_text;
-            document.getElementById("qrtext").innerHTML=qr_text;
+            qrtext.innerHTML=qr_text;
+            qrtext.style.display="block";
+
             qrcode.innerHTML = '';
             errorMessage.textContent = '';
 

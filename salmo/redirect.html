@@ -16,7 +16,7 @@
 		/*transition set in js*/
 	}
 
-	video {
+	#gampley {
 		transform: translateY(110px);
 		/*transition set in js*/
 	}
@@ -31,7 +31,7 @@
 		transition: 1s;
 	}
 
-	#unmute-button{cursor: pointer; border:5px ridge yellow; background-color: yellow; margin-top: 350px;}
+	#unmute-button{cursor: pointer; border:5px ridge yellow; background-color: yellow; margin-top: 350px; display: none;}
 	#unmute-button:hover{animation: rainbow-bg 1s linear infinite;}
 
 	#mute-indicator{
@@ -58,7 +58,7 @@
 		transition: 0.5s !important;
 		background-color: black !important;
 
-		video{
+		#gampley{
 			transform: scale(3) translateY(100px);
 			transition: ease-out 2s !important;
 		}
@@ -87,7 +87,7 @@
 	<div id="countdown" style="font-size: 100%; margin-top: 3%; font-weight: bold; text-align: center; z-index: 99999;"></div>
 </h1>
 
-<video id="gampley" width="540" height="520" autoplay loop muted=true src="../assets/media/video/gameplay.mp4"></video>
+<video id="gampley" width="540" height="520" autoplay loop muted=true src="../assets/media/video/gameplay.mp4" alt="subway surfers footage"></video>
 <div id="unmute-button" onclick="button_unmute()">Click to Unmute</div>
 
 <audio id="click" src="../assets/media/audio/sfx/impact_0.mp3"></audio>
@@ -98,6 +98,12 @@ const vid = document.getElementById("gampley");
 const muteInd = document.getElementById("mute-indicator");
 
 const clicksound = document.getElementById("click");
+clicksound.load();
+
+//only display unmute button if video is loaded.
+vid.addEventListener('playing',()=>{
+	document.getElementById("unmute-button").style.display="block";
+});
 
 let muted = true;
 function toggleAudio() {
@@ -130,8 +136,8 @@ function button_unmute() {
 	vid.setAttribute("style","transition: 5s;");
 	doc.setAttribute("style","transition: 5s;");
 
-	setTimeout(function(){
-		setTimeout(function(){
+	setTimeout(()=>{
+		setTimeout(()=>{
 			doc.classList.remove("alt");
 
 			//enable toggle audio by clicking	video.

@@ -5,9 +5,15 @@
   <meta name="darkreader-lock">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" href="../../assets/media/icons/ultrenc.png">
-  <link href="https://db.onlinewebfonts.com/c/a0e1b1883c0cf520e9c50d0cd91cd0d0?family=Papyrus+W01" rel="stylesheet">
+  <!--<link href="https://db.onlinewebfonts.com/c/a0e1b1883c0cf520e9c50d0cd91cd0d0?family=Papyrus+W01" rel="stylesheet">
+  <script src="https://c.webfontfree.com/c.js?f=PapyrusW01" type="text/javascript"></script>
+  -->
   <title>untraencode(r)</title>
   <style>
+      @font-face{
+        font-family: "PapyrusW01";
+        src: url("../../assets/fonts/PapyrusW01.ttf");
+      }
       html {
         height: 100%;
         background-repeat: no-repeat;
@@ -27,7 +33,7 @@
       }
       *::selection{background-color: darkred;}
       h2 {
-        font-family: "Papyrus W01";
+        font-family: "PapyrusW01";
         font-size: 180%;
         margin-top: 35px;
         margin-bottom: 0;
@@ -128,7 +134,7 @@
   <p>decode:</p>
   <textarea id="outputText" rows="16" placeholder="<output>"></textarea><br>
   <button id="copybutton" onclick="copyResult()">copy output</button>
-<p id="foottext">%"&T&(#"%Q$(%%&Q$R')#$#"$S$#$U$"$)# %&&R&$&T&'#%$U')$U$"$)# '$&V&%')$U$"$)# %Q&V&$&T%"#!$)')'#''$U$$&R'#</p>
+  <div id="foottext">%"&T&(#"%Q$(%%&Q$R')#$#"$S$#$U$"$)# %&&R&$&T&'#%$U')$U$"$)# '$&V&%')$U$"$)# %Q&V&$&T%"#!$)')'#''$U$$&R'#</div>
 
 <script type="text/javascript" src="load.js"></script>
 <script type="text/javascript" src="../../assets/scripts/encode.js"></script>
